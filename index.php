@@ -11,6 +11,6 @@
 ?>
 <br>
 Ręczne uruchomienie skryptu
-  <br> a to z automatu powinno za godzinę się pojawić... </br>
+  <br> <b>Ostatni test:</b>: to z automatu powinno za godzinę się pojawić... </br>
 </body>
 </html>
