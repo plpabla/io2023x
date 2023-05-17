@@ -9,6 +9,6 @@
   <?php
   echo "Hello from PHP";
 ?>
-
+Ręczne uruchomienie skryptu
 </body>
 </html>
