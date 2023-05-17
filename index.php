@@ -9,6 +9,8 @@
   <?php
   echo "Hello from PHP";
 ?>
+<br>
 Ręczne uruchomienie skryptu
+  <br> a to z automatu powinno za godzinę się pojawić... </br>
 </body>
 </html>
