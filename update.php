@@ -1,2 +1,2 @@
 Updating...
-<?php system('cd io2023x ; git pull'); ?>
+<?php system('git pull'); ?>
