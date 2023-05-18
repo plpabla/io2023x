@@ -12,6 +12,5 @@
 <br>
 Ręczne uruchomienie skryptu
   <br> <b>Ostatni test:</b>: to z automatu powinno za godzinę się pojawić... 
-  Nigdy nie bedzie ostatni...
 </body>
 </html>
