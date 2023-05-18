@@ -1,2 +1,2 @@
 Updating...
-<?php system('pwd'); ?>
+<?php system('git pull;'); ?>

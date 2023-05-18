@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Hello world</title>
+  <title>Hello there</title>
 </head>
 <body>
   <h1>Hello there</h1>
