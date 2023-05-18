@@ -1,0 +1,17 @@
+name: updatePage
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  publish:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: touch update.php endpoint
+      run: wget "http://io2023.pl/io2023x/update.php"
+
