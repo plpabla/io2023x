@@ -13,6 +13,6 @@
 Ręczne uruchomienie skryptu
   <br> <b>Ostatni test:</b>: to z automatu powinno za godzinę się pojawić... 
 <br><br>
-eh
+eh, to jeszcze z poziomu VS Code i mojego "CD" na szybko xD
 </body>
 </html>
