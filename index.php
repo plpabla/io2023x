@@ -12,7 +12,6 @@
 <br>
 Ręczne uruchomienie skryptu
   <br> <b>Ostatni test:</b>: to z automatu powinno za godzinę się pojawić... 
-<br> I jeszcze raz - teraz przez strone.
 
 </body>
 </html>
