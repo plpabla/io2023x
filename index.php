@@ -17,7 +17,7 @@
     <br><br>
     eh, to jeszcze z poziomu VS Code i mojego "CD" na szybko xD
     <script>
-    alert("A JS bangla?")
+    alert("kopytko")
     </script>
 </body>
 
