@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <h1>Hello there</h1>
+    <h1>Have a nice day</h1>
     <?php
   echo "Hello from PHP";
 ?>
