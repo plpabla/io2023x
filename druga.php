@@ -3,8 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hello there</title>
+    <title>there</title>
 </head>
+
+<body>
+coś się wyświetla
+</body>
 
 <script>
     alert("eeeeeeeeeee")
