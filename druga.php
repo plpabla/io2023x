@@ -7,7 +7,7 @@
 </head>
 
 <body>
-coś się wyświetla
+Kto to wie, bo ja nie?
 </body>
 
 <script>
