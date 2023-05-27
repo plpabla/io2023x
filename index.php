@@ -16,9 +16,7 @@
     <br> <b>Ostatni test:</b>: to z automatu powinno za godzinę się pojawić...
     <br><br>
     eh, to jeszcze z poziomu VS Code i mojego "CD" na szybko xD
-    <script>
-    alert("yyyyyyyyy")
-    </script>
+    <a href="druga.php">Link do innej strony</a>
 </body>
 
 </html>
