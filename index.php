@@ -16,7 +16,8 @@
     <br> <b>Ostatni test:</b>: to z automatu powinno za godzinę się pojawić...
     <br><br>
     eh, to jeszcze z poziomu VS Code i mojego "CD" na szybko xD
-    <a href="druga.php">Link do innej strony</a>
+    <a href="chorobywirusowewstomatologii.php">Link do jednostek chorobowych</a>
+    <a href="wirusy.php">Link do informacji o wirusach</a>
 </body>
 
 </html>
