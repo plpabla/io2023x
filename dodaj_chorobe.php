@@ -1,6 +1,3 @@
-//to poniżej miało być przekierowaniem po dodaniu rekordu
-header("Location: chorobywirusowewstomatologii.php");
-
 <!DOCTYPE html>
 <html lang="en">
 
