@@ -10,30 +10,25 @@ header("Location: chorobywirusowewstomatologii.php");
 </head>
 
 <body>
-       <?php
-    $dbconn = pg_connect("host=localhost dbname=choroby user=moj_uzytkownik password=moje_haslo");
-   
-    $pole1 = $_POST['pole1'];
-    $pole2 = $_POST['pole2'];
-    $pole3 = $_POST['pole3'];
-    $pole4 = $_POST['pole4'];
-    $pole5 = $_POST['pole5'];
-    $pole6 = $_POST['pole6'];
+    <form action="adres_do_przetwarzania_danych.php" method="post">
+        <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
+        <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br>
 
-    //tu powinny być sprawdzenia walidacyjne?
+        <label for="objawy_ogolne_miejscowe">Objawy ogólne i miejscowe poza j.u.:</label>
+        <textarea id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" required></textarea><br>
 
-    $query = "INSERT INTO choroby (jednostka_chorobowa, czynnik_etiologiczny, objawy_ogolne_i_miejscowe_poza_ju, objawy_miejscowe_w_ju, rozpoznanie, roznicowanie) VALUES ('$pole1', '$pole2', '$pole3', '$pole4', '$pole5', '$pole6')";
-    
-    $result = pg_query($dbconn, $query);
+        <label for="objawy_miejscowe_ju">Objawy miejscowe w j.u.:</label>
+        <textarea id="objawy_miejscowe_ju" name="objawy_miejscowe_ju" required></textarea><br>
 
-    
-    pg_close($dbconn);
-    ?>
+        <label for="rozpoznanie">Rozpoznanie:</label>
+        <textarea id="rozpoznanie" name="rozpoznanie" required></textarea><br>
 
-    //tutaj okienko, że baza wirusów została zaktualizowana?
+        <label for="roznicowanie">Różnicowanie:</label>
+        <textarea id="roznicowanie" name="roznicowanie" required></textarea><br>
+
+        <input type="submit" value="Wyślij">
+    </form>
+
 </body>
 
 </html>
-
-//zakończenie headera?
-exit();
