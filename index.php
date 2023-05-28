@@ -1,23 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="utf-8">
-    <title>Hello there</title>
+  <title>Tabela Choroba</title>
+  <style>
+    table {
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+  </style>
 </head>
 
 <body>
-    <h1>Have a nice day</h1>
-    <?php
-  echo "Hello from PHP";
-?>
+    <a href="dodaj_chorobe.php">Link do dodania nowej choroby</a>
     <br>
-    Ręczne uruchomienie skryptu
-    <br> <b>Ostatni test:</b>: to z automatu powinno za godzinę się pojawić...
-    <br><br>
-    eh, to jeszcze z poziomu VS Code i mojego "CD" na szybko xD
-    <a href="chorobywirusowewstomatologii.php">Link do jednostek chorobowych</a>
-    <a href="wirusy.php">Link do informacji o wirusach</a>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ID Wirus</th>
+        <th>Choroba</th>
+        <th>Objawy Ogólne</th>
+        <th>Objawy JU</th>
+        <th>Rozpoznanie</th>
+        <th>Roznicowanie</th>
+        <th>Edytuj</th>
+        <th>Usuń</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      /*
+        // Tu wykonujesz połączenie z bazą danych PostgreSQL i wykonujesz zapytanie do tabeli "choroba" aby pobrać dane
+        // Przykładowy kod PHP dla takiego połączenia i zapytania:
+        $conn = pg_connect("host=adres_hosta dbname=nazwa_bazy_danych user=uzytkownik password=haslo");
+        $query = "SELECT id, id_wirus, choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie FROM choroba";
+        $result = pg_query($conn, $query);
+        
+        // Iterujesz przez wyniki zapytania i generujesz wiersze tabeli HTML
+        while ($row = pg_fetch_assoc($result)) {
+          echo "<tr>";
+          echo "<td>" . $row['id'] . "</td>";
+          echo "<td>" . $row['id_wirus'] . "</td>";
+          echo "<td>" . $row['choroba'] . "</td>";
+          echo "<td>" . $row['objawy_ogolne'] . "</td>";
+          echo "<td>" . $row['objawy_ju'] . "</td>";
+          echo "<td>" . $row['rozpoznanie'] . "</td>";
+          echo "<td>" . $row['roznicowanie'] . "</td>";
+          echo "</tr>";
+        }
+        
+        // Zamykasz połączenie
+        pg_close($conn);
+      */
+      ?>
+    </tbody>
+  </table>
 </body>
-
 </html>
