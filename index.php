@@ -23,15 +23,19 @@
     $pass = $ini["dbpass"];
     echo "ustawienia <br>";
     $conn = pg_connect("host=$host port=5432 dbname=$db user=$usr password=$pass");
-    echo "zmienna conn: "; 
-    echo $conn;
-    echo "<br>";
+    if($conn)
+    {
+      echo "connected <br>";
+    } else
+    {
+      echo "not connected :( <br>";
+    };
 
     $query = "SELECT * FROM choroba;";
-    echo "zapytanie <br>";
-    $res = pg_query($conn, $query);
+    // echo "zapytanie <br>";
+    // $res = pg_query($conn, $query);
 
-    echo $res . "<br>";
+    // echo $res . "<br>";
     ?>
 
     <a href="dodaj_chorobe.php">Link do dodania nowej choroby</a>
