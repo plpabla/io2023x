@@ -23,7 +23,9 @@
     $pass = $ini["dbpass"];
     echo "ustawienia <br>";
     $conn = pg_connect("host=$host dbname=$db user=$usr password=$pass");
-    echo "zmienna conn: " . $conn . "<br>";
+    echo "zmienna conn: "; 
+    echo $conn;
+    echo "<br>";
 
     $query = "SELECT * FROM choroba;";
     echo "zapytanie <br>";
