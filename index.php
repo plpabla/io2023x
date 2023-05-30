@@ -16,7 +16,7 @@
 <body>
     <h1>Jeden wirus może powodować wiele chorób</h1>
     <h2>Choroba może być powodowana tylko przez jednego wirusa!!</h2>
-    <img src="/doc/wirusy.png" width=500/><br>
+    <img src="doc/wirusy.png" width=500/><br>
     <?php
     function get_conn_string()
     {
