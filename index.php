@@ -25,23 +25,6 @@
       $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
       return $conn_string;
     }
-    
-    echo "db: ";
-    $conn = pg_connect(get_conn_string());
-    if($conn)
-    {
-      $query = "SELECT * FROM choroba;";
-      echo "zapytanie: '$query' <br>";
-      $res = pg_query($conn, $query);
-
-      $row = pg_fetch_assoc($res);
-      echo "pierwszy wynik: ";
-      print_r($row);
-      echo "<br><br>";
-
-      pg_close($conn);
-    }
-
     ?>
 
     <a href="dodaj_chorobe.php">Link do dodania nowej choroby</a>
@@ -71,6 +54,7 @@
        
         // Iterujesz przez wyniki zapytania i generujesz wiersze tabeli HTML
         while ($row = pg_fetch_assoc($result)) {
+          // Dla każdego wiersza pobierz też dane wirusa, które chcesz wyświetlić
           $id_wirus = $row['id_wirus'];
           $query2 = "SELECT nazwa FROM wirus WHERE id=${id_wirus}";
           $res_wir = pg_fetch_row(pg_query($conn, $query2));
