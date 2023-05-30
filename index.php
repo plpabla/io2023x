@@ -16,7 +16,16 @@
 <body>
     <?php
     $ini = parse_ini_file("php.ini");
-    echo 'message = ' . $ini["message"] . "\n";
+    $host = $ini["dbhost"];
+    $db = $ini["dbname"];
+    $usr = $ini["dbuser"];
+    $pass = $ini["dbpass"];
+    $conn = pg_connect("host=$host dbname=$db user=$usr password=$pass");
+
+    $query = "SELECT * FROM choroba";
+    $res = pg_query($conn, $query);
+
+    echo $res . "<br>";
     ?>
 
     <a href="dodaj_chorobe.php">Link do dodania nowej choroby</a>
