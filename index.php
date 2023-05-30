@@ -22,7 +22,7 @@
     $usr = $ini["dbuser"];
     $pass = $ini["dbpass"];
     echo "ustawienia <br>";
-    $conn = pg_connect("host=$host dbname=$db user=$usr password=$pass");
+    $conn = pg_connect("host=$host port=5432 dbname=$db user=$usr password=$pass");
     echo "zmienna conn: "; 
     echo $conn;
     echo "<br>";
