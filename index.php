@@ -14,15 +14,18 @@
 </head>
 
 <body>
+    To się wysypuje? <br>
     <?php
     $ini = parse_ini_file("php.ini");
     $host = $ini["dbhost"];
     $db = $ini["dbname"];
     $usr = $ini["dbuser"];
     $pass = $ini["dbpass"];
+    echo "ustawienia <br>";
     $conn = pg_connect("host=$host dbname=$db user=$usr password=$pass");
 
     $query = "SELECT * FROM choroba";
+    echo "zapytanie <br>";
     $res = pg_query($conn, $query);
 
     echo $res . "<br>";
