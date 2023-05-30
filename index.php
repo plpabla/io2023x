@@ -32,10 +32,12 @@
     };
 
     $query = "SELECT * FROM choroba;";
-    // echo "zapytanie <br>";
-    // $res = pg_query($conn, $query);
+    echo "zapytanie $query <br>";
+    $res = pg_query($conn, $query);
 
-    // echo $res . "<br>";
+    $row = pg_fetch_assoc($res);
+    print_r($row);
+    echo "<br>";
     ?>
 
     <a href="dodaj_chorobe.php">Link do dodania nowej choroby</a>
