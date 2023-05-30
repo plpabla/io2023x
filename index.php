@@ -24,7 +24,7 @@
     echo "ustawienia <br>";
     $conn = pg_connect("host=$host dbname=$db user=$usr password=$pass");
 
-    $query = "SELECT * FROM choroba";
+    $query = "SELECT * FROM choroba;";
     echo "zapytanie <br>";
     $res = pg_query($conn, $query);
 
