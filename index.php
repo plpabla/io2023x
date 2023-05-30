@@ -14,14 +14,13 @@
 </head>
 
 <body>
-    To się wysypuje? <br>
     <?php
     $ini = parse_ini_file("php.ini");
     $host = $ini["dbhost"];
     $db = $ini["dbname"];
     $usr = $ini["dbuser"];
     $pass = $ini["dbpass"];
-    echo "ustawienia <br>";
+    echo "db: ";
     $conn = pg_connect("host=$host port=5432 dbname=$db user=$usr password=$pass");
     if($conn)
     {
@@ -32,16 +31,17 @@
     };
 
     $query = "SELECT * FROM choroba;";
-    echo "zapytanie $query <br>";
+    echo "zapytanie: '$query' <br>";
     $res = pg_query($conn, $query);
 
     $row = pg_fetch_assoc($res);
+    echo "pierwszy wynik: ";
     print_r($row);
-    echo "<br>";
+    echo "<br><br>";
     ?>
 
     <a href="dodaj_chorobe.php">Link do dodania nowej choroby</a>
-    <br>
+    <br><br>
   <table>
     <thead>
       <tr>
