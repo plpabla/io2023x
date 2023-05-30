@@ -15,13 +15,19 @@
 
 <body>
     <?php
-    $ini = parse_ini_file("php.ini");
-    $host = $ini["dbhost"];
-    $db = $ini["dbname"];
-    $usr = $ini["dbuser"];
-    $pass = $ini["dbpass"];
+    function get_conn_string()
+    {
+      $ini = parse_ini_file("php.ini");
+      $host = $ini["dbhost"];
+      $db = $ini["dbname"];
+      $usr = $ini["dbuser"];
+      $pass = $ini["dbpass"];
+      $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
+      return $conn_string;
+    }
+    
     echo "db: ";
-    $conn = pg_connect("host=$host port=5432 dbname=$db user=$usr password=$pass");
+    $conn = pg_connect(get_conn_string());
     if($conn)
     {
       echo "connected <br>";
