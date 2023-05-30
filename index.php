@@ -14,6 +14,10 @@
 </head>
 
 <body>
+    <?php
+    echo 'message = ' . ini_get('message') . "\n";
+    ?>
+
     <a href="dodaj_chorobe.php">Link do dodania nowej choroby</a>
     <br>
   <table>
