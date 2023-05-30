@@ -14,6 +14,9 @@
 </head>
 
 <body>
+    <h1>Jeden wirus może powodować wiele chorób</h1>
+    <h2>Choroba może być powodowana tylko przez jednego wirusa!!</h2>
+    <img src="/doc/wirusy.png" width=500/><br>
     <?php
     function get_conn_string()
     {
@@ -33,8 +36,8 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Wirus.nazwa - to bedzie link</th>
         <th>Choroba</th>
+        <th>Wirus.nazwa - to bedzie link</th>
         <th>Objawy Ogólne</th>
         <th>Objawy JU</th>
         <th>Rozpoznanie</th>
@@ -61,8 +64,8 @@
 
           echo "<tr>";
           echo "<td>" . $row['id'] . "</td>";
-          echo "<td>" . $res_wir[0] . "</td>";
           echo "<td>" . $row['choroba'] . "</td>";
+          echo "<td>" . $res_wir[0] . "</td>";
           echo "<td>" . $row['objawy_ogolne'] . "</td>";
           echo "<td>" . $row['objawy_ju'] . "</td>";
           echo "<td>" . $row['rozpoznanie'] . "</td>";
