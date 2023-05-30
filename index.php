@@ -30,20 +30,18 @@
     $conn = pg_connect(get_conn_string());
     if($conn)
     {
-      echo "connected <br>";
-    } else
-    {
-      echo "not connected :( <br>";
-    };
+      $query = "SELECT * FROM choroba;";
+      echo "zapytanie: '$query' <br>";
+      $res = pg_query($conn, $query);
 
-    $query = "SELECT * FROM choroba;";
-    echo "zapytanie: '$query' <br>";
-    $res = pg_query($conn, $query);
+      $row = pg_fetch_assoc($res);
+      echo "pierwszy wynik: ";
+      print_r($row);
+      echo "<br><br>";
 
-    $row = pg_fetch_assoc($res);
-    echo "pierwszy wynik: ";
-    print_r($row);
-    echo "<br><br>";
+      pg_close($conn);
+    }
+    
     ?>
 
     <a href="dodaj_chorobe.php">Link do dodania nowej choroby</a>
