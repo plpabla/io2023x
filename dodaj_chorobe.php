@@ -7,8 +7,7 @@
 </head>
 
 <body>
-    <form action="adres_do_przetwarzania_danych.php" method="post">
-        //
+            // combobox
         <label for="wirus">Wirus:</label>
         <select id="wirus" name="wirus">
             <?php
@@ -33,6 +32,7 @@
             ?>
         </select><br>
         //
+    <form action="adres_do_przetwarzania_danych.php" method="post">
         <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br>
 
