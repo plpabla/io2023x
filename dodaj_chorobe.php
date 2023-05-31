@@ -6,31 +6,7 @@
     <title>Dodawanie jednostki chorobowej</title>
 </head>
 
-<body><!--
-        <label for="wirus">Wirus:</label>
-        <select id="wirus" name="wirus">
-            <?php
-            // Dane do połączenia z bazą danych
-            $host = "localhost";
-            $dbname = "nazwa_bazy_danych";
-            $username = "nazwa_uzytkownika";
-            $password = "haslo";
-
-            // Tworzenie połączenia z bazą danych
-            $conn = pg_connect("host=$host dbname=$dbname user=$username password=$password");
-
-            // Pobieranie danych dla comboboxa
-            $query = "SELECT nazwa FROM wirusy";
-            $result = pg_query($conn, $query);
-
-            while ($row = pg_fetch_assoc($result)) {
-                echo '<option value="' . $row['nazwa'] . '">' . $row['nazwa'] . '</option>';
-            }
-
-            pg_close($conn);
-            ?>
-        </select><br>
-        -->
+<body>
     <form action="adres_do_przetwarzania_danych.php" method="post">
         <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br>
