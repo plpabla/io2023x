@@ -19,7 +19,8 @@
         return $conn_string;
     }
 
-    $conn = pg_connect(get_conn_string());
+    $conn_string = get_conn_string();
+    $conn = pg_connect($conn_string);
     $query = "SELECT nazwa FROM wirusy";
     $result = pg_query($conn, $query);
     ?>
