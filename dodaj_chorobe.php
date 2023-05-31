@@ -54,6 +54,32 @@
         <input type="submit" value="Wyślij">
     </form>
 
+    <?php
+    function get_conn_string()
+    {
+        $ini = parse_ini_file("php.ini");
+        $host = $ini["dbhost"];
+        $db = $ini["dbname"];
+        $usr = $ini["dbuser"];
+        $pass = $ini["dbpass"];
+        $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
+        return $conn_string;
+    }
+
+    $conn = pg_connect(get_conn_string());
+    $query = "SELECT nazwa FROM wirusy";
+    $result = pg_query($conn, $query);
+
+    echo '<label for="wirus">Wirus:</label>';
+    echo '<select id="wirus" name="wirus">';
+    while ($row = pg_fetch_assoc($result)) {
+        echo '<option value="' . $row['nazwa'] . '">' . $row['nazwa'] . '</option>';
+    }
+    echo '</select>';
+
+    pg_close($conn);
+    ?>
+
 </body>
 
 </html>
