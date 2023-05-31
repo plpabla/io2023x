@@ -19,7 +19,7 @@
       return $conn_string;
     }
     ?>
-        <label for="wirus">Wirus lub rodzina wirusów:</label>
+        <label for="wirus" style="width: 250px; height: 30px;">Wirus lub rodzina wirusów:</label>
         <select id="wirus" name="wirus" style="width: 250px; height: 30px;">
         <?php
             $conn = pg_connect(get_conn_string());
@@ -39,19 +39,19 @@
         </select>
 
     <form action="adres_do_przetwarzania_danych.php" method="post">
-        <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
+        <label for="jednostka_chorobowa" style="width: 250px; height: 30px;">Jednostka chorobowa:</label>
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" style="width: 250px; height: 30px" required><br>
 
-        <label for="objawy_ogolne_miejscowe">Objawy ogólne i miejscowe poza j.u.:</label><br>
+        <label for="objawy_ogolne_miejscowe" style="width: 300px; height: 30px;">Objawy ogólne i miejscowe poza j.u.:</label><br>
         <textarea id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" style="width: 300px; height: 150px;" required></textarea><br>
 
-        <label for="objawy_miejscowe_ju">Objawy miejscowe w j.u.:</label><br>
+        <label for="objawy_miejscowe_ju" style="width: 300px; height: 30px;">Objawy miejscowe w j.u.:</label><br>
         <textarea id="objawy_miejscowe_ju" name="objawy_miejscowe_ju" style="width: 300px; height: 150px;" required></textarea><br>
 
-        <label for="rozpoznanie">Rozpoznanie:</label><br>
+        <label for="rozpoznanie" style="width: 300px; height: 30px;">Rozpoznanie:</label><br>
         <textarea id="rozpoznanie" name="rozpoznanie" style="width: 300px; height: 80px;" required></textarea><br>
 
-        <label for="roznicowanie">Różnicowanie:</label><br>
+        <label for="roznicowanie" style="width: 300px; height: 30px;">Różnicowanie:</label><br>
         <textarea id="roznicowanie" name="roznicowanie" style="width: 300px; height: 80px;" required></textarea><br>
 
         <input type="submit" value="Wyślij">
