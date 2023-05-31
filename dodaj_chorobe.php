@@ -20,7 +20,7 @@
     }
     ?>
         <label for="wirus">Wirus lub rodzina wirusów:</label>
-        <select id="wirus" name="wirus" style="width: 200px; height: 30px;">
+        <select id="wirus" name="wirus" style="width: 250px; height: 30px;">
         <?php
             $conn = pg_connect(get_conn_string());
             $query = "SELECT id_wirus, choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie FROM choroba";
@@ -40,7 +40,7 @@
 
     <form action="adres_do_przetwarzania_danych.php" method="post">
         <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
-        <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br>
+        <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" style="width: 250px; height: 30px" required><br>
 
         <label for="objawy_ogolne_miejscowe">Objawy ogólne i miejscowe poza j.u.:</label><br>
         <textarea id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" style="width: 300px; height: 150px;" required></textarea><br>
@@ -49,10 +49,10 @@
         <textarea id="objawy_miejscowe_ju" name="objawy_miejscowe_ju" style="width: 300px; height: 150px;" required></textarea><br>
 
         <label for="rozpoznanie">Rozpoznanie:</label><br>
-        <textarea id="rozpoznanie" name="rozpoznanie" style="width: 300px; height: 150px;" required></textarea><br>
+        <textarea id="rozpoznanie" name="rozpoznanie" style="width: 300px; height: 80px;" required></textarea><br>
 
         <label for="roznicowanie">Różnicowanie:</label><br>
-        <textarea id="roznicowanie" name="roznicowanie" style="width: 300px; height: 150px;" required></textarea><br>
+        <textarea id="roznicowanie" name="roznicowanie" style="width: 300px; height: 80px;" required></textarea><br>
 
         <input type="submit" value="Wyślij">
     </form>
