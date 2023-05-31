@@ -42,16 +42,16 @@
         <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br>
 
-        <label for="objawy_ogolne_miejscowe">Objawy ogólne i miejscowe poza j.u.:</label>
+        <label for="objawy_ogolne_miejscowe">Objawy ogólne i miejscowe poza j.u.:</label><br>
         <textarea id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" style="width: 300px; height: 150px;" required></textarea><br>
 
-        <label for="objawy_miejscowe_ju">Objawy miejscowe w j.u.:</label>
+        <label for="objawy_miejscowe_ju">Objawy miejscowe w j.u.:</label><br>
         <textarea id="objawy_miejscowe_ju" name="objawy_miejscowe_ju" style="width: 300px; height: 150px;" required></textarea><br>
 
-        <label for="rozpoznanie">Rozpoznanie:</label>
+        <label for="rozpoznanie">Rozpoznanie:</label><br>
         <textarea id="rozpoznanie" name="rozpoznanie" style="width: 300px; height: 150px;" required></textarea><br>
 
-        <label for="roznicowanie">Różnicowanie:</label>
+        <label for="roznicowanie">Różnicowanie:</label><br>
         <textarea id="roznicowanie" name="roznicowanie" style="width: 300px; height: 150px;" required></textarea><br>
 
         <input type="submit" value="Wyślij">
