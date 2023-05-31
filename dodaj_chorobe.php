@@ -7,6 +7,8 @@
 </head>
 
 <body>
+        <label for="wirus">Wirus:</label>
+        <select id="wirus" name="wirus">
 <?php
     function get_conn_string()
     {
@@ -18,11 +20,9 @@
       $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
       return $conn_string;
     }
-    ?>
-        <label for="wirus">Wirus:</label>
-        <select id="wirus" name="wirus">
-             $conn = pg_connect(get_conn_string());
-             $query = "SELECT nazwa FROM wirusy";
+
+            $conn = pg_connect(get_conn_string());
+            $query = "SELECT nazwa FROM wirusy";
             $result = pg_query($conn, $query);
 
             while ($row = pg_fetch_assoc($result)) {
@@ -30,7 +30,7 @@
             }
 
             pg_close($conn);
-            ?>
+    ?>        
         </select>
 
     <form action="adres_do_przetwarzania_danych.php" method="post">
