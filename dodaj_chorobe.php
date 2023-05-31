@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dodawanie jednostki chorobowej</title>
+</head>
+
+<body>
 <?php
 // Dane do połączenia z bazą danych
 $host = "dbhost";
@@ -14,17 +23,6 @@ $statement = $pdo->prepare($query);
 $statement->execute();
 $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
-//////////////
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <title>Dodawanie jednostki chorobowej</title>
-</head>
-
-<body>
     <select>
         <?php foreach ($rows as $row): ?>
             <option value="<?php echo $row['id']; ?>"><?php echo $row['nazwa']; ?></option>
