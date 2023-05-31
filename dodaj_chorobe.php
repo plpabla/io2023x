@@ -6,8 +6,7 @@
     <title>Dodawanie jednostki chorobowej</title>
 </head>
 
-<body>
-            // combobox
+<body><!--
         <label for="wirus">Wirus:</label>
         <select id="wirus" name="wirus">
             <?php
@@ -31,7 +30,7 @@
             pg_close($conn);
             ?>
         </select><br>
-        //
+        -->
     <form action="adres_do_przetwarzania_danych.php" method="post">
         <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br>
