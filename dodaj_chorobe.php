@@ -7,19 +7,20 @@
 </head>
 
 <body>
+    <form action="adres_do_przetwarzania_danych.php" method="post">
         <label for="wirus">Wirus:</label>
         <select id="wirus" name="wirus">
-<?php
-    function get_conn_string()
-    {
-      $ini = parse_ini_file("php.ini");
-      $host = $ini["dbhost"];
-      $db = $ini["dbname"];
-      $usr = $ini["dbuser"];
-      $pass = $ini["dbpass"];
-      $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
-      return $conn_string;
-    }
+            <?php
+            function get_conn_string()
+            {
+                $ini = parse_ini_file("php.ini");
+                $host = $ini["dbhost"];
+                $db = $ini["dbname"];
+                $usr = $ini["dbuser"];
+                $pass = $ini["dbpass"];
+                $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
+                return $conn_string;
+            }
 
             $conn = pg_connect(get_conn_string());
             $query = "SELECT nazwa FROM wirusy";
@@ -30,10 +31,11 @@
             }
 
             pg_close($conn);
-    ?>        
+            ?>
         </select>
 
-    <form action="adres_do_przetwarzania_danych.php" method="post">
+        <br>
+
         <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br>
 
