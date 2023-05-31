@@ -23,10 +23,14 @@
         <select id="wirus" name="wirus">
         <?php
             $conn = pg_connect(get_conn_string());
-            $query = "SELECT nazwa FROM wirusy";
+            $query = "SELECT id_wirus, choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie FROM choroba";
             $result = pg_query($conn, $query);
-
+            
             while ($row = pg_fetch_assoc($result)) {
+                $id_wirus = $row['id_wirus'];
+                $query2 = "SELECT nazwa FROM wirus WHERE id=${id_wirus}";
+                $res_wir = pg_fetch_row(pg_query($conn, $query2));
+                
                 echo '<option value="' . $row['nazwa'] . '">' . $row['nazwa'] . '</option>';
             }
 
