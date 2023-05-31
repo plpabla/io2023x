@@ -7,6 +7,34 @@
 </head>
 
 <body>
+<div>
+        <label for="wirus">Wirus:</label>
+        <select id="wirus" name="wirus">
+            <?php
+            // Dane do połączenia z bazą danych
+            $ini = parse_ini_file("php.ini");
+            $host = $ini["dbhost"];
+            $db = $ini["dbname"];
+            $usr = $ini["dbuser"];
+            $pass = $ini["dbpass"];
+            $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
+
+            // Tworzenie połączenia z bazą danych
+            $conn = pg_connect(get_conn_string());
+            
+            // Pobieranie danych dla comboboxa
+            $query = "SELECT nazwa FROM wirusy";
+            $result = pg_query($conn, $query);
+
+            while ($row = pg_fetch_assoc($result)) {
+                echo '<option value="' . $row['nazwa'] . '">' . $row['nazwa'] . '</option>';
+            }
+
+            pg_close($conn);
+            ?>
+        </select>
+    </div>
+    <!-- to też nie działa
 <?php
     function get_conn_string()
     {
@@ -35,6 +63,7 @@
   return $options;
     }
     ?>
+    -->
 <!-- z GPT
     <div>
         <label for="wirus">Wirus:</label>
