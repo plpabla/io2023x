@@ -36,12 +36,12 @@
     <thead>
       <tr>
         <th>ID</th>
-        <th>Choroba</th>
-        <th>Wirus.nazwa - to bedzie link</th>
-        <th>Objawy Ogólne</th>
-        <th>Objawy JU</th>
+        <th>Jednostka chorobowa</th>
+        <th>Czynnik etiologiczny - to bedzie link</th>
+        <th>Objawy ogólne lub miejscowe poza jamą ustną</th>
+        <th>Objawy miejscowe w jamie ustnej</th>
         <th>Rozpoznanie</th>
-        <th>Roznicowanie</th>
+        <th>Różnicowanie</th>
         <th>Edytuj</th>
         <th>Usuń</th>
       </tr>
