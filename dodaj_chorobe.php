@@ -7,8 +7,38 @@
 </head>
 
 <body>
+<?php
+    function get_conn_string()
+    {
+      $ini = parse_ini_file("php.ini");
+      $host = $ini["dbhost"];
+      $db = $ini["dbname"];
+      $usr = $ini["dbuser"];
+      $pass = $ini["dbpass"];
+      $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
+      
+      // Tworzenie połączenia z bazą danych
+  $conn = pg_connect($conn_string);
+
+  // Pobieranie danych dla comboboxa; options przechowuje generowane opcje dla comboboxa
+  $query = "SELECT nazwa FROM wirusy";
+  $result = pg_query($conn, $query);
+
+  $options = '';
+
+  while ($row = pg_fetch_assoc($result)) {
+    $options .= '<option value="' . $row['nazwa'] . '">' . $row['nazwa'] . '</option>';
+  }
+
+  pg_close($conn);
+
+  return $options;
+    }
+    ?>
+<!-- z GPT
     <div>
         <label for="wirus">Wirus:</label>
+        
         <select id="wirus" name="wirus">
             <?php
             // Dane do połączenia z bazą danych
@@ -32,7 +62,7 @@
             ?>
         </select>
     </div>
-
+        -->
     <form action="adres_do_przetwarzania_danych.php" method="post">
         <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br>
