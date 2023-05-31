@@ -1,3 +1,21 @@
+<?php
+// Dane do połączenia z bazą danych
+$host = "dbhost";
+$dbname = "dbname";
+$username = "dbuser";
+$password = "dbpass";
+
+// Tworzenie połączenia z bazą danych
+$pdo = new PDO("pgsql:host=$host;dbname=$dbname", $username, $password);
+
+// Pobieranie danych dla comboboxa
+$query = "SELECT id, nazwa FROM wirus";
+$statement = $pdo->prepare($query);
+$statement->execute();
+$rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+//////////////
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +25,11 @@
 </head>
 
 <body>
+    <select>
+        <?php foreach ($rows as $row): ?>
+            <option value="<?php echo $row['id']; ?>"><?php echo $row['nazwa']; ?></option>
+        <?php endforeach; ?>
+    </select>
     <form action="adres_do_przetwarzania_danych.php" method="post">
         <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br>
