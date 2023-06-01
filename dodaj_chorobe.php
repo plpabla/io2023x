@@ -68,8 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             pg_close($conn);
             ?>
-        </select>
-        
+        </select><br>
+
         <label for="jednostka_chorobowa" style="width: 250px; height: 30px;">Jednostka chorobowa:</label>
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" style="width: 250px; height: 30px" required><br>
 

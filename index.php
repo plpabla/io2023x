@@ -55,6 +55,17 @@
         $query = "SELECT id, id_wirus, choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie FROM choroba";
         $result = pg_query($conn, $query);
        
+         // Sprawdzanie, czy są dostępne dane
+    if (pg_num_rows($result) > 0) {
+      echo '<table>
+              <tr>
+                  <th>Jednostka chorobowa</th>
+                  <th>Objawy ogólne i miejscowe poza j.u.</th>
+                  <th>Objawy miejscowe w j.u.</th>
+                  <th>Rozpoznanie</th>
+                  <th>Różnicowanie</th>
+              </tr>';
+
         // Iterujesz przez wyniki zapytania i generujesz wiersze tabeli HTML
         while ($row = pg_fetch_assoc($result)) {
           // Dla każdego wiersza pobierz też dane wirusa, które chcesz wyświetlić
@@ -75,6 +86,10 @@
           echo "</tr>";
         }
         
+        echo '</table>';
+    } else {
+        echo 'Brak danych do wyświetlenia.';
+    }
         // Zamykasz połączenie
         pg_close($conn);
       
