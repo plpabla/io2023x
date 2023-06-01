@@ -10,60 +10,25 @@ function get_conn_string()
     return $conn_string;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Pobierz identyfikator choroby z parametru URL
-    $id = $_GET['id'];
+// Pobierz identyfikator choroby z parametru URL
+$id = $_GET['id'];
 
-    // Pobranie danych z formularza
-    $jednostka_chorobowa = $_POST['jednostka_chorobowa'];
-    $objawy_ogolne_miejscowe = $_POST['objawy_ogolne_miejscowe'];
-    $objawy_miejscowe_ju = $_POST['objawy_miejscowe_ju'];
-    $rozpoznanie = $_POST['rozpoznanie'];
-    $roznicowanie = $_POST['roznicowanie'];
-    $id_wirus = $_POST['wirus'];
+// Pobranie danych choroby o podanym identyfikatorze
 
-    // Sprawdzenie, czy wszystkie pola formularza są wypełnione
-    if (empty($jednostka_chorobowa) || empty($objawy_ogolne_miejscowe) || empty($objawy_miejscowe_ju) || empty($rozpoznanie) || empty($roznicowanie)) {
-        echo "Wypełnij wszystkie pola formularza.";
-    } else {
-        // Połączenie z bazą danych PostgreSQL
-        $conn = pg_connect(get_conn_string());
+// Połączenie z bazą danych PostgreSQL
+$conn = pg_connect(get_conn_string());
 
-        // Zabezpieczenie przed SQL Injection
-        $jednostka_chorobowa = pg_escape_string($jednostka_chorobowa);
-        $objawy_ogolne_miejscowe = pg_escape_string($objawy_ogolne_miejscowe);
-        $objawy_miejscowe_ju = pg_escape_string($objawy_miejscowe_ju);
-        $rozpoznanie = pg_escape_string($rozpoznanie);
-        $roznicowanie = pg_escape_string($roznicowanie);
+$query = "SELECT c.id, c.jednostka_chorobowa, w.nazwa, c.objawy_ogolne_miejscowe, c.objawy_miejscowe_ju, c.rozpoznanie, c.roznicowanie, c.id_wirus
+          FROM choroba c
+          JOIN wirus w ON c.id_wirus = w.id
+          WHERE c.id = $id";
+$result = pg_query($conn, $query);
+$row = pg_fetch_assoc($result);
 
-        // Aktualizacja danych choroby w bazie danych
-        $query = "UPDATE choroba SET jednostka_chorobowa = '$jednostka_chorobowa', objawy_ogolne_miejscowe = '$objawy_ogolne_miejscowe', objawy_miejscowe_ju = '$objawy_miejscowe_ju', rozpoznanie = '$rozpoznanie', roznicowanie = '$roznicowanie', id_wirus = $id_wirus WHERE id = $id";
-        $result = pg_query($conn, $query);
-
-        if ($result) {
-            echo "Dane choroby zostały zaktualizowane.";
-        } else {
-            echo "Wystąpił błąd podczas aktualizacji danych choroby.";
-        }
-
-        // Zamknięcie połączenia z bazą danych
-        pg_close($conn);
-    }
-} else {
-    // Pobierz identyfikator choroby z parametru URL
-    $id = $_GET['id'];
-
-    // Połączenie z bazą danych PostgreSQL
-    $conn = pg_connect(get_conn_string());
-
-    // Pobranie danych choroby o podanym identyfikatorze
-    $query = "SELECT id, jednostka_chorobowa, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie, id_wirus FROM choroba WHERE id = $id";
-    $result = pg_query($conn, $query);
-    $row = pg_fetch_assoc($result);
-
-    // Zamknięcie połączenia z bazą danych
-    pg_close($conn);
+// Zamknięcie połączenia z bazą danych
+pg_close($conn);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -93,20 +58,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" id="roznicowanie" name="roznicowanie" value="<?php echo $row['roznicowanie']; ?>" required>
         <br><br>
 
-        <label for="wirus">Wybierz wirusa:</label>
-        <select id="wirus" name="wirus">
+        <label for="id_wirus">Czynnik etiologiczny (wirus):</label>
+        <select id="id_wirus" name="id_wirus" required>
             <?php
             // Połączenie z bazą danych PostgreSQL
             $conn = pg_connect(get_conn_string());
 
             // Pobranie wszystkich wirusów
-            $query = "SELECT id, nazwa FROM wirus";
+            $query = "SELECT * FROM wirus";
             $result = pg_query($conn, $query);
 
-            // Generowanie opcji dla listy rozwijanej
-            while ($wirus = pg_fetch_assoc($result)) {
-                $selected = ($wirus['id'] == $row['id_wirus']) ? 'selected' : '';
-                echo "<option value='" . $wirus['id'] . "' $selected>" . $wirus['nazwa'] . "</option>";
+            // Iterujesz przez wyniki zapytania i generujesz opcje w formularzu
+            while ($virus = pg_fetch_assoc($result)) {
+                $selected = ($virus['id'] == $row['id_wirus']) ? "selected" : "";
+                echo "<option value='{$virus['id']}' $selected>{$virus['nazwa']}</option>";
             }
 
             // Zamknięcie połączenia z bazą danych
