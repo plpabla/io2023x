@@ -79,6 +79,14 @@
         pg_close($conn);
       
       ?>
+
+        <?php
+if (isset($_GET['message'])) {
+    $message = $_GET['message'];
+    echo "<script>alert('" . $message . "');</script>";
+}
+?>
+
     </tbody>
   </table>
 </body>
