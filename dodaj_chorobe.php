@@ -75,12 +75,12 @@
         <br><br>
 
         <label for="wirus">Wybierz wirusa:</label>
-        <select id="wirus" name="wirus">
-            <?php
-            foreach ($wirusy as $wirus) {
-                echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
-            }
-            ?>
+        <select id="wirus" name="id_wirus">
+          <?php
+               foreach ($wirusy as $wirus) {
+               echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
+             }   
+          ?>
         </select>
         <br><br>
 
