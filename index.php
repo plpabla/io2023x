@@ -38,9 +38,12 @@
     $conn = pg_connect(get_conn_string());
 
     // Pobranie danych z tabeli choroba, wraz z nazwą wirusa
+    /* nieskuteczna próba powiązania tabel
     $query = "SELECT c.id, c.jednostka_chorobowa, w.nazwa, c.objawy_ogolne_miejscowe, c.objawy_miejscowe_ju, c.rozpoznanie, c.roznicowanie
               FROM choroba c
               JOIN wirus w ON c.id_wirus = w.id";
+              */
+    $query = "SELECT id, id_wirus, choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie FROM choroba";
     $result = pg_query($conn, $query);
 
     // Sprawdzenie, czy są dostępne dane
