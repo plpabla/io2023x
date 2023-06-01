@@ -24,6 +24,12 @@
     // Pobranie danych wirusów z bazy danych
     $query = "SELECT * FROM wirus";
     $result = pg_query($conn, $query);
+
+    if (!$result) {
+        echo "Wystąpił błąd podczas pobierania danych wirusów: " . pg_last_error();
+        exit();
+    }
+    
     $wirusy = pg_fetch_all($result);
 
     // Zamknięcie połączenia z bazą danych
