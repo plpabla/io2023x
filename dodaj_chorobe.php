@@ -36,7 +36,7 @@
         $objawy_miejscowe_ju = $_POST['objawy_miejscowe_ju'];
         $rozpoznanie = $_POST['rozpoznanie'];
         $roznicowanie = $_POST['roznicowanie'];
-        $id_wirus = $_POST['wirus'];
+        $id_wirus = $_POST['id_wirus'];
 
         // Sprawdzenie, czy wszystkie pola formularza są wypełnione
         if (empty($jednostka_chorobowa) || empty($objawy_ogolne_miejscowe) || empty($objawy_miejscowe_ju) || empty($rozpoznanie) || empty($roznicowanie)) {
@@ -53,8 +53,8 @@
             $roznicowanie = pg_escape_string($roznicowanie);
 
             // Wstawienie danych choroby do bazy danych
-            $query = "INSERT INTO choroba (jednostka_chorobowa, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie, id_wirus) 
-                      VALUES ('$jednostka_chorobowa', '$objawy_ogolne_miejscowe', '$objawy_miejscowe_ju', '$rozpoznanie', '$roznicowanie', $id_wirus)";
+            $query = "INSERT INTO choroba (id_wirus, jednostka_chorobowa, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie) 
+                      VALUES ($id_wirus, '$jednostka_chorobowa', '$objawy_ogolne_miejscowe', '$objawy_miejscowe_ju', '$rozpoznanie', '$roznicowanie')";
             $result = pg_query($conn, $query);
 
             if ($result) {
@@ -74,13 +74,13 @@
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required>
         <br><br>
 
-        <label for="wirus">Wybierz wirusa:</label>
-        <select id="wirus" name="id_wirus">
-          <?php
-               foreach ($wirusy as $wirus) {
-               echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
-             }   
-          ?>
+        <label for="id_wirus">Wybierz wirusa:</label>
+        <select id="id_wirus" name="id_wirus">
+            <?php
+            foreach ($wirusy as $wirus) {
+                echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
+            }
+            ?>
         </select>
         <br><br>
 
