@@ -24,7 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Sprawdzenie wyniku zapytania
     if ($result) {
-        echo "Rekord został dodany poprawnie.";
+        // Przekierowanie użytkownika na stronę index.php po pomyślnym dodaniu rekordu
+        pg_close($dbconn);
+        header("Location: index.php?message=Baza+wirus%C3%B3w+zosta%C5%82a+pomy%C5%9Blnie+zaktualizowana");
+        exit();
     } else {
         echo "Wystąpił błąd podczas dodawania rekordu.";
     }
@@ -33,3 +36,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     pg_close($dbconn);
 }
 ?>
+
