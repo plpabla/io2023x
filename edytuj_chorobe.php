@@ -13,6 +13,30 @@ function get_conn_string()
 // Pobierz identyfikator choroby z parametru URL
 $id = $_GET['id'];
 
+if (isset($_POST['submit'])) {
+    // Pobierz wartości z formularza
+    $jednostka_chorobowa = $_POST['jednostka_chorobowa'];
+    $objawy_ogolne_miejscowe = $_POST['objawy_ogolne_miejscowe'];
+    $objawy_miejscowe_ju = $_POST['objawy_miejscowe_ju'];
+    $rozpoznanie = $_POST['rozpoznanie'];
+    $roznicowanie = $_POST['roznicowanie'];
+    $id_wirus = $_POST['id_wirus'];
+
+    // Połączenie z bazą danych PostgreSQL
+    $conn = pg_connect(get_conn_string());
+
+    // Aktualizacja danych choroby w bazie danych
+    $query = "UPDATE choroba SET jednostka_chorobowa = '$jednostka_chorobowa', objawy_ogolne_miejscowe = '$objawy_ogolne_miejscowe', objawy_miejscowe_ju = '$objawy_miejscowe_ju', rozpoznanie = '$rozpoznanie', roznicowanie = '$roznicowanie', id_wirus = $id_wirus WHERE id = $id";
+    pg_query($conn, $query);
+
+    // Zamknięcie połączenia z bazą danych
+    pg_close($conn);
+
+    // Przekierowanie użytkownika do listy chorób
+    header("Location: index.php");
+    exit();
+}
+
 // Pobranie danych choroby o podanym identyfikatorze
 
 // Połączenie z bazą danych PostgreSQL
@@ -42,20 +66,20 @@ pg_close($conn);
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" value="<?php echo $row['jednostka_chorobowa']; ?>" required>
         <br><br>
 
-        <label for="objawy_ogolne_miejscowe">Objawy ogólne/miejscowe:</label>
-        <input type="text" id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" value="<?php echo $row['objawy_ogolne_miejscowe']; ?>" required>
+        <label for="objawy_ogolne_miejscowe">Objawy ogólne lub miejscowe poza jamą ustną:</label>
+        <textarea id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" required><?php echo $row['objawy_ogolne_miejscowe']; ?></textarea>
         <br><br>
 
-        <label for="objawy_miejscowe_ju">Objawy miejscowe/ju:</label>
-        <input type="text" id="objawy_miejscowe_ju" name="objawy_miejscowe_ju" value="<?php echo $row['objawy_miejscowe_ju']; ?>" required>
+        <label for="objawy_miejscowe_ju">Objawy miejscowe w jamie ustnej:</label>
+        <textarea id="objawy_miejscowe_ju" name="objawy_miejscowe_ju" required><?php echo $row['objawy_miejscowe_ju']; ?></textarea>
         <br><br>
 
         <label for="rozpoznanie">Rozpoznanie:</label>
-        <input type="text" id="rozpoznanie" name="rozpoznanie" value="<?php echo $row['rozpoznanie']; ?>" required>
+        <textarea id="rozpoznanie" name="rozpoznanie" required><?php echo $row['rozpoznanie']; ?></textarea>
         <br><br>
 
         <label for="roznicowanie">Różnicowanie:</label>
-        <input type="text" id="roznicowanie" name="roznicowanie" value="<?php echo $row['roznicowanie']; ?>" required>
+        <textarea id="roznicowanie" name="roznicowanie" required><?php echo $row['roznicowanie']; ?></textarea>
         <br><br>
 
         <label for="id_wirus">Czynnik etiologiczny (wirus):</label>
@@ -80,7 +104,7 @@ pg_close($conn);
         </select>
         <br><br>
 
-        <input type="submit" value="Zapisz zmiany">
+        <input type="submit" name="submit" value="Zapisz zmiany">
     </form>
 </body>
 </html>
