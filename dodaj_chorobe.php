@@ -50,7 +50,7 @@
   <form method="POST">
     <label for="jednostka_chorobowa">Jednostka chorobowa:</label><br>
     <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br><br>
-
+<!--3xten
     <label for="id_wirus">ID wirusa:</label><br>
     <select id="id_wirus" name="id_wirus" required>
       <option value="">Wybierz wirusa</option>
@@ -58,7 +58,18 @@
       <option value="2">Wirus B</option>
       <option value="3">Wirus C</option>
       <!-- Dodaj tutaj pozostałe opcje dla innych wirusów -->
-    </select><br><br>
+ <!--ten   </select><br><br>
+ten-->
+    <label for="wirus">Wybierz wirusa:</label>
+        <select id="wirus" name="wirus">
+            <?php
+            foreach ($wirusy as $wirus) {
+                echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
+            }
+            ?>
+        </select>
+        <br><br>
+
 
     <label for="objawy_ogolne_miejscowe">Objawy ogólne lub miejscowe poza jamą ustną:</label><br>
     <textarea id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" required></textarea><br><br>
