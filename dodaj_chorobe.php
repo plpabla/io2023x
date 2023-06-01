@@ -38,6 +38,35 @@
             ?>
         </select>
 
+        <?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Pobierz wartości wprowadzone przez użytkownika
+    $jednostka_chorobowa = $_POST["jednostka_chorobowa"];
+    $objawy_ogolne_miejscowe = $_POST["objawy_ogolne_miejscowe"];
+    $objawy_miejscowe_ju = $_POST["objawy_miejscowe_ju"];
+    $rozpoznanie = $_POST["rozpoznanie"];
+    $roznicowanie = $_POST["roznicowanie"];
+
+    // Połączenie z bazą danych
+    $conn = pg_connect(get_conn_string());
+
+    // Przygotowanie i wykonanie zapytania SQL
+    $query = "INSERT INTO tabela (jednostka_chorobowa, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie)
+              VALUES ('$jednostka_chorobowa', '$objawy_ogolne_miejscowe', '$objawy_miejscowe_ju', '$rozpoznanie', '$roznicowanie')";
+    $result = pg_query($conn, $query);
+
+    // Sprawdzenie, czy zapytanie zostało wykonane poprawnie
+    if ($result) {
+        echo "Dane zostały zapisane do bazy danych.";
+    } else {
+        echo "Wystąpił błąd podczas zapisywania danych.";
+    }
+
+    // Zamknięcie połączenia z bazą danych
+    pg_close($conn);
+}
+?>
+
     <form action="adres_do_przetwarzania_danych.php" method="post">
         <label for="jednostka_chorobowa" style="width: 250px; height: 30px;">Jednostka chorobowa:</label>
         <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" style="width: 250px; height: 30px" required><br>
