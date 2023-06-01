@@ -1,66 +1,80 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dodaj Chorobę</title>
+    <meta charset="UTF-8">
+    <title>Dodaj chorobę</title>
 </head>
-
 <body>
-  <h1>Dodaj Nową Chorobę</h1>
+    <h1>Dodaj chorobę</h1>
 
-  <?php
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    <?php
     function get_conn_string()
     {
-      $ini = parse_ini_file("php.ini");
-      $host = $ini["dbhost"];
-      $db = $ini["dbname"];
-      $usr = $ini["dbuser"];
-      $pass = $ini["dbpass"];
-      $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
-      return $conn_string;
+        $ini = parse_ini_file("php.ini");
+        $host = $ini["dbhost"];
+        $db = $ini["dbname"];
+        $usr = $ini["dbuser"];
+        $pass = $ini["dbpass"];
+        $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
+        return $conn_string;
     }
 
-    // Połączenie z bazą danych PostgreSQL
     $conn = pg_connect(get_conn_string());
 
-    // Pobranie danych z formularza
-    $jednostka_chorobowa = $_POST['jednostka_chorobowa'];
-    $id_wirus = $_POST['id_wirus'];
-    $objawy_ogolne_miejscowe = $_POST['objawy_ogolne_miejscowe'];
-    $objawy_miejscowe_ju = $_POST['objawy_miejscowe_ju'];
-    $rozpoznanie = $_POST['rozpoznanie'];
-    $roznicowanie = $_POST['roznicowanie'];
-
-    // Wstawienie nowego rekordu do tabeli choroba
-    $query = "INSERT INTO choroba (jednostka_chorobowa, id_wirus, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie)
-              VALUES ('$jednostka_chorobowa', $id_wirus, '$objawy_ogolne_miejscowe', '$objawy_miejscowe_ju', '$rozpoznanie', '$roznicowanie')";
+    // Pobranie danych wirusów z bazy danych
+    $query = "SELECT * FROM wirus";
     $result = pg_query($conn, $query);
-
-    if ($result) {
-      echo "Dodano nową chorobę.";
-    } else {
-      echo "Wystąpił błąd podczas dodawania choroby.";
-    }
+    $wirusy = pg_fetch_all($result);
 
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
-  }
-  ?>
 
-  <form method="POST">
-    <label for="jednostka_chorobowa">Jednostka chorobowa:</label><br>
-    <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required><br><br>
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Pobranie danych z formularza
+        $jednostka_chorobowa = $_POST['jednostka_chorobowa'];
+        $objawy_ogolne_miejscowe = $_POST['objawy_ogolne_miejscowe'];
+        $objawy_miejscowe_ju = $_POST['objawy_miejscowe_ju'];
+        $rozpoznanie = $_POST['rozpoznanie'];
+        $roznicowanie = $_POST['roznicowanie'];
+        $id_wirus = $_POST['wirus'];
 
-    <label for="id_wirus">ID wirusa:</label><br>
-    <select id="id_wirus" name="id_wirus" required>
-      <option value="">Wybierz wirusa</option>
-      <option value="1">Wirus A</option>
-      <option value="2">Wirus B</option>
-      <option value="3">Wirus C</option>
-      <!-- Dodaj tutaj pozostałe opcje dla innych wirusów -->
-    </select><br><br>
-<!-- miało wyświetlać nazwę wirusa z tabeli wirusy
-    <label for="wirus">Wybierz wirusa:</label>
+        // Sprawdzenie, czy wszystkie pola formularza są wypełnione
+        if (empty($jednostka_chorobowa) || empty($objawy_ogolne_miejscowe) || empty($objawy_miejscowe_ju) || empty($rozpoznanie) || empty($roznicowanie)) {
+            echo "Wypełnij wszystkie pola formularza.";
+        } else {
+            // Połączenie z bazą danych PostgreSQL
+            $conn = pg_connect(get_conn_string());
+
+            // Zabezpieczenie przed SQL Injection
+            $jednostka_chorobowa = pg_escape_string($jednostka_chorobowa);
+            $objawy_ogolne_miejscowe = pg_escape_string($objawy_ogolne_miejscowe);
+            $objawy_miejscowe_ju = pg_escape_string($objawy_miejscowe_ju);
+            $rozpoznanie = pg_escape_string($rozpoznanie);
+            $roznicowanie = pg_escape_string($roznicowanie);
+
+            // Wstawienie danych choroby do bazy danych
+            $query = "INSERT INTO choroba (jednostka_chorobowa, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie, id_wirus) 
+                      VALUES ('$jednostka_chorobowa', '$objawy_ogolne_miejscowe', '$objawy_miejscowe_ju', '$rozpoznanie', '$roznicowanie', $id_wirus)";
+            $result = pg_query($conn, $query);
+
+            if ($result) {
+                echo "Baza chorób została zaktualizowana.";
+            } else {
+                echo "Wystąpił błąd podczas dodawania choroby.";
+            }
+
+            // Zamknięcie połączenia z bazą danych
+            pg_close($conn);
+        }
+    }
+    ?>
+
+    <form action="dodaj_chorobe.php" method="POST">
+        <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
+        <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required>
+        <br><br>
+
+        <label for="wirus">Wybierz wirusa:</label>
         <select id="wirus" name="wirus">
             <?php
             foreach ($wirusy as $wirus) {
@@ -69,21 +83,27 @@
             ?>
         </select>
         <br><br>
-        -->
 
-    <label for="objawy_ogolne_miejscowe">Objawy ogólne lub miejscowe poza jamą ustną:</label><br>
-    <textarea id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" required></textarea><br><br>
+        <label for="objawy_ogolne_miejscowe">Objawy ogólne/miejscowe:</label>
+        <input type="text" id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" required>
+        <br><br>
 
-    <label for="objawy_miejscowe_ju">Objawy miejscowe w jamie ustnej:</label><br>
-    <textarea id="objawy_miejscowe_ju" name="objawy_miejscowe_ju" required></textarea><br><br>
+        <label for="objawy_miejscowe_ju">Objawy miejscowe/ju:</label>
+        <input type="text" id="objawy_miejscowe_ju" name="objawy_miejscowe_ju" required>
+        <br><br>
 
-    <label for="rozpoznanie">Rozpoznanie:</label><br>
-    <textarea id="rozpoznanie" name="rozpoznanie" required></textarea><br><br>
+        <label for="rozpoznanie">Rozpoznanie:</label>
+        <input type="text" id="rozpoznanie" name="rozpoznanie" required>
+        <br><br>
 
-    <label for="roznicowanie">Roznicowanie:</label><br>
-    <textarea id="roznicowanie" name="roznicowanie" required></textarea><br><br>
+        <label for="roznicowanie">Różnicowanie:</label>
+        <input type="text" id="roznicowanie" name="roznicowanie" required>
+        <br><br>
 
-    <input type="submit" value="Dodaj">
-  </form>
+        <input type="submit" value="Dodaj chorobę">
+    </form>
+
+    <br><br>
+    <a href="index.php">Wróć na stronę główną</a>
 </body>
 </html>
