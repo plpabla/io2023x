@@ -82,11 +82,11 @@
         echo "<td><a href='edytuj_chorobe.php?id={$row['id']}'>Edytuj</a></td>";
         echo "<td><a href='usun_chorobe.php?id={$row['id']}'>Usuń</a></td>";
         echo "</tr>";
+        
+              $lp++; // Inkrementacja zmiennej licznikowej
       }
 
-               $lp++; // Inkrementacja zmiennej licznikowej
-
-      echo '</tbody>
+        echo '</tbody>
             </table>';
     } else {
       echo "Brak dostępnych danych.";
