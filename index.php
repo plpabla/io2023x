@@ -17,7 +17,6 @@
     <h1>Jeden wirus może powodować wiele chorób</h1>
     <h2>Choroba może być powodowana tylko przez jednego wirusa!!</h2>
     <img src="doc/wirusy.png" width=500/><br>
-    <h3>Wybrane choroby wirusowe manifestujące objawy w jamie ustnej</h3>
     <?php
     function get_conn_string()
     {
@@ -35,6 +34,9 @@
     <br><br>
     <a href="wirusy.php">Link do wirusów</a>
     <br><br>
+
+    <h3>Wybrane choroby wirusowe manifestujące objawy w jamie ustnej</h3>
+    
   <?php
       
     // Połączenie z bazą danych PostgreSQL
