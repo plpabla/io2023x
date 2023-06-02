@@ -79,7 +79,8 @@
 //        echo "<td>" . $row['id'] . "</td>";
         echo "<td>" . $lp . "</td>";
         echo "<td>" . $row['choroba'] . "</td>";
-        echo "<td>" . $wirusy[$row['id_wirus']]['nazwa'] . "</td>";
+        echo "<td>" . $row['nazwa_wirusa'] . "</td>";
+//        echo "<td>" . $wirusy[$row['id_wirus']]['nazwa'] . "</td>";
         echo "<td>" . $row['objawy_ogolne'] . "</td>";
         echo "<td>" . $row['objawy_ju'] . "</td>";
         echo "<td>" . $row['rozpoznanie'] . "</td>";
