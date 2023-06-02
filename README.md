@@ -2,4 +2,4 @@
 
 Projekt na IO, hostowane na stronie http://io2023.pl
 
-![Screenshot](wirusy.png)
+![Graficzna reprezentacja bazy danych](./io2023x/doc/wirusy.png)
