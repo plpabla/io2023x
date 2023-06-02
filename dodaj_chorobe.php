@@ -30,7 +30,7 @@
         exit();
     }
     
-    $wirusy = pg_fetch_all($result);
+    $wirus = pg_fetch_all($result);
 
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
@@ -83,7 +83,7 @@
         <label for="id_wirus">Wybierz wirusa:</label>
         <select id="id_wirus" name="id_wirus">
             <?php
-            foreach ($wirusy as $wirus) {
+            foreach ($wirus as $wirus) {
                 echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
             }
             ?>
