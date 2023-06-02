@@ -37,30 +37,30 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Pobranie danych z formularza
-        $jednostka_chorobowa = $_POST['jednostka_chorobowa'];
-        $objawy_ogolne_miejscowe = $_POST['objawy_ogolne_miejscowe'];
-        $objawy_miejscowe_ju = $_POST['objawy_miejscowe_ju'];
+        $choroba = $_POST['choroba'];
+        $objawy_ogolne = $_POST['objawy_ogolne'];
+        $objawy_ju = $_POST['objawy_ju'];
         $rozpoznanie = $_POST['rozpoznanie'];
         $roznicowanie = $_POST['roznicowanie'];
         $id_wirus = $_POST['id_wirus'];
 
         // Sprawdzenie, czy wszystkie pola formularza są wypełnione
-        if (empty($jednostka_chorobowa) || empty($objawy_ogolne_miejscowe) || empty($objawy_miejscowe_ju) || empty($rozpoznanie) || empty($roznicowanie)) {
+        if (empty($choroba) || empty($objawy_ogolne) || empty($objawy_ju) || empty($rozpoznanie) || empty($roznicowanie)) {
             echo "Wypełnij wszystkie pola formularza.";
         } else {
             // Połączenie z bazą danych PostgreSQL
             $conn = pg_connect(get_conn_string());
 
             // Zabezpieczenie przed SQL Injection
-            $jednostka_chorobowa = pg_escape_string($conn, $jednostka_chorobowa);
-            $objawy_ogolne_miejscowe = pg_escape_string($conn, $objawy_ogolne_miejscowe);
-            $objawy_miejscowe_ju = pg_escape_string($conn, $objawy_miejscowe_ju);
+            $choroba = pg_escape_string($conn, $choroba);
+            $objawy_ogolne = pg_escape_string($conn, $objawy_ogolne);
+            $objawy_ju = pg_escape_string($conn, $objawy_ju);
             $rozpoznanie = pg_escape_string($conn, $rozpoznanie);
             $roznicowanie = pg_escape_string($conn, $roznicowanie);
 
             // Wstawienie danych choroby do bazy danych
-            $query = "INSERT INTO choroba (id_wirus, jednostka_chorobowa, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie) 
-                      VALUES ($id_wirus, '$jednostka_chorobowa', '$objawy_ogolne_miejscowe', '$objawy_miejscowe_ju', '$rozpoznanie', '$roznicowanie')";
+            $query = "INSERT INTO choroba (id_wirus, choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie) 
+                      VALUES ($id_wirus, '$choroba', '$objawy_ogolne', '$objawy_ju', '$rozpoznanie', '$roznicowanie')";
             $result = pg_query($conn, $query);
 
             if ($result) {
@@ -76,8 +76,8 @@
     ?>
 
     <form action="dodaj_chorobe.php" method="POST">
-        <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
-        <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" required>
+        <label for="choroba">Jednostka chorobowa:</label>
+        <input type="text" id="choroba" name="choroba" required>
         <br><br>
 
         <label for="id_wirus">Wybierz wirusa:</label>
@@ -92,12 +92,12 @@
         </select>
         <br><br>
 
-        <label for="objawy_ogolne_miejscowe">Objawy ogólne/miejscowe:</label>
-        <input type="text" id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" required>
+        <label for="objawy_ogolne">Objawy ogólne/miejscowe:</label>
+        <input type="text" id="objawy_ogolne" name="objawy_ogolne" required>
         <br><br>
 
-        <label for="objawy_miejscowe_ju">Objawy miejscowe/ju:</label>
-        <input type="text" id="objawy_miejscowe_ju" name="objawy_miejscowe_ju" required>
+        <label for="objawy_ju">Objawy miejscowe/ju:</label>
+        <input type="text" id="objawy_ju" name="objawy_ju" required>
         <br><br>
 
         <label for="rozpoznanie">Rozpoznanie:</label>

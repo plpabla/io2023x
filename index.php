@@ -41,11 +41,11 @@
 
     // Pobranie danych z tabeli choroba, wraz z nazwą wirusa
     /* nieskuteczna próba powiązania tabel
-    $query = "SELECT c.id, c.jednostka_chorobowa, w.nazwa, c.objawy_ogolne_miejscowe, c.objawy_miejscowe_ju, c.rozpoznanie, c.roznicowanie
+    $query = "SELECT c.id, c.choroba, w.nazwa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
               FROM choroba c
               JOIN wirus w ON c.id_wirus = w.id";
               */
-    $query = "SELECT id, id_wirus, jednostka_chorobowa, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie FROM choroba";
+    $query = "SELECT id, id_wirus, choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie FROM choroba";
     $result = pg_query($conn, $query);
 
     // Sprawdzenie, czy są dostępne dane
@@ -70,10 +70,10 @@
       while ($row = pg_fetch_assoc($result)) {
         echo "<tr>";
         echo "<td>" . $row['id'] . "</td>";
-        echo "<td>" . $row['jednostka_chorobowa'] . "</td>";
+        echo "<td>" . $row['choroba'] . "</td>";
         echo "<td>" . $row['nazwa'] . "</td>";
-        echo "<td>" . $row['objawy_ogolne_miejscowe'] . "</td>";
-        echo "<td>" . $row['objawy_miejscowe_ju'] . "</td>";
+        echo "<td>" . $row['objawy_ogolne'] . "</td>";
+        echo "<td>" . $row['objawy_ju'] . "</td>";
         echo "<td>" . $row['rozpoznanie'] . "</td>";
         echo "<td>" . $row['roznicowanie'] . "</td>";
         echo "<td><a href='edytuj_chorobe.php?id={$row['id']}'>Edytuj</a></td>";

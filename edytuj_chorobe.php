@@ -15,9 +15,9 @@ $id = $_GET['id'];
 
 if (isset($_POST['submit'])) {
     // Pobierz wartości z formularza
-    $jednostka_chorobowa = $_POST['jednostka_chorobowa'];
-    $objawy_ogolne_miejscowe = $_POST['objawy_ogolne_miejscowe'];
-    $objawy_miejscowe_ju = $_POST['objawy_miejscowe_ju'];
+    $choroba = $_POST['choroba'];
+    $objawy_ogolne = $_POST['objawy_ogolne'];
+    $objawy_ju = $_POST['objawy_ju'];
     $rozpoznanie = $_POST['rozpoznanie'];
     $roznicowanie = $_POST['roznicowanie'];
     $id_wirus = $_POST['id_wirus'];
@@ -26,7 +26,7 @@ if (isset($_POST['submit'])) {
     $conn = pg_connect(get_conn_string());
 
     // Aktualizacja danych choroby w bazie danych
-    $query = "UPDATE choroba SET jednostka_chorobowa = '$jednostka_chorobowa', objawy_ogolne_miejscowe = '$objawy_ogolne_miejscowe', objawy_miejscowe_ju = '$objawy_miejscowe_ju', rozpoznanie = '$rozpoznanie', roznicowanie = '$roznicowanie', id_wirus = $id_wirus WHERE id = $id";
+    $query = "UPDATE choroba SET choroba = '$choroba', objawy_ogolne = '$objawy_ogolne', objawy_ju = '$objawy_ju', rozpoznanie = '$rozpoznanie', roznicowanie = '$roznicowanie', id_wirus = $id_wirus WHERE id = $id";
     pg_query($conn, $query);
 
     // Zamknięcie połączenia z bazą danych
@@ -42,7 +42,7 @@ if (isset($_POST['submit'])) {
 // Połączenie z bazą danych PostgreSQL
 $conn = pg_connect(get_conn_string());
 
-$query = "SELECT c.id, c.jednostka_chorobowa, w.nazwa, c.objawy_ogolne_miejscowe, c.objawy_miejscowe_ju, c.rozpoznanie, c.roznicowanie, c.id_wirus
+$query = "SELECT c.id, c.choroba, w.nazwa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie, c.id_wirus
           FROM choroba c
           JOIN wirus w ON c.id_wirus = w.id
           WHERE c.id = $id";
@@ -62,16 +62,16 @@ pg_close($conn);
     <h2>Edytuj Chorobę</h2>
 
     <form action="edytuj_chorobe.php?id=<?php echo $id; ?>" method="POST">
-        <label for="jednostka_chorobowa">Jednostka chorobowa:</label>
-        <input type="text" id="jednostka_chorobowa" name="jednostka_chorobowa" value="<?php echo $row['jednostka_chorobowa']; ?>" required>
+        <label for="choroba">Jednostka chorobowa:</label>
+        <input type="text" id="choroba" name="choroba" value="<?php echo $row['choroba']; ?>" required>
         <br><br>
 
-        <label for="objawy_ogolne_miejscowe">Objawy ogólne lub miejscowe poza jamą ustną:</label>
-        <textarea id="objawy_ogolne_miejscowe" name="objawy_ogolne_miejscowe" required><?php echo $row['objawy_ogolne_miejscowe']; ?></textarea>
+        <label for="objawy_ogolne">Objawy ogólne lub miejscowe poza jamą ustną:</label>
+        <textarea id="objawy_ogolne" name="objawy_ogolne" required><?php echo $row['objawy_ogolne']; ?></textarea>
         <br><br>
 
-        <label for="objawy_miejscowe_ju">Objawy miejscowe w jamie ustnej:</label>
-        <textarea id="objawy_miejscowe_ju" name="objawy_miejscowe_ju" required><?php echo $row['objawy_miejscowe_ju']; ?></textarea>
+        <label for="objawy_ju">Objawy miejscowe w jamie ustnej:</label>
+        <textarea id="objawy_ju" name="objawy_ju" required><?php echo $row['objawy_ju']; ?></textarea>
         <br><br>
 
         <label for="rozpoznanie">Rozpoznanie:</label>

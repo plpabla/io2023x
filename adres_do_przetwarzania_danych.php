@@ -1,14 +1,14 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Pobranie danych z formularza
-    $jednostka_chorobowa = $_POST['jednostka_chorobowa'];
-    $objawy_ogolne_miejscowe = $_POST['objawy_ogolne_miejscowe'];
-    $objawy_miejscowe_ju = $_POST['objawy_miejscowe_ju'];
+    $choroba = $_POST['choroba'];
+    $objawy_ogolne = $_POST['objawy_ogolne'];
+    $objawy_ju = $_POST['objawy_ju'];
     $rozpoznanie = $_POST['rozpoznanie'];
     $roznicowanie = $_POST['roznicowanie'];
 
     // Sprawdzanie czy pola formularza nie są puste
-    if (empty($jednostka_chorobowa) || empty($objawy_ogolne_miejscowe) || empty($objawy_miejscowe_ju) || empty($rozpoznanie) || empty($roznicowanie)) {
+    if (empty($choroba) || empty($objawy_ogolne) || empty($objawy_ju) || empty($rozpoznanie) || empty($roznicowanie)) {
         echo "Wypełnij wszystkie pola formularza.";
     } else {
         // Połączenie z bazą danych PostgreSQL
@@ -26,15 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $conn = pg_connect(get_conn_string());
 
         // Zabezpieczenie przed SQL Injection
-        $jednostka_chorobowa = pg_escape_string($jednostka_chorobowa);
-        $objawy_ogolne_miejscowe = pg_escape_string($objawy_ogolne_miejscowe);
-        $objawy_miejscowe_ju = pg_escape_string($objawy_miejscowe_ju);
+        $choroba = pg_escape_string($choroba);
+        $objawy_ogolne = pg_escape_string($objawy_ogolne);
+        $objawy_ju = pg_escape_string($objawy_ju);
         $rozpoznanie = pg_escape_string($rozpoznanie);
         $roznicowanie = pg_escape_string($roznicowanie);
 
         // Wstawienie danych choroby do bazy danych
-        $query = "INSERT INTO choroba (jednostka_chorobowa, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie) 
-                  VALUES ('$jednostka_chorobowa', '$objawy_ogolne_miejscowe', '$objawy_miejscowe_ju', '$rozpoznanie', '$roznicowanie')";
+        $query = "INSERT INTO choroba (choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie) 
+                  VALUES ('$choroba', '$objawy_ogolne', '$objawy_ju', '$rozpoznanie', '$roznicowanie')";
         $result = pg_query($conn, $query);
 
         if ($result) {
