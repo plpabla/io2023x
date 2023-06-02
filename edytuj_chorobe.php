@@ -36,8 +36,8 @@ if (isset($_POST['submit'])) {
     echo "<script>alert('Baza wirusów została zaktualizowana');</script>";
 
     // Przekierowanie użytkownika do listy chorób
-    header("Location: index.php");
-    exit();
+ //   header("Location: index.php");
+ //   exit();
 }
 
 // Pobranie danych choroby o podanym identyfikatorze
