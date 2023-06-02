@@ -22,7 +22,7 @@
     $conn = pg_connect(get_conn_string());
 
     // Pobranie danych wirusów z bazy danych
-    $query = "SELECT id, nazwa, skrot, genom, wyleganie, szczepionka, droga_zak FROM wirus ORDER BY id";";
+    $query = "SELECT id, nazwa, skrot, genom, wyleganie, szczepionka, droga_zak FROM wirus ORDER BY id";
     $result = pg_query($conn, $query);
 
     if (pg_num_rows($result) > 0) {
