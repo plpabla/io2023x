@@ -22,28 +22,47 @@
     $conn = pg_connect(get_conn_string());
 
     // Pobranie danych wirusów z bazy danych
-    $query = "SELECT * FROM wirus";
+    $query = "SELECT id, nazwa, skrot, genom, wyleganie, szczepionka, droga_zak FROM wirus";
     $result = pg_query($conn, $query);
 
-    if (!$result) {
+    if (pg_num_rows($result) > 0) {
+        echo '<table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nazwa wirusa lub rodziny wirusów</th>
+                    <th>Skrót</th>
+                    <th>Genom</th>
+                    <th>Okres wylęgania [dni]</th>
+                    <th>Szczepionka</th>
+                    <th>Droga zakażenia</th>
+                  </tr>
+                </thead>
+                <tbody>';
+    /*if (!$result) {
         echo "Wystąpił błąd podczas pobierania danych wirusów: " . pg_last_error();
         exit();
     }
 
-    echo "<table>";
+    echo "<table>";*/
     while ($row = pg_fetch_assoc($result)) {
         echo "<tr>";
-        echo "<td>" . $row['ID'] . "</td>";
-        echo "<td>" . $row['Nazwa wirusa lub rodziny wirusów'] . "</td>";
-        echo "<td>" . $row['Skrót'] . "</td>";
-        echo "<td>" . $row['Genom'] . "</td>";
-        echo "<td>" . $row['Okres wylęgania [dni]'] . "</td>";
-        echo "<td>" . $row['Szczepionka'] . "</td>";
-        echo "<td>" . $row['Droga zakażenia'] . "</td>";
-        echo "<td>" . $row['Jednostki chorobowe'] . "</td>";
+        echo "<td>" . $row['id'] . "</td>";
+        echo "<td>" . $row['nazwa'] . "</td>";
+        echo "<td>" . $row['skrot'] . "</td>";
+        echo "<td>" . $row['genom'] . "</td>";
+        echo "<td>" . $row['wyleganie'] . "</td>";
+        echo "<td>" . $row['szczepionka'] . "</td>";
+        echo "<td>" . $row['droga_zak'] . "</td>";
         echo "</tr>";
     }
-    echo "</table>";
+//    echo "</table>";
+
+    echo '</tbody>
+          </table>';
+    } else {
+      echo "Brak dostępnych danych.";
+    }
 
     pg_close($conn);
     ?>
