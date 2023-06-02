@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Dodaj chorobę</title>
+
+    <script>
+        function showMessageBox() {
+            alert("Baza wirusów została zaktualizowana");
+        }
+    </script>
+    
 </head>
 <body>
     <h1>Dodaj chorobę</h1>
@@ -64,7 +71,8 @@
             $result = pg_query($conn, $query);
 
             if ($result) {
-                echo "Baza chorób została zaktualizowana.";
+//                echo "Baza chorób została zaktualizowana.";
+                echo "<script>showMessageBox();</script>";
             } else {
                 echo "Wystąpił błąd podczas dodawania choroby.";
             }
