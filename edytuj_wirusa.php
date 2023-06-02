@@ -32,9 +32,12 @@ if (isset($_POST['submit'])) {
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
 
+     // Wyświetlenie messageboxa po aktualizacji bazy wirusów
+     echo "<script>alert('Baza wirusów została zaktualizowana');</script>";
+
     // Przekierowanie użytkownika do listy wirusów
-    header("Location: wirusy.php");
-    exit();
+//    header("Location: wirusy.php");
+//   exit();
 }
 
 // Pobranie danych wirusa o podanym identyfikatorze
@@ -87,3 +90,6 @@ pg_close($conn);
     </form>
 </body>
 </html>
+
+<br><br>
+<a href="wirusy.php">Powrót do charakterystyki wirusów</a>
