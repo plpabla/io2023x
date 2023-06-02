@@ -54,6 +54,8 @@
         echo "<td>" . $row['wyleganie'] . "</td>";
         echo "<td>" . $row['szczepionka'] . "</td>";
         echo "<td>" . $row['droga_zak'] . "</td>";
+        echo "<td><a href='edytuj_wirusa.php?id={$row['id']}'>Edytuj</a></td>";
+        echo "<td><a href='usun_chorobe.php?id={$row['id']}'>Usuń</a></td>";
         echo "</tr>";
     }
 //    echo "</table>";
