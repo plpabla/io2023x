@@ -32,6 +32,9 @@ if (isset($_POST['submit'])) {
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
 
+    // Wyświetlenie messageboxa po aktualizacji bazy wirusów
+    echo "<script>alert('Baza wirusów została zaktualizowana');</script>";
+
     // Przekierowanie użytkownika do listy chorób
     header("Location: index.php");
     exit();
@@ -66,7 +69,7 @@ pg_close($conn);
         <input type="text" id="choroba" name="choroba" value="<?php echo $row['choroba']; ?>" required>
         <br><br>
 
-        <label for="id_wirus">Czynnik etiologiczny (wirus):</label>
+        <label for="id_wirus">Czynnik etiologiczny:</label>
         <select id="id_wirus" name="id_wirus" required>
             <?php
             // Połączenie z bazą danych PostgreSQL
