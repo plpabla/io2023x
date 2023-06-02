@@ -8,10 +8,28 @@
 
 <body>
     <?php
-    $dbconn = pg_connect("host=localhost dbname=wirusy user=moj_uzytkownik password=moje_haslo");
-    $query = "SELECT * FROM wirusy";
-    $result = pg_query($dbconn, $query);
-    
+    function get_conn_string()
+    {
+        $ini = parse_ini_file("php.ini");
+        $host = $ini["dbhost"];
+        $db = $ini["dbname"];
+        $usr = $ini["dbuser"];
+        $pass = $ini["dbpass"];
+        $conn_string = "host=$host port=5432 dbname=$db user=$usr password=$pass";
+        return $conn_string;
+    }
+
+    $conn = pg_connect(get_conn_string());
+
+    // Pobranie danych wirusów z bazy danych
+    $query = "SELECT * FROM wirus";
+    $result = pg_query($conn, $query);
+
+    if (!$result) {
+        echo "Wystąpił błąd podczas pobierania danych wirusów: " . pg_last_error();
+        exit();
+    }
+
     echo "<table>";
     while ($row = pg_fetch_assoc($result)) {
         echo "<tr>";
@@ -26,8 +44,8 @@
         echo "</tr>";
     }
     echo "</table>";
-    
-    pg_close($dbconn);
+
+    pg_close($conn);
     ?>
 </body>
 
