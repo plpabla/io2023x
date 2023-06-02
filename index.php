@@ -46,10 +46,11 @@
               JOIN wirus w ON c.id_wirus = w.id";
               */
  //   $query = "SELECT id, id_wirus, choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie FROM choroba ORDER BY id";
-    $query = "SELECT c.id, c.choroba, w.nazwa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
-          FROM choroba c
-          JOIN wirus w ON c.id_wirus = w.id
-          ORDER BY c.id";
+            $query = "SELECT c.id, c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
+            FROM choroba c
+            JOIN wirus w ON c.id_wirus = w.id
+            ORDER BY c.id";
+
     $result = pg_query($conn, $query);
               
     // Sprawdzenie, czy są dostępne dane
