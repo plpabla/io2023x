@@ -30,7 +30,7 @@
         exit();
     }
     
-    $wirus = pg_fetch_all($result);
+    $wirusy = pg_fetch_all($result);
 
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
@@ -52,11 +52,11 @@
             $conn = pg_connect(get_conn_string());
 
             // Zabezpieczenie przed SQL Injection
-            $jednostka_chorobowa = pg_escape_string($jednostka_chorobowa);
-            $objawy_ogolne_miejscowe = pg_escape_string($objawy_ogolne_miejscowe);
-            $objawy_miejscowe_ju = pg_escape_string($objawy_miejscowe_ju);
-            $rozpoznanie = pg_escape_string($rozpoznanie);
-            $roznicowanie = pg_escape_string($roznicowanie);
+            $jednostka_chorobowa = pg_escape_string($conn, $jednostka_chorobowa);
+            $objawy_ogolne_miejscowe = pg_escape_string($conn, $objawy_ogolne_miejscowe);
+            $objawy_miejscowe_ju = pg_escape_string($conn, $objawy_miejscowe_ju);
+            $rozpoznanie = pg_escape_string($conn, $rozpoznanie);
+            $roznicowanie = pg_escape_string($conn, $roznicowanie);
 
             // Wstawienie danych choroby do bazy danych
             $query = "INSERT INTO choroba (id_wirus, jednostka_chorobowa, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie) 
@@ -83,8 +83,10 @@
         <label for="id_wirus">Wybierz wirusa:</label>
         <select id="id_wirus" name="id_wirus">
             <?php
-            foreach ($wirus as $wirus) {
-                echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
+            if (!empty($wirusy)) {
+                foreach ($wirusy as $wirus) {
+                    echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
+                }
             }
             ?>
         </select>
