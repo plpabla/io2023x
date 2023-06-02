@@ -69,5 +69,7 @@
     pg_close($conn);
     ?>
 </body>
-
 </html>
+
+<br><br>
+<a href="index.php">Powrót do strony głównej</a>
