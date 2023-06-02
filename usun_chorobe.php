@@ -21,7 +21,7 @@ $query = "DELETE FROM choroba WHERE id = $id";
 $result = pg_query($conn, $query);
 
 if ($result) {
-    echo "Choroba została usunięta.";
+    echo "Jednostka chorobowa została usunięta.";
 } else {
     echo "Wystąpił błąd podczas usuwania choroby.";
 }
@@ -29,3 +29,6 @@ if ($result) {
 // Zamknięcie połączenia z bazą danych
 pg_close($conn);
 ?>
+
+<br><br>
+<a href="index.php">Powrót do strony głównej</a>
