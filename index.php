@@ -45,7 +45,7 @@
               FROM choroba c
               JOIN wirus w ON c.id_wirus = w.id";
               */
-    $query = "SELECT id, id_wirus, choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie FROM choroba";
+    $query = "SELECT id, id_wirus, jednostka_chorobowa, objawy_ogolne_miejscowe, objawy_miejscowe_ju, rozpoznanie, roznicowanie FROM choroba";
     $result = pg_query($conn, $query);
 
     // Sprawdzenie, czy są dostępne dane
