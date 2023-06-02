@@ -32,6 +32,8 @@
 
     <a href="dodaj_chorobe.php">Link do dodania nowej choroby</a>
     <br><br>
+    <a href="wirusy.php">Link do wirusów</a>
+    <br><br>
   <?php
       
     // Połączenie z bazą danych PostgreSQL
