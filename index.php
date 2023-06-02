@@ -53,7 +53,7 @@
       echo '<table>
               <thead>
                 <tr>
-                  <th>ID</th>
+                  <th>Lp.</th>
                   <th>Jednostka chorobowa</th>
                   <th>Czynnik etiologiczny</th>
                   <th>Objawy ogólne lub miejscowe poza jamą ustną</th>
@@ -66,10 +66,13 @@
               </thead>
               <tbody>';
 
+              $lp = 1; // Zmienna licznikowa
+
       // Iterujesz przez wyniki zapytania i generujesz wiersze tabeli HTML
       while ($row = pg_fetch_assoc($result)) {
         echo "<tr>";
-        echo "<td>" . $row['id'] . "</td>";
+//        echo "<td>" . $row['id'] . "</td>";
+        echo "<td>" . $lp . "</td>";
         echo "<td>" . $row['choroba'] . "</td>";
         echo "<td>" . $row['nazwa'] . "</td>";
         echo "<td>" . $row['objawy_ogolne'] . "</td>";
@@ -80,6 +83,8 @@
         echo "<td><a href='usun_chorobe.php?id={$row['id']}'>Usuń</a></td>";
         echo "</tr>";
       }
+
+               $lp++; // Inkrementacja zmiennej licznikowej
 
       echo '</tbody>
             </table>';
