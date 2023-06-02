@@ -73,7 +73,7 @@ pg_close($conn);
             $conn = pg_connect(get_conn_string());
 
             // Pobranie wszystkich wirusów
-            $query = "SELECT * FROM wirus";
+            $query = "SELECT * FROM wirus ORDER BY id";
             $result = pg_query($conn, $query);
 
             // Iterujesz przez wyniki zapytania i generujesz opcje w formularzu
