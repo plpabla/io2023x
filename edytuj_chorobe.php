@@ -56,30 +56,14 @@ pg_close($conn);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edytuj Chorobę</title>
+    <title>Edytuj chorobę wirusową</title>
 </head>
 <body>
-    <h2>Edytuj Chorobę</h2>
+    <h2>Edytuj chorobę wirusową</h2>
 
     <form action="edytuj_chorobe.php?id=<?php echo $id; ?>" method="POST">
         <label for="choroba">Jednostka chorobowa:</label>
         <input type="text" id="choroba" name="choroba" value="<?php echo $row['choroba']; ?>" required>
-        <br><br>
-
-        <label for="objawy_ogolne">Objawy ogólne lub miejscowe poza jamą ustną:</label>
-        <textarea id="objawy_ogolne" name="objawy_ogolne" required><?php echo $row['objawy_ogolne']; ?></textarea>
-        <br><br>
-
-        <label for="objawy_ju">Objawy miejscowe w jamie ustnej:</label>
-        <textarea id="objawy_ju" name="objawy_ju" required><?php echo $row['objawy_ju']; ?></textarea>
-        <br><br>
-
-        <label for="rozpoznanie">Rozpoznanie:</label>
-        <textarea id="rozpoznanie" name="rozpoznanie" required><?php echo $row['rozpoznanie']; ?></textarea>
-        <br><br>
-
-        <label for="roznicowanie">Różnicowanie:</label>
-        <textarea id="roznicowanie" name="roznicowanie" required><?php echo $row['roznicowanie']; ?></textarea>
         <br><br>
 
         <label for="id_wirus">Czynnik etiologiczny (wirus):</label>
@@ -104,7 +88,26 @@ pg_close($conn);
         </select>
         <br><br>
 
+        <label for="objawy_ogolne">Objawy ogólne lub miejscowe poza jamą ustną:</label>
+        <textarea id="objawy_ogolne" name="objawy_ogolne" required><?php echo $row['objawy_ogolne']; ?></textarea>
+        <br><br>
+
+        <label for="objawy_ju">Objawy miejscowe w jamie ustnej:</label>
+        <textarea id="objawy_ju" name="objawy_ju" required><?php echo $row['objawy_ju']; ?></textarea>
+        <br><br>
+
+        <label for="rozpoznanie">Rozpoznanie:</label>
+        <textarea id="rozpoznanie" name="rozpoznanie" required><?php echo $row['rozpoznanie']; ?></textarea>
+        <br><br>
+
+        <label for="roznicowanie">Różnicowanie:</label>
+        <textarea id="roznicowanie" name="roznicowanie" required><?php echo $row['roznicowanie']; ?></textarea>
+        <br><br>
+
         <input type="submit" name="submit" value="Zapisz zmiany">
     </form>
 </body>
 </html>
+
+<br><br>
+<a href="index.php">Powrót do strony głównej</a>
