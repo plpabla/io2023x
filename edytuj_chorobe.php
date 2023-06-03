@@ -40,13 +40,8 @@ if (isset($_POST['submit'])) {
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
 
-    // Przekierowanie użytkownika do listy chorób
-   header("Location: index.php");
-   
     // Wyświetlenie messageboxa po aktualizacji bazy wirusów
     echo "<script>alert('Baza wirusów została zaktualizowana');</script>";
-
-   exit();
 }
 
 // Pobranie danych choroby o podanym identyfikatorze
