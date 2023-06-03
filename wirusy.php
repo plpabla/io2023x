@@ -4,9 +4,13 @@
 <head>
     <meta charset="utf-8">
     <title>Wirusy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
 </head>
 
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <h1>Baza wirusów</h1>
     <?php
     function get_conn_string()
     {
@@ -26,8 +30,8 @@
     $result = pg_query($conn, $query);
 
     if (pg_num_rows($result) > 0) {
-        echo '<table>
-                <thead>
+        echo '<table class="table table-striped">
+                <thead class="table-dark">
                   <tr>
                     <th>ID</th>
                     <th>Nazwa wirusa lub rodziny wirusów</th>
@@ -36,6 +40,8 @@
                     <th>Okres wylęgania [dni]</th>
                     <th>Szczepionka</th>
                     <th>Droga zakażenia</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>';
@@ -54,8 +60,8 @@
         echo "<td>" . $row['wyleganie'] . "</td>";
         echo "<td>" . $row['szczepionka'] . "</td>";
         echo "<td>" . $row['droga_zak'] . "</td>";
-        echo "<td><a href='edytuj_wirusa.php?id={$row['id']}'>Edytuj</a></td>";
-        echo "<td><a href='usun_wirusa.php?id={$row['id']}'>Usuń</a></td>";
+        echo "<td><button type='button' class='btn btn-primary' onclick='location.href=\"edytuj_wirusa.php?id={$row['id']}\"'>Edytuj</button></td>";
+        echo "<td><button type='button' class='btn btn-danger' onclick='location.href=\"usun_wirusa.php?id={$row['id']}\"'>Usuń</button></td>";
         echo "</tr>";
     }
 //    echo "</table>";
@@ -71,5 +77,5 @@
 </body>
 </html>
 
-<br><br>
-<a href="index.php">Powrót do strony głównej</a>
+<br>
+<button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
