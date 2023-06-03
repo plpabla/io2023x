@@ -2,8 +2,7 @@
 <html>
 
 <head>
-    <title>Tabela Choroba</title>
-
+    <title>Tabela Chorób</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 
 </head>
@@ -11,9 +10,9 @@
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-    <h1>Jeden wirus może powodować wiele chorób</h1>
+    <!-- <h1>Jeden wirus może powodować wiele chorób</h1>
     <h2>Choroba może być powodowana tylko przez jednego wirusa!!</h2>
-    <img src="doc/wirusy.png" width=500 /><br>
+    <img src="doc/wirusy.png" width=500 /><br> -->
     <?php
     function get_conn_string()
     {
@@ -26,14 +25,11 @@
       return $conn_string;
     }
     ?>
+    <h1>Wybrane choroby wirusowe manifestujące objawy w jamie ustnej</h1>
 
-    <a href="dodaj_chorobe.php">Link do dodania nowej choroby</a>
+    <button type="button" class="btn btn-primary" onclick="location.href='dodaj_chorobe.php';">Dodaj chorobę</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='wirusy.php';">Wyświetl wirusy</button>
     <br><br>
-    <a href="wirusy.php">Link do wirusów</a>
-    <br><br>
-
-    <h3>Wybrane choroby wirusowe manifestujące objawy w jamie ustnej</h3>
-
     <?php
       
     // Połączenie z bazą danych PostgreSQL
@@ -59,8 +55,8 @@
                   <th scope="col">Objawy miejscowe w jamie ustnej</th>
                   <th scope="col">Rozpoznanie</th>
                   <th scope="col">Różnicowanie</th>
-                  <th scope="col">Edytuj</th>
-                  <th scope="col">Usuń</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>';
@@ -77,8 +73,8 @@
         echo "<td>" . $row['objawy_ju'] . "</td>";
         echo "<td>" . $row['rozpoznanie'] . "</td>";
         echo "<td>" . $row['roznicowanie'] . "</td>";
-        echo "<td><a href='edytuj_chorobe.php?id={$row['id']}'>Edytuj</a></td>";
-        echo "<td><a href='usun_chorobe.php?id={$row['id']}'>Usuń</a></td>";
+        echo "<td><button type='button' class='btn btn-primary' onclick='location.href=\"edytuj_chorobe.php?id={$row['id']}\"'>Edytuj</button></td>";
+        echo "<td><button type='button' class='btn btn-danger' onclick='location.href=\"usun_chorobe.php?id={$row['id']}\"'>Usuń</button></td>";
         echo "</tr>";
         
               $lp++; // Inkrementacja zmiennej licznikowej
