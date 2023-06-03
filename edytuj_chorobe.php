@@ -22,16 +22,16 @@ if (isset($_POST['submit'])) {
     $roznicowanie = $_POST['roznicowanie'];
     $id_wirus = $_POST['id_wirus'];
 
+    // Połączenie z bazą danych PostgreSQL
+    $conn = pg_connect(get_conn_string());
+    
     // Zabezpieczenie przed SQL Injection
     $choroba = pg_escape_string($conn, $choroba);
     $objawy_ogolne = pg_escape_string($conn, $objawy_ogolne);
     $objawy_ju = pg_escape_string($conn, $objawy_ju);
     $rozpoznanie = pg_escape_string($conn, $rozpoznanie);
     $roznicowanie = pg_escape_string($conn, $roznicowanie);
-    // $id_wirus = pg_escape_string($conn, $id_wirus);
-
-    // Połączenie z bazą danych PostgreSQL
-    $conn = pg_connect(get_conn_string());
+    $id_wirus = pg_escape_string($conn, $id_wirus);
 
     // Aktualizacja danych choroby w bazie danych
     $query = "UPDATE choroba SET choroba = '$choroba', objawy_ogolne = '$objawy_ogolne', objawy_ju = '$objawy_ju', rozpoznanie = '$rozpoznanie', roznicowanie = '$roznicowanie', id_wirus = $id_wirus WHERE id = $id";
