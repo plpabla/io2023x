@@ -25,7 +25,7 @@
 
     $conn = pg_connect(get_conn_string());
 
-    $selected_id = 4;
+    $selected_id = -1;
     if (isset($_GET["nazwa"]))
     {
         $selected_str = urldecode($_GET["nazwa"]);
@@ -33,14 +33,19 @@
         $selected_str = pg_escape_string($conn, $selected_str);
         echo "poszukiwanie ${selected_str}<br>";
         $query = "SELECT id FROM wirus WHERE nazwa=${selected_str}";
+        echo "zapytanie: ${query}";
         $result = pg_query($conn, $query);
         if($result)
+        {
             echo "cos jest";
-            else
+            $row = pg_fetch_assoc($result);
+            print_r($row);
+            $selected_id = $row['id'];
+        } else
+        {
             echo "nie ma";
-        $row = pg_fetch_assoc($result);
-        print_r($row);
-        $selected_id = $row['id'];
+            $selected_id = -1;
+        }
     };
     echo $selected_id;
 
