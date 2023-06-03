@@ -9,9 +9,11 @@
             alert("Baza wirusów została zaktualizowana");
         }
     </script>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
 </head>
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <h1>Dodaj chorobę</h1>
 
     <?php
@@ -42,7 +44,11 @@
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //////////////////////////////////////////////////////////////////////
+    //////////////// wrócić!! 
+    //////////////// $_SERVER['REQUEST_METHOD']
+    //////////////////////////////////////////////////////////////////////
+    if ('' === 'POST') {
         // Pobranie danych z formularza
         $choroba = $_POST['choroba'];
         $objawy_ogolne = $_POST['objawy_ogolne'];
@@ -84,12 +90,15 @@
     ?>
 
     <form action="dodaj_chorobe.php" method="POST">
-        <label for="choroba">Jednostka chorobowa:</label>
-        <input type="text" id="choroba" name="choroba" required>
-        <br><br>
+        <div class="form-floating mb-3">
+            <!-- <span class="input-group-text" id="basic-addon1">Jednostka chorobowa</span> -->
+            <input type="text" id="choroba" name="choroba" required class="form-control">
+            <label for="choroba" class="form-label">Jednostka chorobowa:</label>
+        </div>
 
-        <label for="id_wirus">Wybierz wirusa:</label>
-        <select id="id_wirus" name="id_wirus">
+        <div class="form mb-3">
+        <label for="id_wirus">Wybierz wirusa:</label>  
+        <select class="form-select" id="id_wirus" name="id_wirus">
             <?php
             if (!empty($wirusy)) {
                 foreach ($wirusy as $wirus) {
@@ -98,28 +107,40 @@
             }
             ?>
         </select>
-        <br><br>
+        </div>
 
-        <label for="objawy_ogolne">Objawy ogólne/miejscowe:</label>
-        <input type="text" id="objawy_ogolne" name="objawy_ogolne" required>
-        <br><br>
+        <div class="form mb-3">
+        <button type="button" class="btn btn-secondary" onclick="location.href='dodaj_wirusa.php';">Dodaj nowego wirusa</button>
+        </div>
+        
 
-        <label for="objawy_ju">Objawy miejscowe/ju:</label>
-        <input type="text" id="objawy_ju" name="objawy_ju" required>
-        <br><br>
+        <div class="form-floating mb-3">
+            <input type="text" id="objawy_ogolne" name="objawy_ogolne" required class="form-control">
+            <label for="objawy_ogolne" class="form-label">Objawy ogólne/miejscowe:</label>
+        </div>
 
-        <label for="rozpoznanie">Rozpoznanie:</label>
-        <input type="text" id="rozpoznanie" name="rozpoznanie" required>
-        <br><br>
+        <div class="form-floating mb-3">
+            <input type="text" id="objawy_ju" name="objawy_ju" required class="form-control">
+            <label for="objawy_ju" class="form-label">Objawy miejscowe/ju:</label>
+        </div>
 
-        <label for="roznicowanie">Różnicowanie:</label>
-        <input type="text" id="roznicowanie" name="roznicowanie" required>
-        <br><br>
+        <div class="form-floating mb-3">
+            <input type="text" id="rozpoznanie" name="rozpoznanie" required class="form-control">
+            <label for="rozpoznanie" class="form-label">Rozpoznanie:</label>
+        </div>
 
-        <input type="submit" value="Dodaj chorobę">
+        <div class="form-floating mb-3">
+            <input type="text" id="roznicowanie" name="roznicowanie" required class="form-control">
+            <label for="roznicowanie" class="form-label">Różnicowanie:</label>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Dodaj chorobę</button>
+        </div>
     </form>
 
     <br><br>
-    <a href="index.php">Wróć na stronę główną</a>
+    <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
+
 </body>
 </html>
