@@ -32,8 +32,8 @@
         echo "poszukiwanie ${selected_str}<br>";
         $selected_str = pg_escape_string($conn, $selected_str);
         echo "poszukiwanie ${selected_str}<br>";
-        $query = "SELECT id FROM wirus WHERE nazwa=${selected_str}";
-        echo "zapytanie: ${query}";
+        $query = "SELECT id FROM wirus WHERE nazwa='${selected_str}'";
+        echo "zapytanie: ${query}<br>";
         $result = pg_query($conn, $query);
         if($result)
         {
