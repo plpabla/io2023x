@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     $objawy_ju = pg_escape_string($conn, $objawy_ju);
     $rozpoznanie = pg_escape_string($conn, $rozpoznanie);
     $roznicowanie = pg_escape_string($conn, $roznicowanie);
-    $id_wirus = pg_escape_string($conn, $id_wirus);
+    // $id_wirus = pg_escape_string($conn, $id_wirus);
 
     // Połączenie z bazą danych PostgreSQL
     $conn = pg_connect(get_conn_string());
@@ -44,8 +44,8 @@ if (isset($_POST['submit'])) {
     echo "<script>alert('Baza wirusów została zaktualizowana');</script>";
 
     // Przekierowanie użytkownika do listy chorób
- //   header("Location: index.php");
- //   exit();
+//    header("Location: index.php");
+//    exit();
 }
 
 // Pobranie danych choroby o podanym identyfikatorze
