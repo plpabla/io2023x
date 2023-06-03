@@ -59,7 +59,12 @@
 
 if (!empty($search)) {
 // Dodaj warunek WHERE, jeśli podano wartość wyszukiwania
-$query .= " WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'";
+$query .= " WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
+            OR w.nazwa ILIKE '%" . pg_escape_string($search) . "%'
+            OR c.objawy_ogolne ILIKE '%" . pg_escape_string($search) . "%'
+            OR c.objawy_ju ILIKE '%" . pg_escape_string($search) . "%'
+            OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
+            OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'";
 }
 
 $query .= " ORDER BY c.id";
