@@ -29,10 +29,13 @@
     if (isset($_GET["nazwa"]))
     {
         $selected_str = urlencode($_GET["nazwa"]);
+        echo "poszukiwanie ${selected_str}<br>";
         $selected_str = pg_escape_string($conn, $selected_str);
+        echo "poszukiwanie ${selected_str}<br>";
         $query = "SELECT id FROM wirus WHERE nazwa=${selected_str}";
         $result = pg_query($conn, $query);
         $row = pg_fetch_assoc($result);
+        print_r($row);
         $selected_id = $row['id'];
     };
     echo $selected_id;
