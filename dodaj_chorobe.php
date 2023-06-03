@@ -96,21 +96,28 @@
             <label for="choroba" class="form-label">Jednostka chorobowa:</label>
         </div>
 
-        <div class="form mb-3">
         <label for="id_wirus">Wybierz wirusa:</label>  
-        <select class="form-select" id="id_wirus" name="id_wirus">
-            <?php
-            if (!empty($wirusy)) {
-                foreach ($wirusy as $wirus) {
-                    echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
-                }
-            }
-            ?>
-        </select>
-        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form mb-3">
+                
+                <select class="form-select" id="id_wirus" name="id_wirus">
+                    <?php
+                    if (!empty($wirusy)) {
+                        foreach ($wirusy as $wirus) {
+                            echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
+                        }
+                    }
+                    ?>
+                </select>
+                </div>
+            </div>
 
-        <div class="form mb-3">
-        <button type="button" class="btn btn-secondary" onclick="location.href='dodaj_wirusa.php';">Dodaj nowego wirusa</button>
+            <div class="col">
+                <div class="form mb-3">
+                    <button type="button" class="btn btn-secondary" onclick="location.href='dodaj_wirusa.php';">Dodaj nowego wirusa</button>
+                </div>
+            </div>
         </div>
         
 
