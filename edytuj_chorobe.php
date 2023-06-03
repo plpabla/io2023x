@@ -13,6 +13,7 @@ function get_conn_string()
 // Pobierz identyfikator choroby z parametru URL
 $id = $_GET['id'];
 
+// Obsługa aktualizacji
 if (isset($_POST['submit'])) {
     // Pobierz wartości z formularza
     $choroba = $_POST['choroba'];
@@ -43,9 +44,10 @@ if (isset($_POST['submit'])) {
     // Wyświetlenie messageboxa po aktualizacji bazy wirusów
     echo "<script>alert('Baza wirusów została zaktualizowana');</script>";
 }
+?>
 
-// Pobranie danych choroby o podanym identyfikatorze
-
+<!-- Obsługa wyświetlania -->
+<?php
 // Połączenie z bazą danych PostgreSQL
 $conn = pg_connect(get_conn_string());
 
