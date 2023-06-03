@@ -25,24 +25,48 @@
       return $conn_string;
     }
     ?>
+
+<div class="container">
+
     <h1>Wybrane choroby wirusowe manifestujące objawy w jamie ustnej</h1>
 
     <button type="button" class="btn btn-primary" onclick="location.href='dodaj_chorobe.php';">Dodaj chorobę</button>
     <button type="button" class="btn btn-secondary" onclick="location.href='wirusy.php';">Wyświetl wirusy</button>
     <br><br>
+
+    <form method="GET">
+            <div class="form-group">
+                <label for="search">Wyszukaj:</label>
+                <input type="text" class="form-control" id="search" name="search">
+            </div>
+            <button type="submit" class="btn btn-primary">Szukaj</button>
+        </form>
+
+        <br>
+
     <?php
       
     // Połączenie z bazą danych PostgreSQL
     $conn = pg_connect(get_conn_string());
 
-    // Pobranie danych z tabeli choroba, wraz z nazwą wirusa
+    // Pobranie wartości wyszukiwania z pola tekstowego
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+    // Pobranie danych z tabeli choroba, wraz z nazwą wirusa i zaktualizowanie zapytania SQL z warunkiem WHERE dla wyszukiwania
     $query = "SELECT c.id, c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
-    FROM choroba c
-    JOIN wirus w ON c.id_wirus = w.id
-    ORDER BY c.id";
+                  FROM choroba c
+                  JOIN wirus w ON c.id_wirus = w.id
+                  WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
+                  ORDER BY c.id";
+
+    // Pobranie danych z tabeli choroba, wraz z nazwą wirusa
+//    $query = "SELECT c.id, c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
+//    FROM choroba c
+//    JOIN wirus w ON c.id_wirus = w.id
+//    ORDER BY c.id";
 
     $result = pg_query($conn, $query);
-              
+    
     // Sprawdzenie, czy są dostępne dane
     if (pg_num_rows($result) > 0) {
       echo '<table class="table table-striped">
@@ -89,6 +113,8 @@
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
   ?>
+</div>
+
 </body>
 
 </html>
