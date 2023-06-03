@@ -52,12 +52,17 @@
     // Pobranie wartości wyszukiwania z pola tekstowego
     $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-    // Pobranie danych z tabeli choroba, wraz z nazwą wirusa i zaktualizowanie zapytania SQL z warunkiem WHERE dla wyszukiwania
+    // Zaktualizuj zapytanie SQL z warunkiem WHERE
     $query = "SELECT c.id, c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
-                  FROM choroba c
-                  JOIN wirus w ON c.id_wirus = w.id
-                  WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
-                  ORDER BY c.id";
+    FROM choroba c
+    JOIN wirus w ON c.id_wirus = w.id";
+
+if (!empty($search)) {
+// Dodaj warunek WHERE, jeśli podano wartość wyszukiwania
+$query .= " WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'";
+}
+
+$query .= " ORDER BY c.id";
 
     // Pobranie danych z tabeli choroba, wraz z nazwą wirusa
 //    $query = "SELECT c.id, c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
@@ -66,6 +71,11 @@
 //    ORDER BY c.id";
 
     $result = pg_query($conn, $query);
+
+     // Sprawdzenie, czy przesłano wartość wyszukiwania
+     if (!empty($search)) {
+      echo "<h3>Wyniki wyszukiwania dla: " . htmlentities($search) . "</h3>";
+  }
     
     // Sprawdzenie, czy są dostępne dane
     if (pg_num_rows($result) > 0) {
