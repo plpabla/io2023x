@@ -3,20 +3,14 @@
 
 <head>
     <title>Tabela Choroba</title>
-    <style>
-    table {
-        border-collapse: collapse;
-    }
 
-    th,
-    td {
-        border: 1px solid black;
-        padding: 8px;
-    }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
 </head>
 
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
     <h1>Jeden wirus może powodować wiele chorób</h1>
     <h2>Choroba może być powodowana tylko przez jednego wirusa!!</h2>
     <img src="doc/wirusy.png" width=500 /><br>
@@ -55,18 +49,18 @@
               
     // Sprawdzenie, czy są dostępne dane
     if (pg_num_rows($result) > 0) {
-      echo '<table>
-              <thead>
+      echo '<table class="table table-striped">
+              <thead class="table-dark">
                 <tr>
-                  <th>Lp.</th>
-                  <th>Jednostka chorobowa</th>
-                  <th>Czynnik etiologiczny</th>
-                  <th>Objawy ogólne lub miejscowe poza jamą ustną</th>
-                  <th>Objawy miejscowe w jamie ustnej</th>
-                  <th>Rozpoznanie</th>
-                  <th>Różnicowanie</th>
-                  <th>Edytuj</th>
-                  <th>Usuń</th>
+                  <th scope="col">Lp.</th>
+                  <th scope="col">Jednostka chorobowa</th>
+                  <th scope="col">Czynnik etiologiczny</th>
+                  <th scope="col">Objawy ogólne lub miejscowe poza jamą ustną</th>
+                  <th scope="col">Objawy miejscowe w jamie ustnej</th>
+                  <th scope="col">Rozpoznanie</th>
+                  <th scope="col">Różnicowanie</th>
+                  <th scope="col">Edytuj</th>
+                  <th scope="col">Usuń</th>
                 </tr>
               </thead>
               <tbody>';
@@ -76,7 +70,7 @@
       // Iterujesz przez wyniki zapytania i generujesz wiersze tabeli HTML
       while ($row = pg_fetch_assoc($result)) {
         echo "<tr>";
-        echo "<td>" . $lp . "</td>";
+        echo '<th scope="row">' . $lp . "</td>";
         echo "<td>" . $row['choroba'] . "</td>";
         echo "<td><a href='wirusy.php?nazwa=" . urlencode($row['nazwa_wirusa']) . "'>" . $row['nazwa_wirusa'] . "</a></td>";
         echo "<td>" . $row['objawy_ogolne'] . "</td>";
