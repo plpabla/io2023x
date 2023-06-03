@@ -41,7 +41,6 @@
             $selected_id = -1;
         }
     };
-    echo $selected_id;
 
     // Pobranie danych wirusów z bazy danych
     $query = "SELECT id, nazwa, skrot, genom, wyleganie, szczepionka, droga_zak FROM wirus ORDER BY id";
