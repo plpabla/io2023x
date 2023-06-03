@@ -25,6 +25,18 @@
 
     $conn = pg_connect(get_conn_string());
 
+    $selected_id = 4;
+    if (isset($_GET["nazwa"]))
+    {
+        $selected_str = urlencode($_GET["nazwa"]);
+        $selected_str = pg_escape_string($conn, $selected_str);
+        $query = "SELECT id FROM wirus WHERE nazwa=${selected_str}";
+        $result = pg_query($conn, $query);
+        $row = pg_fetch_assoc($result);
+        $selected_id = $row['id'];
+    };
+    echo $selected_id;
+
     // Pobranie danych wirusów z bazy danych
     $query = "SELECT id, nazwa, skrot, genom, wyleganie, szczepionka, droga_zak FROM wirus ORDER BY id";
     $result = pg_query($conn, $query);
@@ -51,8 +63,12 @@
     }
 
     echo "<table>";*/
+
     while ($row = pg_fetch_assoc($result)) {
-        echo "<tr>";
+        if($selected_id == $row['id'])
+            echo "<tr class='table-danger'>";
+        else
+            echo "<tr>";
         echo "<td>" . $row['id'] . "</td>";
         echo "<td>" . $row['nazwa'] . "</td>";
         echo "<td>" . $row['skrot'] . "</td>";
