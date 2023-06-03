@@ -44,11 +44,7 @@
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
 
-    //////////////////////////////////////////////////////////////////////
-    //////////////// wrócić!! 
-    //////////////// $_SERVER['REQUEST_METHOD']
-    //////////////////////////////////////////////////////////////////////
-    if ('' === 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Pobranie danych z formularza
         $choroba = $_POST['choroba'];
         $objawy_ogolne = $_POST['objawy_ogolne'];
