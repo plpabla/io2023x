@@ -29,15 +29,14 @@ if (isset($_POST['submit'])) {
     $query = "UPDATE choroba SET choroba = '$choroba', objawy_ogolne = '$objawy_ogolne', objawy_ju = '$objawy_ju', rozpoznanie = '$rozpoznanie', roznicowanie = '$roznicowanie', id_wirus = $id_wirus WHERE id = $id";
     $result = pg_query($conn, $query);
 
+    // Zamknięcie połączenia z bazą danych
+    pg_close($conn);
+
     if ($result) {
-   
         echo "<script>showMessageBox();</script>";
     } else {
-        echo "Wystąpił błąd podczas dodawania choroby.";
+        echo "Wystąpił błąd podczas edycji choroby.";
     }
-
-     // Zamknięcie połączenia z bazą danych
-     pg_close($conn);
 }
 
 // Połączenie z bazą danych PostgreSQL
