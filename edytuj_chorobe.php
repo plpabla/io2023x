@@ -130,8 +130,9 @@ pg_close($conn);
         
     </form>
 
-    <br><br>
     </div>
+
+    <br><br>
     <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
           
 </body>
