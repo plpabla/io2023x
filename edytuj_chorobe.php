@@ -52,8 +52,8 @@
             $roznicowanie = pg_escape_string($conn, $roznicowanie);
 
             // Wstawienie danych choroby do bazy danych
-            $query = "INSERT INTO choroba (id_wirus, choroba, objawy_ogolne, objawy_ju, rozpoznanie, roznicowanie) 
-                      VALUES ($id_wirus, '$choroba', '$objawy_ogolne', '$objawy_ju', '$rozpoznanie', '$roznicowanie')";
+            $id = $_GET['id']; // Pobierz identyfikator choroby z parametru URL
+            $query = "UPDATE choroba SET choroba = '$choroba', objawy_ogolne = '$objawy_ogolne', objawy_ju = '$objawy_ju', rozpoznanie = '$rozpoznanie', roznicowanie = '$roznicowanie', id_wirus = $id_wirus WHERE id = $id";
             $result = pg_query($conn, $query);
 
             if ($result) {
@@ -66,74 +66,26 @@
             // Zamknięcie połączenia z bazą danych
             pg_close($conn);
         }
-    }
-    // Pobierz identyfikator choroby z parametru URL
-    $id = $_GET['id'];
+    } else {
+        // Jeżeli nie jest to zapytanie POST, wyświetl formularz edycji
+        $id = $_GET['id'];
+        $conn = pg_connect(get_conn_string());
+        $query = "SELECT * FROM choroba WHERE id = $id";
+        $result = pg_query($conn, $query);
+        $row = pg_fetch_assoc($result);
+        $choroba = $row['choroba'];
+        $objawy_ogolne = $row['objawy_ogolne'];
+        $objawy_ju = $row['objawy_ju'];
+        $rozpoznanie = $row['rozpoznanie'];
+        $roznicowanie = $row['roznicowanie'];
+        $id_wirus = $row['id_wirus'];
 
-// Obsługa aktualizacji
-if (isset($_POST['submit'])) {
-    // Pobierz wartości z formularza
-    $choroba = $_POST['choroba'];
-    $objawy_ogolne = $_POST['objawy_ogolne'];
-    $objawy_ju = $_POST['objawy_ju'];
-    $rozpoznanie = $_POST['rozpoznanie'];
-    $roznicowanie = $_POST['roznicowanie'];
-    $id_wirus = $_POST['id_wirus'];
+        // Pobierz wirusy dla listy rozwijanej
+        $query_wirus = "SELECT * FROM wirus";
+        $result_wirus = pg_query($conn, $query_wirus);
 
-    // Połączenie z bazą danych PostgreSQL
-    $conn = pg_connect(get_conn_string());
-    
-    // Zabezpieczenie przed SQL Injection
-    $choroba = pg_escape_string($conn, $choroba);
-    $objawy_ogolne = pg_escape_string($conn, $objawy_ogolne);
-    $objawy_ju = pg_escape_string($conn, $objawy_ju);
-    $rozpoznanie = pg_escape_string($conn, $rozpoznanie);
-    $roznicowanie = pg_escape_string($conn, $roznicowanie);
-    $id_wirus = pg_escape_string($conn, $id_wirus);
-
-    // Aktualizacja danych choroby w bazie danych
-    $query = "UPDATE choroba SET choroba = '$choroba', objawy_ogolne = '$objawy_ogolne', objawy_ju = '$objawy_ju', rozpoznanie = '$rozpoznanie', roznicowanie = '$roznicowanie', id_wirus = $id_wirus WHERE id = $id";
-    pg_query($conn, $query);
-
-    // Zamknięcie połączenia z bazą danych
-    pg_close($conn);
-}
-
-    // Połączenie z bazą danych PostgreSQL
-$conn = pg_connect(get_conn_string());
-
-$query = "SELECT c.id, c.choroba, w.nazwa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie, c.id_wirus
-          FROM choroba c
-          JOIN wirus w ON c.id_wirus = w.id
-          WHERE c.id = $id";
-$result = pg_query($conn, $query);
-
-if (!$result) {
-    echo "Wystąpił błąd podczas pobierania danych wirusów: " . pg_last_error();
-    exit();
-}
-
-$row = pg_fetch_assoc($result);
-
-// Zamknięcie połączenia z bazą danych
-pg_close($conn);
- 
-$conn = pg_connect(get_conn_string());
-
-// Pobranie danych wirusów z bazy danych
-$query = "SELECT * FROM wirus ORDER BY id";
-$result = pg_query($conn, $query);
-
-if (!$result) {
-    echo "Wystąpił błąd podczas pobierania danych wirusów: " . pg_last_error();
-    exit();
-}
-
-$wirusy = pg_fetch_all($result);
-
-// Zamknięcie połączenia z bazą danych
-pg_close($conn);
-    ?>
+        pg_close($conn);
+?>
 
     <form action="edytuj_chorobe.php?id=<?php echo $id; ?>" method="POST">
     <div class="form-floating mb-3">
