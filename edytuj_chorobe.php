@@ -88,6 +88,24 @@ pg_close($conn);
                 <div class="form mb-3">
                 
                 <select class="form-select" id="id_wirus" name="id_wirus">
+                <?php
+            // Połączenie z bazą danych PostgreSQL
+            $conn = pg_connect(get_conn_string());
+
+            // Pobranie wszystkich wirusów
+            $query = "SELECT * FROM wirus";
+            $result = pg_query($conn, $query);
+
+            // Iterujesz przez wyniki zapytania i generujesz opcje w formularzu
+            while ($virus = pg_fetch_assoc($result)) {
+                $selected = ($virus['id'] == $row['id_wirus']) ? "selected" : "";
+                echo "<option value='{$virus['id']}' $selected>{$virus['nazwa']}</option>";
+            }
+
+            // Zamknięcie połączenia z bazą danych
+            pg_close($conn);
+            ?>
+            <!--
                     <?php
                     if (!empty($wirusy)) {
                         foreach ($wirusy as $wirus) {
@@ -95,6 +113,7 @@ pg_close($conn);
                         }
                     }
                     ?>
+            -->        
                 </select>
                 </div>
             </div>
@@ -121,24 +140,24 @@ pg_close($conn);
         </select>
         <br><br>
         -->   
-        
+       
         <div class="form-floating mb-3">
-            <input type="text" id="objawy_ogolne" name="objawy_ogolne" required class="form-control">
+            <input type="text" id="objawy_ogolne" name="objawy_ogolne" value="<?php echo $row['objawy_ogolne']; ?>" required class="form-control">
             <label for="objawy_ogolne" class="form-label">Objawy ogólne/miejscowe:</label>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" id="objawy_ju" name="objawy_ju" required class="form-control">
+            <input type="text" id="objawy_ju" name="objawy_ju" value="<?php echo $row['objawy_ju']; ?>" required class="form-control">
             <label for="objawy_ju" class="form-label">Objawy miejscowe/ju:</label>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" id="rozpoznanie" name="rozpoznanie" required class="form-control">
+            <input type="text" id="rozpoznanie" name="rozpoznanie" value="<?php echo $row['rozpoznanie']; ?>" required class="form-control">
             <label for="rozpoznanie" class="form-label">Rozpoznanie:</label>
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" id="roznicowanie" name="roznicowanie" required class="form-control">
+            <input type="text" id="roznicowanie" name="roznicowanie" value="<?php echo $row['roznicowanie']; ?>" required class="form-control">
             <label for="roznicowanie" class="form-label">Różnicowanie:</label>
         </div>
 
