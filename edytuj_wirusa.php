@@ -13,7 +13,7 @@ function get_conn_string()
 // Pobierz identyfikator wirusa z parametru URL
 $id = $_GET['id'];
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['nazwa'])) {
     // Pobierz wartości z formularza
     $nazwa = $_POST['nazwa'];
     $skrot = $_POST['skrot'];
