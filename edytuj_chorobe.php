@@ -73,7 +73,6 @@ pg_close($conn);
 
     <form action="edytuj_chorobe.php?id=<?php echo $id; ?>" method="POST">
     <div class="form-floating mb-3">
-            <!-- <span class="input-group-text" id="basic-addon1">Jednostka chorobowa</span> -->
             <input type="text" id="choroba" name="choroba" value="<?php echo $row['choroba']; ?>" required class="form-control">
             <label for="choroba" class="form-label">Jednostka chorobowa:</label>
         </div>
@@ -95,20 +94,11 @@ pg_close($conn);
             }
 
             pg_close($conn);
-            ?>
-            <!--
-                    <?php
-                    if (!empty($wirusy)) {
-                        foreach ($wirusy as $wirus) {
-                            echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
-                        }
-                    }
-                    ?>
-            -->        
+            ?>               
                 </select>
                 </div>
             </div>
-       
+        
         <div class="form-floating mb-3">
             <input type="text" id="objawy_ogolne" name="objawy_ogolne" value="<?php echo $row['objawy_ogolne']; ?>" required class="form-control">
             <label for="objawy_ogolne" class="form-label">Objawy ogólne i miejscowe poza jamą ustną:</label>
@@ -128,7 +118,7 @@ pg_close($conn);
             <input type="text" id="roznicowanie" name="roznicowanie" value="<?php echo $row['roznicowanie']; ?>" required class="form-control">
             <label for="roznicowanie" class="form-label">Różnicowanie:</label>
         </div>
-
+        
         <div class="col-12">
             <button class="btn btn-primary" type="submit" name="submit">Zapisz zmiany</button>
         </div>
@@ -136,6 +126,6 @@ pg_close($conn);
 
     <br><br>
     <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
-       
+          
 </body>
 </html>
