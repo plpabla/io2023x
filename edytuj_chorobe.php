@@ -1,4 +1,22 @@
-<?php
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj chorobę wirusową</title>
+
+    <script>
+        function showMessageBox() {
+            alert("Baza wirusów została zaktualizowana");
+        }
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <h1>Edytuj chorobę wirusową</h1>
+
+    <?php
 function get_conn_string()
 {
     $ini = parse_ini_file("php.ini");
@@ -52,24 +70,6 @@ $row = pg_fetch_assoc($result);
 // Zamknięcie połączenia z bazą danych
 pg_close($conn);
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Edytuj chorobę wirusową</title>
-
-    <script>
-        function showMessageBox() {
-            alert("Baza wirusów została zaktualizowana");
-        }
-    </script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-
-</head>
-<body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <h1>Edytuj chorobę wirusową</h1>
 
     <form action="edytuj_chorobe.php?id=<?php echo $id; ?>" method="POST">
     <div class="form-floating mb-3">
