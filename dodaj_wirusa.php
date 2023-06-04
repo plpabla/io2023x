@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Dodaj wirusa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script>
+        function showMessageBox() {
+            alert("Baza wirusów została zaktualizowana");
+        }
+    </script>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -69,7 +74,8 @@
             $result = pg_query($conn, $query);
 
             if ($result) {
-                echo "Baza wirusów została zaktualizowana.";
+          //      echo "Baza wirusów została zaktualizowana.";
+                echo "<script>showMessageBox();</script>";
             } else {
                 echo "Wystąpił błąd podczas dodawania wirusa.";
             }
@@ -81,35 +87,44 @@
     ?>
 
     <form action="dodaj_wirusa.php" method="POST">
-        <label for="nazwa">Nazwa wirusa:</label>
-        <input type="text" id="nazwa" name="nazwa" required>
-        <br><br>
+        <div class="form-floating mb-3">
+            <input type="text" id="nazwa" name="nazwa" required class="form-control">
+            <label for="nazwa" class="form-label">Nazwa wirusa:</label>
+        </div>
+        
+        <div class="form-floating mb-3">
+            <input type="text" id="skrot" name="skrot" required class="form-control">
+            <label for="skrot" class="form-label">Skrót:</label>
+        </div>
 
-        <label for="skrot">Skrót:</label>
-        <input type="text" id="skrot" name="skrot" required>
-        <br><br>
+        <div class="form-floating mb-3">
+            <input type="text" id="genom" name="genom" required class="form-control">
+            <label for="genom" class="form-label">Genom:</label>
+        </div>
 
-        <label for="genom">Genom:</label>
-        <input type="text" id="genom" name="genom" required>
-        <br><br>
+        <div class="form-floating mb-3">
+            <input type="text" id="wyleganie" name="wyleganie" required class="form-control">
+            <label for="wyleganie" class="form-label">Wylęganie:</label>
+        </div>
 
-        <label for="wyleganie">Wylęganie:</label>
-        <input type="text" id="wyleganie" name="wyleganie" required>
-        <br><br>
+        <div class="form-floating mb-3">
+            <input type="text" id="szczepionka" name="szczepionka" required class="form-control">
+            <label for="szczepionka" class="form-label">Szczepionka:</label>
+        </div>
 
-        <label for="szczepionka">Szczepionka:</label>
-        <input type="text" id="szczepionka" name="szczepionka" required>
-        <br><br>
+        <div class="form-floating mb-3">
+            <input type="text" id="droga_zak" name="droga_zak" required class="form-control">
+            <label for="droga_zak" class="form-label">Droga zakażenia:</label>
+        </div>
 
-        <label for="droga_zak">Droga zakażenia:</label>
-        <input type="text" id="droga_zak" name="droga_zak" required>
-        <br><br>
-
-        <input type="submit" value="Dodaj wirusa">
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Dodaj wirusa</button>
+        </div>
     </form>
 
     <br><br>
-    <a href="wirusy.php">Wróć do listy wirusów</a>
+    <button type="button" class="btn btn-secondary" onclick="location.href='wirusy.php';">Wróć do listy wirusów</button>
+
 </body>
 </html>
 
