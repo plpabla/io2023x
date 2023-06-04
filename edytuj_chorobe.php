@@ -77,11 +77,7 @@ pg_close($conn);
             <input type="text" id="choroba" name="choroba" value="<?php echo $row['choroba']; ?>" required required class="form-control">
             <label for="choroba" class="form-label">Jednostka chorobowa:</label>
         </div>
- <!--       <label for="choroba">Jednostka chorobowa:</label>
-        <input type="text" id="choroba" name="choroba" value="<?php echo $row['choroba']; ?>" required>
-        <br><br>
-    -->
-
+ 
     <label for="id_wirus">Wybierz wirusa:</label>  
         <div class="row">
             <div class="col">
@@ -93,7 +89,7 @@ pg_close($conn);
             $conn = pg_connect(get_conn_string());
 
             // Pobranie wszystkich wirusów
-            $query = "SELECT * FROM wirus";
+            $query = "SELECT * FROM wirus ORDER BY id";
             $result = pg_query($conn, $query);
 
             // Iterujesz przez wyniki zapytania i generujesz opcje w formularzu
@@ -162,16 +158,12 @@ pg_close($conn);
         </div>
 
         <div class="col-12">
-        <button class="btn btn-primary" type="submit">Zapisz zmiany</button>
-        <input type="submit" name="submit" value="Zapisz zmiany">    
-  <!--     <input type="submit" name="submit" value="Zapisz zmiany">  -->
+            <button class="btn btn-primary" type="submit">Zapisz zmiany</button>
         </div>
     </form>
 
     <br><br>
-
-           <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
+        <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
        
-    </form>
 </body>
 </html>
