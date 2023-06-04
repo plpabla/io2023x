@@ -162,35 +162,16 @@ pg_close($conn);
         </div>
 
         <div class="col-12">
+        <button class="btn btn-primary" type="submit">Zapisz zmiany</button>
         <input type="submit" name="submit" value="Zapisz zmiany">    
-  <!--      <button class="btn btn-primary" type="submit">Dodaj chorobę</button> -->
+  <!--     <input type="submit" name="submit" value="Zapisz zmiany">  -->
         </div>
     </form>
 
     <br><br>
 
            <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
-      
-
-    <!--
-        <label for="objawy_ogolne">Objawy ogólne lub miejscowe poza jamą ustną:</label>
-        <textarea id="objawy_ogolne" name="objawy_ogolne" required><?php echo $row['objawy_ogolne']; ?></textarea>
-        <br><br>
-
-        <label for="objawy_ju">Objawy miejscowe w jamie ustnej:</label>
-        <textarea id="objawy_ju" name="objawy_ju" required><?php echo $row['objawy_ju']; ?></textarea>
-        <br><br>
-
-        <label for="rozpoznanie">Rozpoznanie:</label>
-        <textarea id="rozpoznanie" name="rozpoznanie" required><?php echo $row['rozpoznanie']; ?></textarea>
-        <br><br>
-
-        <label for="roznicowanie">Różnicowanie:</label>
-        <textarea id="roznicowanie" name="roznicowanie" required><?php echo $row['roznicowanie']; ?></textarea>
-        <br><br>
-        -->
-        
-               
+       
     </form>
 </body>
 </html>
