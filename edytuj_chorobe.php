@@ -85,6 +85,7 @@
         $result_wirus = pg_query($conn, $query_wirus);
 
         pg_close($conn);
+    }
 ?>
 
     <form action="edytuj_chorobe.php?id=<?php echo $id; ?>" method="POST">
@@ -99,13 +100,17 @@
             <div class="col">
                 <div class="form mb-3">
                 <select class="form-select" id="id_wirus" name="id_wirus">
-                    <?php
-                    if (!empty($wirusy)) {
-                        foreach ($wirusy as $wirus) {
-                            echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
-                        }
+                <?php
+                // Pobierz wirusy dla listy rozwijanej
+                $query_wirus = "SELECT * FROM wirus";
+                $result_wirus = pg_query($conn, $query_wirus);
+
+                if ($result_wirus && pg_num_rows($result_wirus) > 0) {
+                    while ($wirus = pg_fetch_assoc($result_wirus)) {
+                        echo "<option value='" . $wirus['id'] . "'>" . $wirus['nazwa'] . "</option>";
                     }
-                    ?>
+                }
+                ?>
                 </select>
                 </div>
             </div>
