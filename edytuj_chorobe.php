@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
 
     // Aktualizacja danych choroby w bazie danych
     $query = "UPDATE choroba SET choroba = '$choroba', objawy_ogolne = '$objawy_ogolne', objawy_ju = '$objawy_ju', rozpoznanie = '$rozpoznanie', roznicowanie = '$roznicowanie', id_wirus = $id_wirus WHERE id = $id";
-    pg_query($conn, $query);
+    $result = pg_query($conn, $query);
 
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
