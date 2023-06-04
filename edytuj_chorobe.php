@@ -74,7 +74,7 @@ pg_close($conn);
     <form action="edytuj_chorobe.php?id=<?php echo $id; ?>" method="POST">
     <div class="form-floating mb-3">
             <!-- <span class="input-group-text" id="basic-addon1">Jednostka chorobowa</span> -->
-            <input type="text" id="choroba" name="choroba" required class="form-control">
+            <input type="text" id="choroba" name="choroba" value="<?php echo $row['choroba']; ?>" required required class="form-control">
             <label for="choroba" class="form-label">Jednostka chorobowa:</label>
         </div>
  <!--       <label for="choroba">Jednostka chorobowa:</label>
