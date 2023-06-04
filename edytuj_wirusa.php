@@ -100,8 +100,8 @@ pg_close($conn);
         </div>
     </form>
 
-    <br>
-    <button type="button" class="btn btn-secondary" onclick="location.href='wirusy.php';">Powrót do charakterystyki wirusów</button>
+    <br><br>
+    <button type="button" class="btn btn-secondary" onclick="location.href='wirusy.php';">Wróć do listy wirusów</button>
     <br><br>
     <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
 </body>
