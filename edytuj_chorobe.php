@@ -15,18 +15,26 @@ $id = $_GET['id'];
 
 // Obsługa aktualizacji
 if (isset($_POST['submit'])) {
-    // Pobierz wartości z formularza i zabezpiecz przed SQL Injection
-    $choroba = pg_escape_string($_POST['choroba']);
-    $objawy_ogolne = pg_escape_string($_POST['objawy_ogolne']);
-    $objawy_ju = pg_escape_string($_POST['objawy_ju']);
-    $rozpoznanie = pg_escape_string($_POST['rozpoznanie']);
-    $roznicowanie = pg_escape_string($_POST['roznicowanie']);
+    // Pobierz wartości z formularza
+    $choroba = $_POST['choroba'];
+    $objawy_ogolne = $_POST['objawy_ogolne'];
+    $objawy_ju = $_POST['objawy_ju'];
+    $rozpoznanie = $_POST['rozpoznanie'];
+    $roznicowanie = $_POST['roznicowanie'];
     $id_wirus = $_POST['id_wirus'];
 
     // Połączenie z bazą danych PostgreSQL
     $conn = pg_connect(get_conn_string());
     
-    // Aktualizacja danych choroby w bazie danych i zabezpieczenie przed SQL Injection
+    // Zabezpieczenie przed SQL Injection
+    $choroba = pg_escape_string($conn, $choroba);
+    $objawy_ogolne = pg_escape_string($conn, $objawy_ogolne);
+    $objawy_ju = pg_escape_string($conn, $objawy_ju);
+    $rozpoznanie = pg_escape_string($conn, $rozpoznanie);
+    $roznicowanie = pg_escape_string($conn, $roznicowanie);
+    $id_wirus = pg_escape_string($conn, $id_wirus);
+
+    // Aktualizacja danych choroby w bazie danych
     $query = "UPDATE choroba SET choroba = '$choroba', objawy_ogolne = '$objawy_ogolne', objawy_ju = '$objawy_ju', rozpoznanie = '$rozpoznanie', roznicowanie = '$roznicowanie', id_wirus = $id_wirus WHERE id = $id";
     pg_query($conn, $query);
 
@@ -36,7 +44,10 @@ if (isset($_POST['submit'])) {
     // Wyświetlenie messageboxa po aktualizacji bazy wirusów
     echo "<script>alert('Baza wirusów została zaktualizowana');</script>";
 }
+?>
 
+<!-- Obsługa wyświetlania -->
+<?php
 // Połączenie z bazą danych PostgreSQL
 $conn = pg_connect(get_conn_string());
 
@@ -70,7 +81,7 @@ pg_close($conn);
             // Połączenie z bazą danych PostgreSQL
             $conn = pg_connect(get_conn_string());
 
-            // Pobranie wszystkich wirusów i zabezpieczenie przed SQL Injection
+            // Pobranie wszystkich wirusów
             $query = "SELECT * FROM wirus ORDER BY id";
             $result = pg_query($conn, $query);
 
