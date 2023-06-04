@@ -29,10 +29,9 @@ function get_conn_string()
 }
 
 // Pobierz identyfikator choroby z parametru URL
-// $id = $_GET['id'];
-$id=4;
-if(0) {
-// if (isset($_POST['submit'])) {
+$id = $_GET['id'];
+
+if (isset($_POST['submit'])) {
     // Pobierz wartości z formularza
     $choroba = $_POST['choroba'];
     $objawy_ogolne = $_POST['objawy_ogolne'];
