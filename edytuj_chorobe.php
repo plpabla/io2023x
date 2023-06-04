@@ -97,6 +97,7 @@ if (isset($_POST['submit'])) {
 
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
+}
 
     // Połączenie z bazą danych PostgreSQL
 $conn = pg_connect(get_conn_string());
@@ -133,7 +134,7 @@ $wirusy = pg_fetch_all($result);
 // Zamknięcie połączenia z bazą danych
 pg_close($conn);
     ?>
-    
+
     <form action="edytuj_chorobe.php?id=<?php echo $id; ?>" method="POST">
     <div class="form-floating mb-3">
             <!-- <span class="input-group-text" id="basic-addon1">Jednostka chorobowa</span> -->
@@ -185,5 +186,5 @@ pg_close($conn);
     <br><br>
     <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
 
-    </body>
+</body>
 </html>
