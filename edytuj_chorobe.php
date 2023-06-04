@@ -143,14 +143,15 @@ pg_close($conn);
         </div>
 
         <div class="col-12">
-            <button class="btn btn-primary" type="submit">Dodaj chorobę</button>
+        <input type="submit" name="submit" value="Zapisz zmiany">    
+  <!--      <button class="btn btn-primary" type="submit">Dodaj chorobę</button> -->
         </div>
     </form>
 
     <br><br>
- <<!-- przycisk z dodawania choroby
+
            <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
-        -->
+      
 
     <!--
         <label for="objawy_ogolne">Objawy ogólne lub miejscowe poza jamą ustną:</label>
@@ -170,8 +171,7 @@ pg_close($conn);
         <br><br>
         -->
         
-        <input type="submit" name="submit" value="Zapisz zmiany">
-        
+               
     </form>
 </body>
 </html>
