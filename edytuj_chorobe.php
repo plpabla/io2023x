@@ -32,13 +32,13 @@ if (isset($_POST['submit'])) {
     // Zamknięcie połączenia z bazą danych
     pg_close($conn);
 
+    if ($result) {
    
-    // Przekierowanie użytkownika do listy chorób
-//    header("Location: index.php");
-//    exit();
+        echo "<script>showMessageBox();</script>";
+    } else {
+        echo "Wystąpił błąd podczas dodawania choroby.";
+    }
 }
-
-// Pobranie danych choroby o podanym identyfikatorze
 
 // Połączenie z bazą danych PostgreSQL
 $conn = pg_connect(get_conn_string());
@@ -49,13 +49,6 @@ $query = "SELECT c.id, c.choroba, w.nazwa, c.objawy_ogolne, c.objawy_ju, c.rozpo
           WHERE c.id = $id";
 $result = pg_query($conn, $query);
 $row = pg_fetch_assoc($result);
-
-if ($result) {
-   
-            echo "<script>showMessageBox();</script>";
-        } else {
-            echo "Wystąpił błąd podczas dodawania choroby.";
-        }
 
 // Zamknięcie połączenia z bazą danych
 pg_close($conn);
@@ -143,7 +136,7 @@ pg_close($conn);
     </form>
 
     <br><br>
-        <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
+    <button type="button" class="btn btn-secondary" onclick="location.href='index.php';">Wróć na stronę główną</button>
        
 </body>
 </html>
