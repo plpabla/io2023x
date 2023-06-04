@@ -43,8 +43,8 @@
     pg_close($conn);
 
 
-    // if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ('' === 'POST') {
+     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+ //   if ('' === 'POST') {
         // Pobranie danych z formularza
         $nazwa = $_POST['nazwa'];
         $skrot = $_POST['skrot'];
