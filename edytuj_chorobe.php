@@ -70,35 +70,14 @@ $row = pg_fetch_assoc($result);
 // Zamknięcie połączenia z bazą danych
 pg_close($conn);
 ?>
-
     <form action="edytuj_chorobe.php?id=<?php echo $id; ?>" method="POST">
+
     <div class="form-floating mb-3">
-            <input type="text" id="choroba" name="choroba" value="<?php echo $row['choroba']; ?>" required class="form-control">
-            <label for="choroba" class="form-label">Jednostka chorobowa:</label>
-        </div>
- 
-    <label for="id_wirus">Wybierz wirusa:</label>  
-        <div class="row">
-            <div class="col">
-                <div class="form mb-3">
-                    <select class="form-select" id="id_wirus" name="id_wirus">
-                <?php
-            $conn = pg_connect(get_conn_string());
+        <input type="text" id="choroba" name="choroba" value="<?php echo $row['choroba']; ?>" required class="form-control">
+        <label for="choroba" class="form-label">Jednostka chorobowa:</label>
+    </div>
 
-            $query = "SELECT * FROM wirus ORDER BY id";
-            $result = pg_query($conn, $query);
-
-            while ($virus = pg_fetch_assoc($result)) {
-                $selected = ($virus['id'] == $row['id_wirus']) ? "selected" : "";
-                echo "<option value='{$virus['id']}' $selected>{$virus['nazwa']}</option>";
-            }
-
-            pg_close($conn);
-            ?>               
-                </select>
-                </div>
-            </div>
-        
+      
         <div class="form-floating mb-3">
             <input type="text" id="objawy_ogolne" name="objawy_ogolne" value="<?php echo $row['objawy_ogolne']; ?>" required class="form-control">
             <label for="objawy_ogolne" class="form-label">Objawy ogólne i miejscowe poza jamą ustną:</label>
@@ -119,9 +98,36 @@ pg_close($conn);
             <label for="roznicowanie" class="form-label">Różnicowanie:</label>
         </div>
         
+        <div>
+        <label for="id_wirus" >Wybierz wirusa:</label>
+    </div>  
+
+        <div class="row">
+            <div class="col">
+                <div class="form mb-3">
+                    <select class="form-select" id="id_wirus" name="id_wirus">
+                <?php
+            $conn = pg_connect(get_conn_string());
+
+            $query = "SELECT * FROM wirus ORDER BY id";
+            $result = pg_query($conn, $query);
+
+            while ($virus = pg_fetch_assoc($result)) {
+                $selected = ($virus['id'] == $row['id_wirus']) ? "selected" : "";
+                echo "<option value='{$virus['id']}' $selected>{$virus['nazwa']}</option>";
+            }
+
+            pg_close($conn);
+            ?>               
+                </select>
+                </div>
+            </div>
+
         <div class="col-12">
             <button class="btn btn-primary" type="submit" name="submit">Zapisz zmiany</button>
         </div>
+
+        
     </form>
 
     <br><br>
