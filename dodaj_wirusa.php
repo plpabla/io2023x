@@ -124,7 +124,7 @@
 
     <br><br>
     <button type="button" class="btn btn-secondary" onclick="location.href='dodaj_chorobe.php';">Wróć do dodawania choroby</button>
-    <br>
+    <br><br>
     <button type="button" class="btn btn-secondary" onclick="location.href='wirusy.php';">Idź do listy wirusów</button>
 
 </body>
