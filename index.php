@@ -12,7 +12,7 @@
 
         <script>
     $(document).ready(function () {
-        $('#search').typeahead({
+        $('#search').autocomplete({
             source: function (query, result) {
                 $.ajax({
                     url: "search.php",
@@ -41,8 +41,8 @@
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-
+ <!--   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+-->
     <?php
     function get_conn_string()
     {
@@ -92,6 +92,16 @@
         <br>
   -->
   <?php
+
+
+
+
+// sprawdzenie czy php.ini jest poprawnie odczytywany
+  $ini = parse_ini_file("php.ini");
+  var_dump($ini);
+
+
+
   // Połączenie z bazą danych PostgreSQL
 $conn = pg_connect(get_conn_string());
 

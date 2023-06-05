@@ -9,17 +9,19 @@ $search = isset($_GET['search']) ? $_GET['search'] : '';
 $query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa
           FROM choroba c
           JOIN wirus w ON c.id_wirus = w.id
-          WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
-          OR w.nazwa ILIKE '%" . pg_escape_string($search) . "%'
-          OR c.objawy_ogolne ILIKE '%" . pg_escape_string($search) . "%'
-          OR c.objawy_ju ILIKE '%" . pg_escape_string($search) . "%'
-          OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
-          OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'
+          WHERE c.choroba ILIKE $1
+          OR w.nazwa ILIKE $1
+          OR c.objawy_ogolne ILIKE $1
+          OR c.objawy_ju ILIKE $1
+          OR c.rozpoznanie ILIKE $1
+          OR c.roznicowanie ILIKE $1
           ORDER BY c.choroba, w.nazwa";
 
+// Przygotowanie zapytania przy użyciu parametrów
+$stmt = pg_prepare($conn, "search_query", $query);
 
-// Pobranie danych z tabeli choroba i wirus
-$result = pg_query($conn, $query);
+// Wykonanie zapytania z przekazanymi parametrami
+$result = pg_execute($conn, "search_query", array("%" . $search . "%"));
 
 // Utworzenie tablicy wyników
 $results = array();
