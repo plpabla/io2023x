@@ -28,7 +28,7 @@
     <h1>Wybrane choroby wirusowe manifestujące objawy w jamie ustnej</h1>
 
     <button type="button" class="btn btn-primary" onclick="location.href='dodaj_chorobe.php';">Dodaj chorobę</button>
-    <button type="button" class="btn btn-secondary" onclick="location.href='wirusy.php';">Wyświetl wirusy</button>
+    <button type="button" class="btn btn-primary" onclick="location.href='wirusy.php';">Wyświetl wirusy</button>
     <button type="button" class="btn btn-secondary" onclick="location.href='info.html';">Info o bazie</button>
     <br>
 
