@@ -10,25 +10,26 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('#search').typeahead({
-                source: function (query, result) {
-                    $.ajax({
-                        url: "search.php",
-                        method: "POST",
-                        data: {query: query},
-                        dataType: "json",
-                        success: function (data) {
-                            result($.map(data, function (item) {
-                                return item;
-                            }));
-                        }
-                    });
-                }
-            });
+        <script>
+    $(document).ready(function () {
+        $('#search').typeahead({
+            source: function (query, result) {
+                $.ajax({
+                    url: "search.php",
+                    method: "GET", // Zmiana metody na GET
+                    data: { search: query }, // Przekazanie wartości 'search' jako parametr GET
+                    dataType: "json",
+                    success: function (data) {
+                        result($.map(data, function (item) {
+                            return item;
+                        }));
+                    }
+                });
+            }
         });
-    </script>
+    });
+</script>
+
 </head>
 
 <body>
