@@ -10,27 +10,32 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('#search').typeahead({
-                source: function (query, result) {
-                    $.ajax({
-                        url: "search.php",
-                        method: "GET",
-                        data: { search: query },
-                        dataType: "json",
-                        success: function (data) {
-                            result($.map(data, function (item) {
-                                return item;
-                            }));
-                        }
-                    });
-                }
-            });
+        <script>
+    $(document).ready(function () {
+        $('#search').typeahead({
+            source: function (query, result) {
+                $.ajax({
+                    url: "search.php",
+                    method: "GET",
+                    data: { search: query },
+                    dataType: "json",
+                    success: function (data) {
+                        var suggestions = [];
+                        $.each(data, function (index, item) {
+                            // Dodaj wszystkie kolumny jako sugestie
+                            suggestions.push(item.choroba);
+                            suggestions.push(item.nazwa_wirusa);
+                            suggestions.push(item.objawy_ogolne);
+                            suggestions.push(item.objawy_ju);
+                            suggestions.push(item.rozpoznanie);
+                            suggestions.push(item.roznicowanie);
+                        });
+                        result(suggestions);
+                    }
+                });
+            }
         });
-    </script>
-
-
+    });
 </script>
 
 </head>
@@ -51,12 +56,10 @@
     }
     ?>
 
-<div class="container">
+      <div class="container">
 
-    <h1>Wybrane choroby wirusowe manifestujące objawy w jamie ustnej</h1>
-
-    <div class="container">
         <h1>Wybrane choroby wirusowe manifestujące objawy w jamie ustnej</h1>
+
         <button type="button" class="btn btn-primary" onclick="location.href='dodaj_chorobe.php';">Dodaj chorobę
         </button>
         <button type="button" class="btn btn-primary" onclick="location.href='wirusy.php';">Wyświetl wirusy</button>
