@@ -15,7 +15,8 @@ $query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa
           OR c.objawy_ju ILIKE '%" . pg_escape_string($search) . "%'
           OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
           OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'
-          ORDER BY c.choroba";
+          ORDER BY c.choroba, w.nazwa";
+
 
 // Pobranie danych z tabeli choroba i wirus
 $result = pg_query($conn, $query);
@@ -27,7 +28,11 @@ $results = array();
 while ($row = pg_fetch_assoc($result)) {
     $results[] = array(
         'choroba' => $row['choroba'],
-        'nazwa_wirusa' => $row['nazwa_wirusa']
+        'nazwa_wirusa' => $row['nazwa_wirusa'],
+        'objawy_ogolne' => $row['objawy_ogolne'],
+        'objawy_ju' => $row['objawy_ju'],
+        'rozpoznanie' => $row['rozpoznanie'],
+        'roznicowanie' => $row['roznicowanie']
     );
 }
 
