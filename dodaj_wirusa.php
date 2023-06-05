@@ -104,7 +104,7 @@
 
         <div class="form-floating mb-3">
             <input type="text" id="wyleganie" name="wyleganie" required class="form-control">
-            <label for="wyleganie" class="form-label">Wylęganie:</label>
+            <label for="wyleganie" class="form-label">Okres wylęgania:</label>
         </div>
 
         <div class="form-floating mb-3">

@@ -56,13 +56,13 @@ pg_close($conn);
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Edytuj Wirusa</title>
+    <title>Edytuj wirusa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-    <h2>Edytuj Wirusa</h2>
+    <h2>Edytuj wirusa</h2>
 
     <form action="edytuj_wirusa.php?id=<?php echo $id; ?>" method="POST">
         <div class="form-floating mb-3">    
@@ -82,7 +82,7 @@ pg_close($conn);
 
         <div class="form-floating mb-3"> 
             <input class="form-control" type="text" id="wyleganie" name="wyleganie" value="<?php echo $row['wyleganie']; ?>" required>
-            <label class="form-label" for="wyleganie">Wyleganie:</label>
+            <label class="form-label" for="wyleganie">Okres wylęgania:</label>
         </div>
 
         <div class="form-floating mb-3"> 

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Dodaj chorobę</title>
+    <title>Dodaj chorobę wirusową</title>
 
     <script>
         function showMessageBox() {
@@ -14,7 +14,7 @@
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <h1>Dodaj chorobę</h1>
+    <h1>Dodaj chorobę wirusową</h1>
 
     <?php
     function get_conn_string()
@@ -119,12 +119,12 @@
 
         <div class="form-floating mb-3">
             <input type="text" id="objawy_ogolne" name="objawy_ogolne" required class="form-control">
-            <label for="objawy_ogolne" class="form-label">Objawy ogólne/miejscowe:</label>
+            <label for="objawy_ogolne" class="form-label">Objawy ogólne i miejscowe poza jamą ustną:</label>
         </div>
 
         <div class="form-floating mb-3">
             <input type="text" id="objawy_ju" name="objawy_ju" required class="form-control">
-            <label for="objawy_ju" class="form-label">Objawy miejscowe/ju:</label>
+            <label for="objawy_ju" class="form-label">Objawy miejscowe w jamie ustnej:</label>
         </div>
 
         <div class="form-floating mb-3">
