@@ -10,9 +10,6 @@
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
-    <!-- <h1>Jeden wirus może powodować wiele chorób</h1>
-    <h2>Choroba może być powodowana tylko przez jednego wirusa!!</h2>
-    <img src="doc/wirusy.png" width=500 /><br> -->
     <?php
     function get_conn_string()
     {
@@ -32,7 +29,8 @@
 
     <button type="button" class="btn btn-primary" onclick="location.href='dodaj_chorobe.php';">Dodaj chorobę</button>
     <button type="button" class="btn btn-secondary" onclick="location.href='wirusy.php';">Wyświetl wirusy</button>
-    <br><br>
+    <button type="button" class="btn btn-secondary" onclick="location.href='info.html';">Info o bazie</button>
+    <br>
 
     <form method="GET">
             <div class="form-group">
