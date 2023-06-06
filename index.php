@@ -71,8 +71,7 @@
         <form method="GET">
             <div class="form-group">
                 <label for="search">Wyszukaj:</label>
-                <input type="text" class="form-control" id="search" name="search" list="suggestions">
-                <datalist id="suggestions"></datalist>
+                <input type="text" class="form-control" id="search" name="search">
             </div>
             <button type="submit" class="btn btn-primary">Szukaj</button>
         </form>
@@ -155,7 +154,7 @@ if (pg_num_rows($result) > 0) {
             <tbody>';
 
     $lp = 1; // Zmienna licznikowa
-/*
+
     // Iteracja przez wyniki zapytania i generowanie wierszy tabeli HTML
     while ($row = pg_fetch_assoc($result)) {
         echo "<tr>";
@@ -172,7 +171,7 @@ if (pg_num_rows($result) > 0) {
 
         $lp++; // Inkrementacja zmiennej licznikowej
     }
-    */
+    /*
     while ($row = pg_fetch_assoc($result)) {
         echo "<tr>";
         echo "<th scope='row'>" . $lp . "</th>";
@@ -188,7 +187,7 @@ if (pg_num_rows($result) > 0) {
 
         $lp++; // Inkrementacja zmiennej licznikowej
     }
-
+*/
     echo '</tbody>
         </table>';
 } else {

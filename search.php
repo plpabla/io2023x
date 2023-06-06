@@ -44,11 +44,11 @@ while ($row = pg_fetch_assoc($result)) {
     $results[] = $row;
 }
 
-// Zwrócenie tablicy wyników jako odpowiedź w formacie JSON
-echo json_encode($results);
-
 // Zamknięcie połączenia z bazą danych
 pg_close($conn);
+
+// Zwrócenie tablicy wyników jako odpowiedź w formacie JSON
+echo json_encode($results);
 ?>
 
 
