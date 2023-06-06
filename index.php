@@ -19,30 +19,31 @@
     
     <script>
     $(document).ready(function () {
-        $('#search').autocomplete({
-            source: function (query, result) {
-                $.ajax({
-                    url: "search.php",
-                    method: "GET",
-                    data: { search: query },
-                    dataType: "json",
-                    success: function (data) {
-                        var suggestions = [];
-                        $.each(data, function (index, item) {
-                            // Dodaj wszystkie kolumny jako sugestie
-                            suggestions.push(item.choroba);
-                            suggestions.push(item.nazwa_wirusa);
-                            suggestions.push(item.objawy_ogolne);
-                            suggestions.push(item.objawy_ju);
-                            suggestions.push(item.rozpoznanie);
-                            suggestions.push(item.roznicowanie);
-                        });
-                        result(suggestions);
-                    }
-                });
-            }
-        });
+    $('#search').autocomplete({
+        source: function (query, result) {
+            $.ajax({
+                url: "search.php",
+                method: "GET",
+                data: { search: query.term },
+                dataType: "json",
+                success: function (data) {
+                    var suggestions = [];
+                    $.each(data, function (index, item) {
+                        // Dodaj wszystkie kolumny jako sugestie
+                        suggestions.push(item.choroba);
+                        suggestions.push(item.nazwa_wirusa);
+                        suggestions.push(item.objawy_ogolne);
+                        suggestions.push(item.objawy_ju);
+                        suggestions.push(item.rozpoznanie);
+                        suggestions.push(item.roznicowanie);
+                    });
+                    result(suggestions);
+                }
+            });
+        },
+        minLength: 2 // Minimalna liczba znaków, po której rozpocznie się autouzupełnianie
     });
+});
 </script>
 
 </head>
