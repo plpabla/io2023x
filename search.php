@@ -10,47 +10,53 @@ function get_conn_string()
     return $conn_string;
 }
 
-// Połączenie z bazą danych PostgreSQL
-$conn = pg_connect(get_conn_string());
+// Funkcja zwracająca sugestie dla podanego fragmentu wyszukiwania
+function get_suggestions($search)
+{
+    // Połączenie z bazą danych PostgreSQL
+    $conn = pg_connect(get_conn_string());
 
-// Pobranie wartości wyszukiwania z pola tekstowego
-$search = isset($_GET['search']) ? $_GET['search'] : '';
+    // Zaktualizuj zapytanie SQL z warunkiem WHERE
+    $query = "SELECT c.id, c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
+              FROM choroba c
+              JOIN wirus w ON c.id_wirus = w.id
+              WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
+              OR w.nazwa ILIKE '%" . pg_escape_string($search) . "%'
+              OR c.objawy_ogolne ILIKE '%" . pg_escape_string($search) . "%'
+              OR c.objawy_ju ILIKE '%" . pg_escape_string($search) . "%'
+              OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
+              OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'
+              ORDER BY c.id";
 
-// Zaktualizuj zapytanie SQL z warunkiem WHERE
-$query = "SELECT c.id, c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
-          FROM choroba c
-          JOIN wirus w ON c.id_wirus = w.id";
+    // Pobranie danych z tabeli choroba, wraz z nazwą wirusa
+    $result = pg_query($conn, $query);
 
-if (!empty($search)) {
-    // Dodaj warunek WHERE, jeśli podano wartość wyszukiwania
-    $query .= " WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
-                OR w.nazwa ILIKE '%" . pg_escape_string($search) . "%'
-                OR c.objawy_ogolne ILIKE '%" . pg_escape_string($search) . "%'
-                OR c.objawy_ju ILIKE '%" . pg_escape_string($search) . "%'
-                OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
-                OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'";
+    // Przygotowanie tablicy wyników
+    $results = array();
+
+    // Iteracja przez wyniki zapytania i dodanie ich do tablicy wyników
+    while ($row = pg_fetch_assoc($result)) {
+        $results[] = $row;
+    }
+
+    // Zamknięcie połączenia z bazą danych
+    pg_close($conn);
+
+    // Zwrócenie tablicy wyników jako odpowiedź w formacie JSON
+    return json_encode($results);
 }
 
-$query .= " ORDER BY c.id";
+// Sprawdzenie, czy zapytanie AJAX zawiera wartość wyszukiwania
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+    
+    // Pobranie sugestii dla podanego fragmentu wyszukiwania
+    $suggestions = get_suggestions($search);
 
-// Pobranie danych z tabeli choroba, wraz z nazwą wirusa
-$result = pg_query($conn, $query);
-
-// Przygotowanie tablicy wyników
-$results = array();
-
-// Iteracja przez wyniki zapytania i dodanie ich do tablicy wyników
-while ($row = pg_fetch_assoc($result)) {
-    $results[] = $row;
+    // Zwrócenie sugestii jako odpowiedź
+    echo $suggestions;
 }
-
-// Zamknięcie połączenia z bazą danych
-pg_close($conn);
-
-// Zwrócenie tablicy wyników jako odpowiedź w formacie JSON
-echo json_encode($results);
 ?>
-
 
 
 
