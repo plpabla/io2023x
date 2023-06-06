@@ -72,10 +72,12 @@
         <form method="GET">
             <div class="form-group">
                 <label for="search">Wyszukaj:</label>
-                <input type="text" class="form-control" id="search" name="search" autocomplete="nope">
+                <input type="text" class="form-control" id="search" name="search" list="suggestions">
+                <datalist id="suggestions"></datalist>
             </div>
-            <button type="submit" class="btn btn-primary">Szukaj</button>
+        <button type="submit" class="btn btn-primary">Szukaj</button>
         </form>
+
 
         <br>
         <!--
