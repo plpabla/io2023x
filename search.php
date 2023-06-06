@@ -6,7 +6,7 @@ $conn = pg_connect(get_conn_string());
 $search = isset($_GET['term']) ? $_GET['term'] : '';
 
 // Zaktualizuj zapytanie SQL z warunkiem WHERE
-$query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
+$query = "SELECT *
           FROM choroba c
           JOIN wirus w ON c.id_wirus = w.id
           WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
@@ -16,6 +16,17 @@ $query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c
           OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
           OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'";
 
+/*
+$query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
+          FROM choroba c
+          JOIN wirus w ON c.id_wirus = w.id
+          WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
+          OR w.nazwa ILIKE '%" . pg_escape_string($search) . "%'
+          OR c.objawy_ogolne ILIKE '%" . pg_escape_string($search) . "%'
+          OR c.objawy_ju ILIKE '%" . pg_escape_string($search) . "%'
+          OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
+          OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'";
+*/
 // Pobranie danych z tabeli choroba i wirus
 $result = pg_query($conn, $query);
 

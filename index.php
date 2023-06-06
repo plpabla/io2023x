@@ -180,12 +180,9 @@ if (pg_num_rows($result) > 0) {
     while ($row = pg_fetch_assoc($result)) {
         echo "<tr>";
         echo "<th scope='row'>" . $lp . "</th>";
-        echo "<td>" . $row['choroba'] . "</td>";
-        echo "<td>" . $row['nazwa_wirusa'] . "</td>";
-        echo "<td>" . $row['objawy_ogolne'] . "</td>";
-        echo "<td>" . $row['objawy_ju'] . "</td>";
-        echo "<td>" . $row['rozpoznanie'] . "</td>";
-        echo "<td>" . $row['roznicowanie'] . "</td>";
+        foreach ($row as $column => $value) {
+            echo "<td>" . $value . "</td>";
+        }  
         echo "<td><button type='button' class='btn btn-primary' onclick='location.href=\"edytuj_chorobe.php?id={$row['id']}\"'>Edytuj</button></td>";
         echo "<td><button type='button' class='btn btn-danger' onclick='location.href=\"usun_chorobe.php?id={$row['id']}\"'>Usuń</button></td>";
         echo "</tr>";
