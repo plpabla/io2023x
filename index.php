@@ -9,7 +9,6 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <script>
@@ -78,7 +77,7 @@
             <button type="submit" class="btn btn-primary">Szukaj</button>
         </form>
         <br>
-        
+
         <!--
     <button type="button" class="btn btn-primary" onclick="location.href='dodaj_chorobe.php';">Dodaj chorobę</button>
     <button type="button" class="btn btn-primary" onclick="location.href='wirusy.php';">Wyświetl wirusy</button>
