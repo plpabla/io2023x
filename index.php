@@ -103,7 +103,7 @@
 
 // sprawdzenie czy php.ini jest poprawnie odczytywany
   $ini = parse_ini_file("php.ini");
-  var_dump($ini);
+  // var_dump($ini);
 
 
 
