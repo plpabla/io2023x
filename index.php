@@ -11,8 +11,7 @@
     
     <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    
-    <!--
+
     <script>
     $(document).ready(function () {
         $('#search').autocomplete({
@@ -41,35 +40,6 @@
         });
     });
     </script>
--->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-
-$(document).ready(function() {
-   // Obsługa zdarzenia zmiany wartości pola tekstowego
-   $('#search').on('input', function() {
-      var searchQuery = $(this).val();
-      
-      // Wysłanie żądania AJAX do serwera
-      $.ajax({
-         url: 'search.php',
-         method: 'POST',
-         data: { searchQuery: searchQuery },
-         success: function(response) {
-            // Usuń poprzednie sugestie
-            $('#search_suggestions').empty();
-            
-            // Dodaj nowe sugestie na podstawie odpowiedzi serwera
-            response.forEach(function(suggestion) {
-               $('#search_suggestions').append('<option value="' + suggestion + '">');
-            });
-         }
-      });
-   });
-});
-</script>
-
-
 
 </head>
 
@@ -88,8 +58,6 @@ $(document).ready(function() {
       return $conn_string;
     }
     ?>
-<input type="text" id="search" placeholder="Szukaj...">
-<select id="search_suggestions"></select>
 
       <div class="container">
 
