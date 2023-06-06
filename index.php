@@ -15,7 +15,9 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 
-        <script>
+    
+    
+    <script>
     $(document).ready(function () {
         $('#search').autocomplete({
             source: function (query, result) {
@@ -157,13 +159,29 @@ if (pg_num_rows($result) > 0) {
             <tbody>';
 
     $lp = 1; // Zmienna licznikowa
-
+/*
     // Iteracja przez wyniki zapytania i generowanie wierszy tabeli HTML
     while ($row = pg_fetch_assoc($result)) {
         echo "<tr>";
         echo "<th scope='row'>" . $lp . "</td>";
         echo "<td>" . $row['choroba'] . "</td>";
         echo "<td><a href='wirusy.php?nazwa=" . urlencode($row['nazwa_wirusa']) . "'>" . $row['nazwa_wirusa'] . "</a></td>";
+        echo "<td>" . $row['objawy_ogolne'] . "</td>";
+        echo "<td>" . $row['objawy_ju'] . "</td>";
+        echo "<td>" . $row['rozpoznanie'] . "</td>";
+        echo "<td>" . $row['roznicowanie'] . "</td>";
+        echo "<td><button type='button' class='btn btn-primary' onclick='location.href=\"edytuj_chorobe.php?id={$row['id']}\"'>Edytuj</button></td>";
+        echo "<td><button type='button' class='btn btn-danger' onclick='location.href=\"usun_chorobe.php?id={$row['id']}\"'>Usuń</button></td>";
+        echo "</tr>";
+
+        $lp++; // Inkrementacja zmiennej licznikowej
+    }
+    */
+    while ($row = pg_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<th scope='row'>" . $lp . "</th>";
+        echo "<td>" . $row['choroba'] . "</td>";
+        echo "<td>" . $row['nazwa_wirusa'] . "</td>";
         echo "<td>" . $row['objawy_ogolne'] . "</td>";
         echo "<td>" . $row['objawy_ju'] . "</td>";
         echo "<td>" . $row['rozpoznanie'] . "</td>";
