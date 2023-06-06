@@ -75,11 +75,10 @@
                 <input type="text" class="form-control" id="search" name="search" list="suggestions">
                 <datalist id="suggestions"></datalist>
             </div>
-        <button type="submit" class="btn btn-primary">Szukaj</button>
+            <button type="submit" class="btn btn-primary">Szukaj</button>
         </form>
-
-
         <br>
+        
         <!--
     <button type="button" class="btn btn-primary" onclick="location.href='dodaj_chorobe.php';">Dodaj chorobę</button>
     <button type="button" class="btn btn-primary" onclick="location.href='wirusy.php';">Wyświetl wirusy</button>
