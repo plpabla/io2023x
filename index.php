@@ -22,19 +22,17 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (data) {
                     var suggestions = [];
+                    var uniqueSuggestions = {}; // Obiekt do przechowywania unikalnych sugestii
+
                     $.each(data, function (index, item) {
-                        suggestions.push(item);
+                        var suggestion = item.toLowerCase(); // Konwersja sugestii na małe litery
+                        uniqueSuggestions[suggestion] = true; // Dodanie sugestii do obiektu unikalnych sugestii
                     });
 
-                    // Filtrowanie sugestii zawierających znaki interpunkcyjne
-                    suggestions = suggestions.filter(function (word) {
-                        return word.match(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/);
-                    });
-
-                    // Konwersja sugestii na małe litery
-                    suggestions = suggestions.map(function (word) {
-                        return word.toLowerCase();
-                    });
+                    // Konwersja obiektu unikalnych sugestii na tablicę
+                    for (var suggestion in uniqueSuggestions) {
+                        suggestions.push(suggestion);
+                    }
 
                     response(suggestions);
                 }
@@ -44,6 +42,7 @@ $(document).ready(function () {
     });
 });
 </script>
+
 
 
 
