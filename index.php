@@ -21,11 +21,17 @@
                     data: { search: request.term },
                     dataType: "json",
                     success: function (data) {
-                        response(data.suggestions);
-                    }
-                });
-            },
-            minLength: 2
+                    var suggestions = [];
+                    $.each(data, function (index, item) {
+                        // Dodaj wszystkie kolumny jako sugestie
+                        suggestions.push(item.choroba);
+                        suggestions.push(item.nazwa_wirusa);
+                        suggestions.push(item.objawy_ogolne);
+                        suggestions.push(item.objawy_ju);
+                        suggestions.push(item.rozpoznanie);
+                        suggestions.push(item.roznicowanie);
+                    });
+                    response(suggestions);
         });
     });
     </script>
