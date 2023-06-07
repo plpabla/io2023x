@@ -29,7 +29,7 @@ $conn = pg_connect(get_conn_string());
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
 // Zaktualizuj zapytanie SQL z warunkiem WHERE
-$query = "SELECT DISTINCT c.choroba, c.nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
+$query = "SELECT c.choroba, c.nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
           FROM choroba c
           JOIN wirus w ON c.id_wirus = w.id
           WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
@@ -47,6 +47,7 @@ $result = pg_query($conn, $query);
 $results = array();
 
 // Iteracja przez wyniki zapytania i dodanie ich do tablicy wyników
+/*
 while ($row = pg_fetch_assoc($result)) {
     $results[] = array(
         'choroba' => $row['choroba'],
@@ -57,6 +58,16 @@ while ($row = pg_fetch_assoc($result)) {
         'roznicowanie' => $row['roznicowanie']
     );
 }
+*/
+while ($row = pg_fetch_assoc($result)) {
+    $results[] = $row['choroba'];
+    $results[] = $row['nazwa_wirusa'];
+    $results[] = $row['objawy_ogolne'];
+    $results[] = $row['objawy_ju'];
+    $results[] = $row['rozpoznanie'];
+    $results[] = $row['roznicowanie'];
+}
+
 
 // Zamknięcie połączenia z bazą danych
 pg_close($conn);
