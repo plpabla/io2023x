@@ -13,17 +13,16 @@
 
     <script>
     $(document).ready(function () {
-        $('#search').autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: "search.php",
-                    method: "GET",
-                    data: { search: request.term },
-                    dataType: "json",
-                    success: function (data) {
+    $('#search').autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "search.php",
+                method: "GET",
+                data: { search: request.term },
+                dataType: "json",
+                success: function (data) {
                     var suggestions = [];
                     $.each(data, function (index, item) {
-                        // Dodaj wszystkie kolumny jako sugestie
                         suggestions.push(item.choroba);
                         suggestions.push(item.nazwa_wirusa);
                         suggestions.push(item.objawy_ogolne);
@@ -32,8 +31,12 @@
                         suggestions.push(item.roznicowanie);
                     });
                     response(suggestions);
-        });
+                }
+            });
+        },
+        minLength: 2
     });
+});
     </script>
 
 </head>
