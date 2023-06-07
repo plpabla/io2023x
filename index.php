@@ -26,7 +26,7 @@
                         for (var key in item) {
                             if (item.hasOwnProperty(key)) {
                             var value = item[key].toLowerCase();
-                            if (value.indexOf(searchTerm) === 0) {
+                            if (value.indexOf(searchTerm) > -1) {
                             suggestions.push(value);
                          break;
                 }
