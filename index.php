@@ -21,19 +21,19 @@
                     dataType: "json",
                     success: function (data) {
                         var suggestions = [];
-                        var searchTerm = request.term.toLowerCase();
-                        $.each(data, function (index, item) {
-                        for (var key in item) {
-                            if (item.hasOwnProperty(key)) {
-                            var value = item[key].toLowerCase();
-                            if (value.indexOf(searchTerm) > -1) {
-                            suggestions.push(value);
-                         break;
+            var searchTerm = request.term.toLowerCase();
+            $.each(data, function (index, item) {
+              for (var key in item) {
+                var words = item[key].toLowerCase().split(' ');
+                for (var i = 0; i < words.length; i++) {
+                  if (words[i].indexOf(searchTerm) === 0) {
+                    suggestions.push(words[i]);
+                    break; // Przerwij pętlę po znalezieniu pierwszej sugestii
+                  }
                 }
               }
-            }
-          });
-          response(suggestions);
+            });
+            response(suggestions);
                     }
                 });
             },
