@@ -20,16 +20,7 @@
                     data: { search: request.term },
                     dataType: "json",
                     success: function (data) {
-                        var suggestions = [];
-                        $.each(data, function (index, item) {                            
-                            suggestions.push(item.choroba);
-                            suggestions.push(item.nazwa_wirusa);
-                            suggestions.push(item.objawy_ogolne);
-                            suggestions.push(item.objawy_ju);
-                            suggestions.push(item.rozpoznanie);
-                            suggestions.push(item.roznicowanie);
-                        });
-                        response(suggestions);
+                        response(data);
                     }
                 });
             },
