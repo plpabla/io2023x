@@ -39,7 +39,7 @@ if (!$result) {
 
 // Przygotowanie tablicy na sugestie
 $suggestions = array();
-
+/*
 while ($row = pg_fetch_assoc($result)) {
     foreach ($row as $field) {
         $words = explode(" ", $field);
@@ -49,6 +49,19 @@ while ($row = pg_fetch_assoc($result)) {
             }
         }
     }
+}
+*/
+while ($row = pg_fetch_assoc($result)) {
+    $suggestion = array(
+        'choroba' => $row['choroba'],
+        'nazwa_wirusa' => $row['nazwa_wirusa'],
+        'objawy_ogolne' => $row['objawy_ogolne'],
+        'objawy_ju' => $row['objawy_ju'],
+        'rozpoznanie' => $row['rozpoznanie'],
+        'roznicowanie' => $row['roznicowanie']
+    );
+
+    $suggestions[] = $suggestion;
 }
 
 
