@@ -21,15 +21,27 @@
                     dataType: "json",
                     success: function (data) {
                         var suggestions = [];
-                        $.each(data, function (index, item) {                            
+                        $.each(data, function (index, item) {
+                        if (item.choroba) {
                             suggestions.push(item.choroba);
+                        }
+                        if (item.nazwa_wirusa) {
                             suggestions.push(item.nazwa_wirusa);
+                        }
+                        if (item.objawy_ogolne) {
                             suggestions.push(item.objawy_ogolne);
+                        }
+                        if (item.objawy_ju) {
                             suggestions.push(item.objawy_ju);
+                        }
+                        if (item.rozpoznanie) {
                             suggestions.push(item.rozpoznanie);
+                        }
+                        if (item.roznicowanie) {
                             suggestions.push(item.roznicowanie);
-                        });
-                        response(suggestions);
+                        }
+                    });
+                    response(suggestions);
                     }
                 });
             },
