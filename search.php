@@ -41,16 +41,12 @@ if (!$result) {
 $suggestions = array();
 
 while ($row = pg_fetch_assoc($result)) {
-    $suggestion = array(
-        'choroba' => $row['choroba'],
-        'nazwa_wirusa' => $row['nazwa_wirusa'],
-        'objawy_ogolne' => $row['objawy_ogolne'],
-        'objawy_ju' => $row['objawy_ju'],
-        'rozpoznanie' => $row['rozpoznanie'],
-        'roznicowanie' => $row['roznicowanie']
-    );
-
-    $suggestions[] = $suggestion;
+    foreach ($row as $key => $value) {
+        if (stripos($value, $search) !== false) {
+            $suggestion = array($key => $value);
+            $suggestions[] = $suggestion;
+        }
+    }
 }
 
 // Ustawienie nagłówka Content-Type na application/json
