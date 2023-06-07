@@ -30,12 +30,16 @@ if (!$result) {
 $suggestions = array();
 
 while ($row = pg_fetch_assoc($result)) {
-    $suggestions[] = $row['choroba'];
-    $suggestions[] = $row['nazwa_wirusa'];
-    $suggestions[] = $row['objawy_ogolne'];
-    $suggestions[] = $row['objawy_ju'];
-    $suggestions[] = $row['rozpoznanie'];
-    $suggestions[] = $row['roznicowanie'];
+    $suggestion = array(
+        'choroba' => $row['choroba'],
+        'nazwa_wirusa' => $row['nazwa_wirusa'],
+        'objawy_ogolne' => $row['objawy_ogolne'],
+        'objawy_ju' => $row['objawy_ju'],
+        'rozpoznanie' => $row['rozpoznanie'],
+        'roznicowanie' => $row['roznicowanie']
+    );
+
+    $suggestions[] = $suggestion;
 }
 
 // Ustawienie nagłówka Content-Type na application/json
@@ -43,6 +47,7 @@ header('Content-Type: application/json');
 
 // Zwrócenie wyników w formacie JSON
 echo json_encode($suggestions);
+
 
 // Zamknięcie połączenia z bazą danych
 pg_close($conn);
