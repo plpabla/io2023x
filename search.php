@@ -17,11 +17,11 @@ $conn = pg_connect(get_conn_string());
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
 // Zaktualizuj zapytanie SQL z warunkiem WHERE
-$query = "SELECT c.choroba, c.nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
+$query = "SELECT c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
           FROM choroba c
           JOIN wirus w ON c.id_wirus = w.id
           WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
-          OR c.nazwa_wirusa ILIKE '%" . pg_escape_string($search) . "%'
+          OR w.nazwa ILIKE '%" . pg_escape_string($search) . "%'
           OR c.objawy_ogolne ILIKE '%" . pg_escape_string($search) . "%'
           OR c.objawy_ju ILIKE '%" . pg_escape_string($search) . "%'
           OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
