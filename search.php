@@ -40,14 +40,20 @@ if (!$result) {
 // Przygotowanie tablicy na sugestie
 $suggestions = array();
 
+$searchWords = explode(" ", $search);
+$searchWords = array_filter($searchWords); // Usunięcie pustych elementów
+
 while ($row = pg_fetch_assoc($result)) {
-    foreach ($row as $key => $value) {
-        if (stripos($value, $search) !== false) {
-            $suggestion = array($key => $value);
-            $suggestions[] = $suggestion;
+    foreach ($searchWords as $searchWord) {
+        foreach ($row as $key => $value) {
+            if (stripos($value, $searchWord) !== false) {
+                $suggestion = array($key => $searchWord);
+                $suggestions[] = $suggestion;
+            }
         }
     }
 }
+
 
 // Ustawienie nagłówka Content-Type na application/json
 header('Content-Type: application/json');

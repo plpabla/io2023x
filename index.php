@@ -21,15 +21,19 @@
                     dataType: "json",
                     success: function (data) {
                         var suggestions = [];
-                        $.each(data, function (index, item) {                            
-                            suggestions.push(item.choroba);
-                            suggestions.push(item.nazwa_wirusa);
-                            suggestions.push(item.objawy_ogolne);
-                            suggestions.push(item.objawy_ju);
-                            suggestions.push(item.rozpoznanie);
-                            suggestions.push(item.roznicowanie);
-                        });
-                        response(suggestions);
+          var searchTerm = request.term.toLowerCase();
+          $.each(data, function (index, item) {
+            for (var key in item) {
+              if (item.hasOwnProperty(key)) {
+                var value = item[key].toLowerCase();
+                if (value.indexOf(searchTerm) !== -1) {
+                  suggestions.push(item[key]);
+                  break;
+                }
+              }
+            }
+          });
+          response(suggestions);
                     }
                 });
             },
