@@ -16,34 +16,22 @@ $conn = pg_connect(get_conn_string());
 // Pobranie wartości wyszukiwania z pola tekstowego
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-// Rozbijanie wyszukiwanej frazy na poszczególne słowa
-$searchTerms = explode(" ", $search);
-$searchTerms = array_filter($searchTerms); // Usunięcie pustych elementów
-
-// Utworzenie warunków dla każdego słowa
-$conditions = array();
-foreach ($searchTerms as $term) {
-    $term = pg_escape_string($term);
-    $condition = "c.choroba ILIKE '%$term%'
-                  OR w.nazwa ILIKE '%$term%'
-                  OR c.objawy_ogolne ILIKE '%$term%'
-                  OR c.objawy_ju ILIKE '%$term%'
-                  OR c.rozpoznanie ILIKE '%$term%'
-                  OR c.roznicowanie ILIKE '%$term%'";
-    $conditions[] = $condition;
-}
-
 // Zaktualizuj zapytanie SQL z warunkiem WHERE
 $query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
           FROM choroba c
           JOIN wirus w ON c.id_wirus = w.id
-          WHERE " . implode(" OR ", $conditions) . "
+          WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
+          OR w.nazwa ILIKE '%" . pg_escape_string($search) . "%'
+          OR c.objawy_ogolne ILIKE '%" . pg_escape_string($search) . "%'
+          OR c.objawy_ju ILIKE '%" . pg_escape_string($search) . "%'
+          OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
+          OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'
           ORDER BY c.choroba";
 
 // Pobranie danych z tabeli choroba
 $result = pg_query($conn, $query);
 
-// Sprawdzenie wyniku zapytania
+//sprawdzenie wyniku zapytania
 if (!$result) {
     echo pg_last_error($conn);
     exit;
@@ -53,17 +41,17 @@ if (!$result) {
 $suggestions = array();
 
 while ($row = pg_fetch_assoc($result)) {
-    // Dodanie pojedynczego słowa jako sugestii
-    $suggestions[] = $row['choroba'];
-    $suggestions[] = $row['nazwa_wirusa'];
-    $suggestions[] = $row['objawy_ogolne'];
-    $suggestions[] = $row['objawy_ju'];
-    $suggestions[] = $row['rozpoznanie'];
-    $suggestions[] = $row['roznicowanie'];
-}
+    $suggestion = array(
+        'choroba' => $row['choroba'],
+        'nazwa_wirusa' => $row['nazwa_wirusa'],
+        'objawy_ogolne' => $row['objawy_ogolne'],
+        'objawy_ju' => $row['objawy_ju'],
+        'rozpoznanie' => $row['rozpoznanie'],
+        'roznicowanie' => $row['roznicowanie']
+    );
 
-// Usunięcie duplikatów i pustych wartości z sugestii
-$suggestions = array_unique(array_filter($suggestions));
+    $suggestions[] = $suggestion;
+}
 
 // Ustawienie nagłówka Content-Type na application/json
 header('Content-Type: application/json');
