@@ -16,6 +16,10 @@ $conn = pg_connect(get_conn_string());
 // Pobranie wartości wyszukiwania z pola tekstowego
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
+// Rozbijanie wyszukiwanej frazy na poszczególne słowa                      @
+$searchTerms = explode(" ", $search);
+$searchTerms = array_filter($searchTerms); // Usunięcie pustych elementów
+
 // Zaktualizuj zapytanie SQL z warunkiem WHERE
 $query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
           FROM choroba c
@@ -27,6 +31,20 @@ $query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c
           OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
           OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'
           ORDER BY c.choroba";
+
+          $conditions = array();
+foreach ($searchTerms as $term) {
+    $condition = "c.choroba ILIKE '%" . pg_escape_string($term) . "%'
+                  OR w.nazwa ILIKE '%" . pg_escape_string($term) . "%'
+                  OR c.objawy_ogolne ILIKE '%" . pg_escape_string($term) . "%'
+                  OR c.objawy_ju ILIKE '%" . pg_escape_string($term) . "%'
+                  OR c.rozpoznanie ILIKE '%" . pg_escape_string($term) . "%'
+                  OR c.roznicowanie ILIKE '%" . pg_escape_string($term) . "%'";
+    $conditions[] = $condition;
+}
+
+$query .= implode(" AND ", $conditions);
+$query .= " ORDER BY c.choroba";
 
 // Pobranie danych z tabeli choroba
 $result = pg_query($conn, $query);
@@ -41,46 +59,29 @@ if (!$result) {
 $suggestions = array();
 
 while ($row = pg_fetch_assoc($result)) {
-    if ($row['choroba']) {
-        $words = explode(" ", $row['choroba']);
-        foreach ($words as $word) {
-            $suggestions[] = $word;
+    foreach ($searchTerms as $term) {
+        $suggestion = '';
+        if (stripos($row['choroba'], $term) !== false) {
+            $suggestion = $row['choroba'];
+        } elseif (stripos($row['nazwa_wirusa'], $term) !== false) {
+            $suggestion = $row['nazwa_wirusa'];
+        } elseif (stripos($row['objawy_ogolne'], $term) !== false) {
+            $suggestion = $row['objawy_ogolne'];
+        } elseif (stripos($row['objawy_ju'], $term) !== false) {
+            $suggestion = $row['objawy_ju'];
+        } elseif (stripos($row['rozpoznanie'], $term) !== false) {
+            $suggestion = $row['rozpoznanie'];
+        } elseif (stripos($row['roznicowanie'], $term) !== false) {
+            $suggestion = $row['roznicowanie'];
         }
-    }
-    if ($row['nazwa_wirusa']) {
-        $words = explode(" ", $row['nazwa_wirusa']);
-        foreach ($words as $word) {
-            $suggestions[] = $word;
-        }
-    }
-    if ($row['objawy_ogolne']) {
-        $words = explode(" ", $row['objawy_ogolne']);
-        foreach ($words as $word) {
-            $suggestions[] = $word;
-        }
-    }
-    if ($row['objawy_ju']) {
-        $words = explode(" ", $row['objawy_ju']);
-        foreach ($words as $word) {
-            $suggestions[] = $word;
-        }
-    }
-    if ($row['rozpoznanie']) {
-        $words = explode(" ", $row['rozpoznanie']);
-        foreach ($words as $word) {
-            $suggestions[] = $word;
-        }
-    }
-    if ($row['roznicowanie']) {
-        $words = explode(" ", $row['roznicowanie']);
-        foreach ($words as $word) {
-            $suggestions[] = $word;
+        
+        if (!empty($suggestion)) {
+            $suggestions[] = $suggestion;
+            break; // Zatrzymaj się po znalezieniu pierwszej sugestii dla danego słowa
         }
     }
 }
 
-// Usunięcie duplikatów z tablicy sugestii
-$suggestions = array_unique($suggestions);
 
 // Ustawienie nagłówka Content-Type na application/json
 header('Content-Type: application/json');
