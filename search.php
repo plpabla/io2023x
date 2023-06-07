@@ -39,7 +39,7 @@ if (!$result) {
 
 // Przygotowanie tablicy na sugestie
 $suggestions = array();
-
+/*
 $searchWords = explode(" ", $search);
 $searchWords = array_filter($searchWords); // Usunięcie pustych elementów
 
@@ -53,7 +53,18 @@ while ($row = pg_fetch_assoc($result)) {
         }
     }
 }
+*/
+while ($row = pg_fetch_assoc($result)) {
+    foreach ($row as $column) {
+        if (stripos($column, $search) === 0) {
+            $suggestions[] = $column;
+        }
+    }
+}
 
+// Usunięcie duplikatów i posortowanie sugestii
+$suggestions = array_unique($suggestions);
+sort($suggestions);
 
 // Ustawienie nagłówka Content-Type na application/json
 header('Content-Type: application/json');
