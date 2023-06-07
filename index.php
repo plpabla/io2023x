@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <script>
-    $(document).ready(function () {
+$(document).ready(function () {
     $('#search').autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -23,24 +23,7 @@
                 success: function (data) {
                     var suggestions = [];
                     $.each(data, function (index, item) {
-                        if (item.choroba) {
-                            suggestions.push({ label: item.choroba, value: item.choroba });
-                        }
-                        if (item.nazwa_wirusa) {
-                            suggestions.push({ label: item.nazwa_wirusa, value: item.nazwa_wirusa });
-                        }
-                        if (item.objawy_ogolne) {
-                            suggestions.push({ label: item.objawy_ogolne, value: item.objawy_ogolne });
-                        }
-                        if (item.objawy_ju) {
-                            suggestions.push({ label: item.objawy_ju, value: item.objawy_ju });
-                        }
-                        if (item.rozpoznanie) {
-                            suggestions.push({ label: item.rozpoznanie, value: item.rozpoznanie });
-                        }
-                        if (item.roznicowanie) {
-                            suggestions.push({ label: item.roznicowanie, value: item.roznicowanie });
-                        }
+                        suggestions.push(item);
                     });
                     response(suggestions);
                 }
@@ -49,8 +32,8 @@
         minLength: 2
     });
 });
+</script>
 
-    </script>
 
 </head>
 
