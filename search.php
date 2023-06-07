@@ -37,37 +37,46 @@ if (!$result) {
     exit;
 }
 
-
+// Przygotowanie tablicy na sugestie
+$suggestions = array();
 
 while ($row = pg_fetch_assoc($result)) {
-    $suggestion = array();
-
     if ($row['choroba']) {
         $words = explode(" ", $row['choroba']);
-        $suggestion = array_merge($suggestion, $words);
+        foreach ($words as $word) {
+            $suggestions[] = $word;
+        }
     }
     if ($row['nazwa_wirusa']) {
         $words = explode(" ", $row['nazwa_wirusa']);
-        $suggestion = array_merge($suggestion, $words);
+        foreach ($words as $word) {
+            $suggestions[] = $word;
+        }
     }
     if ($row['objawy_ogolne']) {
         $words = explode(" ", $row['objawy_ogolne']);
-        $suggestion = array_merge($suggestion, $words);
+        foreach ($words as $word) {
+            $suggestions[] = $word;
+        }
     }
     if ($row['objawy_ju']) {
         $words = explode(" ", $row['objawy_ju']);
-        $suggestion = array_merge($suggestion, $words);
+        foreach ($words as $word) {
+            $suggestions[] = $word;
+        }
     }
     if ($row['rozpoznanie']) {
         $words = explode(" ", $row['rozpoznanie']);
-        $suggestion = array_merge($suggestion, $words);
+        foreach ($words as $word) {
+            $suggestions[] = $word;
+        }
     }
     if ($row['roznicowanie']) {
         $words = explode(" ", $row['roznicowanie']);
-        $suggestion = array_merge($suggestion, $words);
+        foreach ($words as $word) {
+            $suggestions[] = $word;
+        }
     }
-
-    $suggestions = array_merge($suggestions, $suggestion);
 }
 
 // Usunięcie duplikatów z tablicy sugestii
