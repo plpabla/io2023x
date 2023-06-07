@@ -25,29 +25,9 @@ $searchTerms = array_filter($searchTerms); // Usunięcie pustych elementów
 $query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
           FROM choroba c
           JOIN wirus w ON c.id_wirus = w.id
-          WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
-          OR w.nazwa ILIKE '%" . pg_escape_string($search) . "%'
-          OR c.objawy_ogolne ILIKE '%" . pg_escape_string($search) . "%'
-          OR c.objawy_ju ILIKE '%" . pg_escape_string($search) . "%'
-          OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
-          OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'
+          WHERE " . implode(" OR ", $conditions) . "
           ORDER BY c.choroba";
-
-    $conditions = array();
-    
-    foreach ($searchTerms as $term) {
-    $condition = "c.choroba ILIKE '%" . pg_escape_string($term) . "%'
-                  OR w.nazwa ILIKE '%" . pg_escape_string($term) . "%'
-                  OR c.objawy_ogolne ILIKE '%" . pg_escape_string($term) . "%'
-                  OR c.objawy_ju ILIKE '%" . pg_escape_string($term) . "%'
-                  OR c.rozpoznanie ILIKE '%" . pg_escape_string($term) . "%'
-                  OR c.roznicowanie ILIKE '%" . pg_escape_string($term) . "%'";
-    $conditions[] = $condition;
-}
-
-$query .= implode(" OR ", $conditions);
-$query .= " ORDER BY c.choroba";
-
+          
 // Pobranie danych z tabeli choroba
 $result = pg_query($conn, $query);
 
