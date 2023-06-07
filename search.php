@@ -46,7 +46,6 @@ while ($row = pg_fetch_assoc($result)) {
         foreach ($words as $word) {
             if (stripos($word, $search) === 0) {
                 $suggestions[] = $word;
-                break; // Przerwij pętlę po znalezieniu pierwszej sugestii
             }
         }
     }
