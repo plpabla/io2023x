@@ -55,8 +55,9 @@ while ($row = pg_fetch_assoc($result)) {
     foreach ($row as $field) {
         $words = explode(" ", $field);
         foreach ($words as $word) {
-            if (stripos($word, $search) === 0) {
-                $suggestions[] = $word;
+            $cleanedWord = preg_replace("/[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]/u", '', $word);
+            if (stripos($cleanedWord, $search) === 0) {
+                $suggestions[] = $cleanedWord;
             }
         }
     }
@@ -64,6 +65,7 @@ while ($row = pg_fetch_assoc($result)) {
 
 // Usunięcie duplikatów ze zbioru sugestii
 $suggestions = array_unique($suggestions);
+
 /*
 while ($row = pg_fetch_assoc($result)) {
     $suggestion = array(

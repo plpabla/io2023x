@@ -25,6 +25,17 @@ $(document).ready(function () {
                     $.each(data, function (index, item) {
                         suggestions.push(item);
                     });
+
+                    // Filtrowanie sugestii zawierających znaki interpunkcyjne
+                    suggestions = suggestions.filter(function (word) {
+                        return word.match(/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+$/);
+                    });
+
+                    // Konwersja sugestii na małe litery
+                    suggestions = suggestions.map(function (word) {
+                        return word.toLowerCase();
+                    });
+
                     response(suggestions);
                 }
             });
@@ -33,6 +44,7 @@ $(document).ready(function () {
     });
 });
 </script>
+
 
 
 </head>
