@@ -16,6 +16,11 @@ $conn = pg_connect(get_conn_string());
 // Pobranie wartości wyszukiwania z pola tekstowego
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 
+// Rozbijanie wyszukiwanej frazy na poszczególne słowa
+$searchTerms = explode(" ", $search);
+$searchTerms = array_filter($searchTerms); // Usunięcie pustych elementów
+
+
 // Zaktualizuj zapytanie SQL z warunkiem WHERE
 $query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
           FROM choroba c
@@ -27,6 +32,21 @@ $query = "SELECT DISTINCT c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c
           OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
           OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'
           ORDER BY c.choroba";
+
+    $conditions = array();
+    
+    foreach ($searchTerms as $term) {
+    $condition = "c.choroba ILIKE '%" . pg_escape_string($term) . "%'
+                  OR w.nazwa ILIKE '%" . pg_escape_string($term) . "%'
+                  OR c.objawy_ogolne ILIKE '%" . pg_escape_string($term) . "%'
+                  OR c.objawy_ju ILIKE '%" . pg_escape_string($term) . "%'
+                  OR c.rozpoznanie ILIKE '%" . pg_escape_string($term) . "%'
+                  OR c.roznicowanie ILIKE '%" . pg_escape_string($term) . "%'";
+    $conditions[] = $condition;
+}
+
+$query .= implode(" OR ", $conditions);
+$query .= " ORDER BY c.choroba";
 
 // Pobranie danych z tabeli choroba
 $result = pg_query($conn, $query);
