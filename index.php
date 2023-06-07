@@ -21,27 +21,15 @@
                     dataType: "json",
                     success: function (data) {
                         var suggestions = [];
-                        $.each(data, function (index, item) {
-                        if (item.choroba) {
-                            suggestions.push({ label: item.choroba, value: item.choroba });
-                        }
-                        if (item.nazwa_wirusa) {
-                            suggestions.push({ label: item.nazwa_wirusa, value: item.nazwa_wirusa });
-                        }
-                        if (item.objawy_ogolne) {
-                            suggestions.push({ label: item.objawy_ogolne, value: item.objawy_ogolne });
-                        }
-                        if (item.objawy_ju) {
-                            suggestions.push({ label: item.objawy_ju, value: item.objawy_ju });
-                        }
-                        if (item.rozpoznanie) {
-                            suggestions.push({ label: item.rozpoznanie, value: item.rozpoznanie });
-                        }
-                        if (item.roznicowanie) {
-                            suggestions.push({ label: item.roznicowanie, value: item.roznicowanie });
-                        }
-                    });
-                    response(suggestions);
+                        $.each(data, function (index, item) {                            
+                            suggestions.push(item.choroba);
+                            suggestions.push(item.nazwa_wirusa);
+                            suggestions.push(item.objawy_ogolne);
+                            suggestions.push(item.objawy_ju);
+                            suggestions.push(item.rozpoznanie);
+                            suggestions.push(item.roznicowanie);
+                        });
+                        response(suggestions);
                     }
                 });
             },

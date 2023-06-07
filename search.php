@@ -41,25 +41,16 @@ if (!$result) {
 $suggestions = array();
 
 while ($row = pg_fetch_assoc($result)) {
-    $suggestion = '';
+    $suggestion = array(
+        'choroba' => $row['choroba'],
+        'nazwa_wirusa' => $row['nazwa_wirusa'],
+        'objawy_ogolne' => $row['objawy_ogolne'],
+        'objawy_ju' => $row['objawy_ju'],
+        'rozpoznanie' => $row['rozpoznanie'],
+        'roznicowanie' => $row['roznicowanie']
+    );
 
-    if (!empty($row['choroba'])) {
-        $suggestion = $row['choroba'];
-    } elseif (!empty($row['nazwa_wirusa'])) {
-        $suggestion = $row['nazwa_wirusa'];
-    } elseif (!empty($row['objawy_ogolne'])) {
-        $suggestion = $row['objawy_ogolne'];
-    } elseif (!empty($row['objawy_ju'])) {
-        $suggestion = $row['objawy_ju'];
-    } elseif (!empty($row['rozpoznanie'])) {
-        $suggestion = $row['rozpoznanie'];
-    } elseif (!empty($row['roznicowanie'])) {
-        $suggestion = $row['roznicowanie'];
-    }
-
-    if (!empty($suggestion)) {
-        $suggestions[] = $suggestion;
-    }
+    $suggestions[] = $suggestion;
 }
 
 // Ustawienie nagłówka Content-Type na application/json
