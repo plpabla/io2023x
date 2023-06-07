@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,20 +21,7 @@
                     data: { search: request.term },
                     dataType: "json",
                     success: function (data) {
-                        var suggestions = [];
-            var searchTerm = request.term.toLowerCase();
-            $.each(data, function (index, item) {
-              for (var key in item) {
-                var words = item[key].toLowerCase().split(' ');
-                for (var i = 0; i < words.length; i++) {
-                  if (words[i].indexOf(searchTerm) === 0) {
-                    suggestions.push(words[i]);
-                    break; // Przerwij pętlę po znalezieniu pierwszej sugestii
-                  }
-                }
-              }
-            });
-            response(suggestions);
+                        response(data.suggestions);
                     }
                 });
             },
