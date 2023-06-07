@@ -39,18 +39,7 @@ if (!$result) {
 
 // Przygotowanie tablicy na sugestie
 $suggestions = array();
-/*
-while ($row = pg_fetch_assoc($result)) {
-    foreach ($row as $field) {
-        $words = explode(" ", $field);
-        foreach ($words as $word) {
-            if (stripos($word, $search) === 0) {
-                $suggestions[] = $word;
-            }
-        }
-    }
-}
-*/
+
 while ($row = pg_fetch_assoc($result)) {
     foreach ($row as $field) {
         $words = explode(" ", $field);
@@ -66,21 +55,6 @@ while ($row = pg_fetch_assoc($result)) {
 // Usunięcie duplikatów ze zbioru sugestii
 $suggestions = array_unique($suggestions);
 
-/*
-while ($row = pg_fetch_assoc($result)) {
-    $suggestion = array(
-        'choroba' => $row['choroba'],
-        'nazwa_wirusa' => $row['nazwa_wirusa'],
-        'objawy_ogolne' => $row['objawy_ogolne'],
-        'objawy_ju' => $row['objawy_ju'],
-        'rozpoznanie' => $row['rozpoznanie'],
-        'roznicowanie' => $row['roznicowanie']
-    );
-
-    $suggestions[] = $suggestion;
-}
-
-*/
 // Ustawienie nagłówka Content-Type na application/json
 header('Content-Type: application/json');
 
