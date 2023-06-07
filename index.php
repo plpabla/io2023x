@@ -21,14 +21,14 @@
                     dataType: "json",
                     success: function (data) {
                         var suggestions = [];
-          var searchTerm = request.term.toLowerCase();
-          $.each(data, function (index, item) {
-            for (var key in item) {
-              if (item.hasOwnProperty(key)) {
-                var value = item[key].toLowerCase();
-                if (value.indexOf(searchTerm) !== -1) {
-                  suggestions.push(item[key]);
-                  break;
+                        var searchTerm = request.term.toLowerCase();
+                        $.each(data, function (index, item) {
+                        for (var key in item) {
+                            if (item.hasOwnProperty(key)) {
+                            var value = item[key].toLowerCase();
+                            if (value.indexOf(searchTerm) === 0) {
+                            suggestions.push(value);
+                         break;
                 }
               }
             }
