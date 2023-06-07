@@ -43,9 +43,12 @@ $query = "SELECT c.choroba, c.nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozp
 // Pobranie danych z tabeli choroba
 $result = pg_query($conn, $query);
 
+// Przygotowanie tablicy na sugestie
+$suggestions = array();
+/*
 // Utworzenie tablicy wyników
 $results = array();
-
+*/
 // Iteracja przez wyniki zapytania i dodanie ich do tablicy wyników
 /*
 while ($row = pg_fetch_assoc($result)) {
@@ -59,6 +62,7 @@ while ($row = pg_fetch_assoc($result)) {
     );
 }
 */
+/*
 while ($row = pg_fetch_assoc($result)) {
     $results[] = $row['choroba'];
     $results[] = $row['nazwa_wirusa'];
@@ -67,16 +71,24 @@ while ($row = pg_fetch_assoc($result)) {
     $results[] = $row['rozpoznanie'];
     $results[] = $row['roznicowanie'];
 }
-
-
-// Zamknięcie połączenia z bazą danych
-pg_close($conn);
+*/
+while ($row = pg_fetch_assoc($result)) {
+    $suggestions[] = $row['choroba'];
+    $suggestions[] = $row['nazwa_wirusa'];
+    $suggestions[] = $row['objawy_ogolne'];
+    $suggestions[] = $row['objawy_ju'];
+    $suggestions[] = $row['rozpoznanie'];
+    $suggestions[] = $row['roznicowanie'];
+}
 
 // Ustawienie nagłówka Content-Type na application/json
 header('Content-Type: application/json');
 
 // Zwrócenie wyników w formacie JSON
-echo json_encode($results);
+echo json_encode($suggestions);
+
+// Zamknięcie połączenia z bazą danych
+pg_close($conn);
 ?>
 
 <!--
