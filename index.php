@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,20 +37,9 @@ $(document).ready(function () {
                 }
             });
         },
-        minLength: 2,
-        select: function (event, ui) {
-            $('#search').val(ui.item.value);
-            // Wyświetlanie wyników wyszukiwania
-            displaySearchResults(ui.item.value);
-            return false;
-        }
+        minLength: 2
     });
 });
-
-function displaySearchResults(term) {
-    // Przekierowanie na stronę z wynikami wyszukiwania
-    window.location.href = "search_results.php?search=" + encodeURIComponent(term);
-}
 </script>
 
 </head>
