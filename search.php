@@ -37,21 +37,41 @@ if (!$result) {
     exit;
 }
 
-// Przygotowanie tablicy na sugestie
-$suggestions = array();
+
 
 while ($row = pg_fetch_assoc($result)) {
-    $suggestion = array(
-        'choroba' => $row['choroba'],
-        'nazwa_wirusa' => $row['nazwa_wirusa'],
-        'objawy_ogolne' => $row['objawy_ogolne'],
-        'objawy_ju' => $row['objawy_ju'],
-        'rozpoznanie' => $row['rozpoznanie'],
-        'roznicowanie' => $row['roznicowanie']
-    );
+    $suggestion = array();
 
-    $suggestions[] = $suggestion;
+    if ($row['choroba']) {
+        $words = explode(" ", $row['choroba']);
+        $suggestion = array_merge($suggestion, $words);
+    }
+    if ($row['nazwa_wirusa']) {
+        $words = explode(" ", $row['nazwa_wirusa']);
+        $suggestion = array_merge($suggestion, $words);
+    }
+    if ($row['objawy_ogolne']) {
+        $words = explode(" ", $row['objawy_ogolne']);
+        $suggestion = array_merge($suggestion, $words);
+    }
+    if ($row['objawy_ju']) {
+        $words = explode(" ", $row['objawy_ju']);
+        $suggestion = array_merge($suggestion, $words);
+    }
+    if ($row['rozpoznanie']) {
+        $words = explode(" ", $row['rozpoznanie']);
+        $suggestion = array_merge($suggestion, $words);
+    }
+    if ($row['roznicowanie']) {
+        $words = explode(" ", $row['roznicowanie']);
+        $suggestion = array_merge($suggestion, $words);
+    }
+
+    $suggestions = array_merge($suggestions, $suggestion);
 }
+
+// Usunięcie duplikatów z tablicy sugestii
+$suggestions = array_unique($suggestions);
 
 // Ustawienie nagłówka Content-Type na application/json
 header('Content-Type: application/json');
