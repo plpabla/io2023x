@@ -1,26 +1,3 @@
-<!--
-// Zaktualizuj zapytanie SQL z warunkiem WHERE
-$query = "SELECT c.id, c.choroba, w.nazwa AS nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozpoznanie, c.roznicowanie
-          FROM choroba c
-          JOIN wirus w ON c.id_wirus = w.id";
-
-if (!empty($search)) {
-    // Dodaj warunek WHERE, jeśli podano wartość wyszukiwania
-    $query .= " WHERE c.choroba ILIKE '%" . pg_escape_string($search) . "%'
-                OR w.nazwa ILIKE '%" . pg_escape_string($search) . "%'
-                OR c.objawy_ogolne ILIKE '%" . pg_escape_string($search) . "%'
-                OR c.objawy_ju ILIKE '%" . pg_escape_string($search) . "%'
-                OR c.rozpoznanie ILIKE '%" . pg_escape_string($search) . "%'
-                OR c.roznicowanie ILIKE '%" . pg_escape_string($search) . "%'";
-}
-
-$query .= " ORDER BY c.id";
-
-// Iteracja przez wyniki zapytania i dodanie ich do tablicy wyników
-while ($row = pg_fetch_assoc($result)) {
-    $results[] = $row;
-}
--->
 <?php
 // Połączenie z bazą danych PostgreSQL
 $conn = pg_connect(get_conn_string());
@@ -43,35 +20,15 @@ $query = "SELECT c.choroba, c.nazwa_wirusa, c.objawy_ogolne, c.objawy_ju, c.rozp
 // Pobranie danych z tabeli choroba
 $result = pg_query($conn, $query);
 
+//sprawdzenie wyniku zapytania
+if (!$result) {
+    echo pg_last_error($conn);
+    exit;
+}
+
 // Przygotowanie tablicy na sugestie
 $suggestions = array();
-/*
-// Utworzenie tablicy wyników
-$results = array();
-*/
-// Iteracja przez wyniki zapytania i dodanie ich do tablicy wyników
-/*
-while ($row = pg_fetch_assoc($result)) {
-    $results[] = array(
-        'choroba' => $row['choroba'],
-        'nazwa_wirusa' => $row['nazwa_wirusa'],
-        'objawy_ogolne' => $row['objawy_ogolne'],
-        'objawy_ju' => $row['objawy_ju'],
-        'rozpoznanie' => $row['rozpoznanie'],
-        'roznicowanie' => $row['roznicowanie']
-    );
-}
-*/
-/*
-while ($row = pg_fetch_assoc($result)) {
-    $results[] = $row['choroba'];
-    $results[] = $row['nazwa_wirusa'];
-    $results[] = $row['objawy_ogolne'];
-    $results[] = $row['objawy_ju'];
-    $results[] = $row['rozpoznanie'];
-    $results[] = $row['roznicowanie'];
-}
-*/
+
 while ($row = pg_fetch_assoc($result)) {
     $suggestions[] = $row['choroba'];
     $suggestions[] = $row['nazwa_wirusa'];
