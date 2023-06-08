@@ -32,6 +32,9 @@ $(document).ready(function () {
                     for (var suggestion in uniqueSuggestions) {
                         suggestions.push(suggestion);
                     }
+                    suggestions.sort(function(a, b) {       //sortowanie sugestii od najkrótszych słów do najdluższych
+                        return a.length - b.length;
+                    });
 
                     response(suggestions);
                 }
