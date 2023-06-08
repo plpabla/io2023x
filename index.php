@@ -40,7 +40,11 @@ $(document).ready(function () {
                 }
             });
         },
-        minLength: 2
+        minLength: 2,
+        select: function(event, ui) {
+            // Przekierowanie do strony wyników po wybraniu sugestii
+            window.location.href = "results.php?search=" + encodeURIComponent(ui.item.value);
+        }
     });
 });
 </script>
